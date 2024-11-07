@@ -1,18 +1,9 @@
 
-<details open><summary><font size="+2">Week #</font></summary>
+## Week #
 
-## Questions and topics to discuss
+### Questions and topics to discuss
 
-<details open><summary><font size="+1">Topic 1</font></summary>
-
-* 
-* 
-* 
-
-</details>
-
-
-<details open><summary><font size="+1">Topic 2</font></summary>
+<details open><summary><strong>Topic 1</strong></summary>
 
 * 
 * 
@@ -21,7 +12,7 @@
 </details>
 
 
-<details open><summary><font size="+1">Topic 3</font></summary>
+<details open><summary><strong>Topic 2</strong></summary>
 
 * 
 * 
@@ -30,7 +21,16 @@
 </details>
 
 
-#### Meeting Notes: DATE
+<details open><summary><strong>Topic 3</strong></summary>
+
+* 
+* 
+* 
+
+</details>
+
+
+### Meeting Notes: DATE
 
 * 
 * 
