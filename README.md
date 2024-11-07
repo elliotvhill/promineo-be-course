@@ -3,11 +3,11 @@
 A repository to store any questions, discussion topics, tips, or other notes from my mentor sessions with Michael Goeres _(Promineo Tech)_ during the **Back End Software Development** boot camp.
 
  
-<details open><summary><font size="+2">Week 1</font></summary>
+## Week 1
 
-## Questions and topics to discuss
+### Questions and topics to discuss
 
-<details ><summary><font size="+0.5">Intros</font></summary>
+<details ><summary><strong>1. Intros</strong></summary>
 
 * What is your background?
     * What did you study?
@@ -19,14 +19,15 @@ A repository to store any questions, discussion topics, tips, or other notes fro
     * Where have you worked? 
     
     * How'd you get into the field?
+
 * Other hobbies?
 
 * Open to connecting on LinkedIn and/or other platforms?
 
 </details>
 
-
-<details ><summary><font size="+0.5">Time and Space Complexity, Big O Notation:</font></summary>
+  
+<details ><summary><strong>2. Time and Space Complexity, Big O Notation</strong></summary>
 
 * Will this be discussed at all in the course?
 
@@ -37,8 +38,8 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 
 </details>
 
-
-<details ><summary><font size="+0.5">Other</font></summary>
+  
+<details ><summary><strong>3. Other</strong></summary>
 
 * Anything you wish you had known going into the course?
     * _e.g. quirks of Java, code conventions, organization, etc._
@@ -58,7 +59,7 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 </details>
 
 
-<!-- ## Meeting Notes: Nov 9, 2024
+<!-- ### Meeting Notes: Nov 9, 2024
 
 *  -->
 
