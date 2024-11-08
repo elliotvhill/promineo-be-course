@@ -39,7 +39,7 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 </details>
 
   
-<details open><summary><strong>3. Other</strong></summary>
+<details ><summary><strong>3. Other</strong></summary>
 
 * Anything you wish you had known going into the course?
     * _e.g. quirks of Java, code conventions, organization, etc._
