@@ -39,7 +39,7 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 </details>
 
   
-<details ><summary><strong>3. Other</strong></summary>
+<details open><summary><strong>3. Other</strong></summary>
 
 * Anything you wish you had known going into the course?
     * _e.g. quirks of Java, code conventions, organization, etc._
@@ -55,6 +55,42 @@ A repository to store any questions, discussion topics, tips, or other notes fro
     * Suggestions for getting started & overcoming fear/imposter syndrome
     
     * How do you show off your OS work on a resume or LinkedIn, for example?
+
+* Question about redefining variables:
+    * This code correctly returns `true` for both sysouts:
+
+        ```Java
+        public static void main(String[] args) {
+
+            int ageRequiredToDrive = 16;
+            int currentAge = 14;
+            currentAge = 30;
+
+            boolean canPersonDrive = (currentAge >= ageRequiredToDrive);
+
+            System.out.println(canPersonDrive); // returns 'true'
+            
+            currentAge = 14;
+            System.out.println(canPersonDrive); // returns 'true'
+        }
+        ```
+
+    * However, this code incorrectly returns `false` for both sysouts:
+
+        ```Java
+        public static void main(String[] args) {
+
+            int ageRequiredToDrive = 16;
+            int currentAge = 14;
+            boolean canPersonDrive = (currentAge >= ageRequiredToDrive);
+            
+            currentAge = 30;
+            System.out.println(canPersonDrive); // returns 'false'
+            
+            currentAge = 24;
+            System.out.println(canPersonDrive); // returns 'false'
+        }
+        ```
 
 </details>
 
