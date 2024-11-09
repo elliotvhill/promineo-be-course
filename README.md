@@ -423,3 +423,16 @@ Cool. Yeah. Other than that, you guys have a good rest of your weekend.
 Thank you very much. Bye. Bye.
 
 </details>
+
+### Resources Shared
+* https://www.geeksforgeeks.org/introduction-to-java/?ref=lbp
+* https://www.geeksforgeeks.org/loops-in-java/#
+* https://www.programiz.com/java-programming/for-loop
+* https://introcs.cs.princeton.edu/java/home/
+* https://www.youtube.com/@alexlorenlee/videos
+* https://www.youtube.com/@CodingWithJohn
+* https://en.wikibooks.org/wiki/Java_Programming/Getting_started
+* https://math.hws.edu/javanotes/index.html
+* https://docs.oracle.com/javase/tutorial/getStarted/TOC.html
+* https://javaranch.com/
+* https://codingbat.com/
