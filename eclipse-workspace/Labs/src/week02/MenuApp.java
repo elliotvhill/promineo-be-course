@@ -44,7 +44,7 @@ public class MenuApp {
 		}
 
 		System.out.println("Total: " + total);
-
+		sc.close();
 	}
 
 }

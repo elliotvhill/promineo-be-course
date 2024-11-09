@@ -31,6 +31,7 @@ public class UserInputDemo {
 			}
 
 		}
+		sc.close();
 
 	}
 
