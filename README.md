@@ -56,9 +56,10 @@ A repository to store any questions, discussion topics, tips, or other notes fro
     
     * How do you show off your OS work on a resume or LinkedIn, for example?
 
-* Question about redefining variables:
-    * This code correctly returns `true` for both sysouts:
-
+* Question about reassigning variables:
+    * This code incorrectly returns `true` for both sysouts:
+        <details><summary>Example 1</summary>
+        
         ```Java
         public static void main(String[] args) {
 
@@ -71,11 +72,15 @@ A repository to store any questions, discussion topics, tips, or other notes fro
             System.out.println(canPersonDrive); // returns 'true'
             
             currentAge = 14;
-            System.out.println(canPersonDrive); // returns 'true'
+            System.out.println(canPersonDrive); // returns 'true' 
+            // Explanation: still returns true bc value of canPersonDrive still holds value of 'true' (bc 30 >= 16)
         }
         ```
+        </details>
 
-    * However, this code incorrectly returns `false` for both sysouts:
+    * This code incorrectly returns `false` for both sysouts:
+
+        <details><summary>Example 2</summary>
 
         ```Java
         public static void main(String[] args) {
@@ -89,8 +94,13 @@ A repository to store any questions, discussion topics, tips, or other notes fro
             
             currentAge = 24;
             System.out.println(canPersonDrive); // returns 'false'
+            // Explanation: again, value of canPerson drive hasn't changed -- it's still 'false' (bc 14 <= 16)
         }
         ```
+        
+        </details>
+
+    * _**Answer:** the variable `canPersonDrive` is simmply never updated, which is wwhy it continues to return the same value after `currentAge` is reassigned -- we're not running any kind of function that would automatically update `canPersonDrive`; it's statically defined._
 
 </details>
 
