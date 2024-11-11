@@ -4,6 +4,88 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 
 _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/week_0/2023PTBESyllabus.pdf)_
 
+
+## Week 2
+
+### Questions and topics to discuss
+
+<details><summary><strong>Lab week02 question 6</strong></summary>
+
+**Question 6:**
+
+```java
+// 6. Cookie Distribution:
+		// Note: You will evenly distribute all of the cookies to the children
+		// and as the adult you get to keep the remaining cookies for yourself.
+		
+		// a. Create two variables called numberOfCookies and numberOfChildren.
+		// b. Initialize the two variables to integer values.
+		// b. Use a conditional to print the following based on the following
+		// conditions:
+		// i. If there are 0 cookies remaining, print "Sad Face"
+		// ii. If there are less than 2 cookies, print "Yes!"
+		// iii. If there are less than 5 cookies, print "Whoohoooo!"
+		// iv. If there are 5 or more cookies, print "Jackpot!"
+```
+
+**My solution:**
+
+```java
+int numberOfCookies = 18;
+		int numberOfChildren = 14;
+		
+		int result = numberOfCookies % numberOfChildren;
+		
+		if (result == 0) {
+			System.out.println("Sad Face");
+		} else if (result < 2) {
+			System.out.println("Yes!");
+		} else if (result < 5) {
+			System.out.println("Whoohoooo!");
+		} else {
+			System.out.println("Jackpot!");
+		}
+
+// My Questions:
+//		Q: Can we assume cookies remain whole?
+//		i.e. if cookies cannot be divided evenly
+//		among children, does adult keep _all_ cookies?
+		
+//		Q: For time/space optimization, does it make sense to use memory 
+//		or to repeat the calculation w/o using extra storage?
+```
+
+
+</details>
+
+
+<!-- <details open><summary><strong>Topic 2</strong></summary>
+
+* 
+* 
+* 
+
+</details>
+
+
+<details open><summary><strong>Topic 3</strong></summary>
+
+* 
+* 
+* 
+
+</details>
+
+
+### Meeting Notes: DATE
+
+* 
+* 
+*  -->
+
+
+
+
  
 ## Week 1
 
@@ -425,6 +507,7 @@ Thank you very much. Bye. Bye.
 </details>
 
 ### Resources Shared
+
 * https://www.geeksforgeeks.org/introduction-to-java/?ref=lbp
 * https://www.geeksforgeeks.org/loops-in-java/#
 * https://www.programiz.com/java-programming/for-loop
