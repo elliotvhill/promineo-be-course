@@ -93,26 +93,34 @@ public class Week02BooleanConditionalsLoopsLab {
 		// iii. If there are less than 5 cookies, print "Whoohoooo!"
 		// iv. If there are 5 or more cookies, print "Jackpot!"
 
-//		Assumptions:
-//		Can we assume cookies remain whole?
-//		i.e. if cookies % children != 0, does adult keep all cookies?
+		int numberOfCookies = 20;
+		int numberOfChildren = 14;
 		
-		int numberOfCookies = 5;
-		int numberOfChildren = 7;
-
 		int result = numberOfCookies % numberOfChildren;
-
+		
 		if (result == 0) {
+//			System.out.println(result);
 			System.out.println("Sad Face");
 		} else if (result < 2) {
+//			System.out.println(result);
 			System.out.println("Yes!");
 		} else if (result < 5) {
+//			System.out.println(result);
 			System.out.println("Whoohoooo!");
 		} else {
+//			System.out.println(result);
 			System.out.println("Jackpot!");
 		}
-
 		
+//		Q: Can we assume cookies remain whole?
+//		i.e. if cookies cannot be divided evenly
+//		among children, does adult keep _all_ cookies?
+		
+//		Q: For time/space optimization, does it make sense to use memory 
+//		(i.e. create 'result' variable)
+//		or to repeat the calculation w/o using extra storage?
+		
+
 		// 7. Loyalty Member Program:
 		// a. Create a variable called loyaltyMemberStatus and assign the value "SILVER"
 		// b. Create a variable called loyaltyMemberDiscount and assign the value 0.0
