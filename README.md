@@ -59,25 +59,24 @@ int numberOfCookies = 18;
 </details>
 
 
-<!-- <details open><summary><strong>Topic 2</strong></summary>
+<details open><summary><strong>Other code questions</strong></summary>
 
-* 
-* 
-* 
+* What does the Java error `dead code` mean?
+
 
 </details>
 
 
-<details open><summary><strong>Topic 3</strong></summary>
+<!-- <details open><summary><strong>Topic 3</strong></summary>
 
 * 
 * 
 * 
 
-</details>
+</details> -->
 
 
-### Meeting Notes: DATE
+<!-- ### Meeting Notes: DATE
 
 * 
 * 
