@@ -6,18 +6,19 @@
 //
 package week02;
 
+import java.util.*;
+
 public class Week02OpenClassConditionalsPart1 {
 
 	public static void main(String[] args) {
 
-		//
-		// BOOLEANS and CONDITIONALS:
+		//////////// BOOLEANS and CONDITIONALS -- LESSON EXAMPLES ////////////
 		//
 
 		// 1. Variable Declaration:
 		// a. Create a variable named age and assign it a value of 14
 
-		int age = 14;
+//		int age = 14;
 
 		// 2. Print a Boolean Expression:
 		// a. Print the boolean expression age >= 16 to the console and note the
@@ -93,33 +94,32 @@ public class Week02OpenClassConditionalsPart1 {
 		// iii. If there are less than 5 cookies, print "Whoohoooo!"
 		// iv. If there are 5 or more cookies, print "Jackpot!"
 
-		int numberOfCookies = 20;
-		int numberOfChildren = 14;
-		
-		int result = numberOfCookies % numberOfChildren;
-		
-		if (result == 0) {
-//			System.out.println(result);
-			System.out.println("Sad Face");
-		} else if (result < 2) {
-//			System.out.println(result);
-			System.out.println("Yes!");
-		} else if (result < 5) {
-//			System.out.println(result);
-			System.out.println("Whoohoooo!");
-		} else {
-//			System.out.println(result);
-			System.out.println("Jackpot!");
-		}
-		
+//		int numberOfCookies = 20;
+//		int numberOfChildren = 14;
+//		
+//		int result = numberOfCookies % numberOfChildren;
+//		
+//		if (result == 0) {
+////			System.out.println(result);
+//			System.out.println("Sad Face");
+//		} else if (result < 2) {
+////			System.out.println(result);
+//			System.out.println("Yes!");
+//		} else if (result < 5) {
+////			System.out.println(result);
+//			System.out.println("Whoohoooo!");
+//		} else {
+////			System.out.println(result);
+//			System.out.println("Jackpot!");
+//		}
+
 //		Q: Can we assume cookies remain whole?
 //		i.e. if cookies cannot be divided evenly
 //		among children, does adult keep _all_ cookies?
-		
+
 //		Q: For time/space optimization, does it make sense to use memory 
 //		(i.e. create 'result' variable)
 //		or to repeat the calculation w/o using extra storage?
-		
 
 		// 7. Loyalty Member Program:
 		// a. Create a variable called loyaltyMemberStatus and assign the value "SILVER"
@@ -228,6 +228,185 @@ public class Week02OpenClassConditionalsPart1 {
 //			i--;
 //			System.out.println(i % 3);
 //		}
+//		
+//		
+//		
+		//////////// OPEN CLASS PROBLEMS: ////////////
+//		
+//		
+		Scanner in = new Scanner(System.in);
+//		
+//		
+//		
+//		1. Old Enough to Vote?
+//
+//		Given the variable age, create an if/else statement that checks if 
+//		the value stored in age is old enough to vote.
+//		- If the age is greater than or equal to 18, then print "You are 
+//		old enough to vote."
+//		- If the age is not, then print "You are not old enough to vote."
+//		
+//		
+//		int age = in.nextInt();
+//		
+//		if (age >= 18) {
+//			System.out.println("You are old enough to vote.");
+//		} else {
+//			System.out.println("You are not old enough to vote.");
+//		}
+//		
+//		
+//		
+//		2. True or False: In Java, a variable has to be declared before it is used.
+//		True
+//		
+//		
+//		
+//		3. Is This String Long?
+//
+//		Given the variable randomWord, create an if/else statement that 
+//		checks the length of the String in variable randomWord
+//		- If the word contains 10 or more characters, print "That is a 
+//		really long word!"
+//		- Otherwise, print "Your word is not that long."
+//		
+//		String randomWord = in.next();
+//		
+//		if (randomWord.length() >= 10) {
+//			System.out.println("That is a really long word!");
+//		} else {
+//			System.out.println("Your word is not that long.");
+//		}
+//		
+//		test #1: exceptionally
+//		Output: long word
+//		
+//		test #2: Java
+//		Output: not long word
+//		
+//		test #3: programming
+//		Output: long word
+//		
+//		test #4: small
+//		Output: not long word
+//		
+//		test #5: inconsequential
+//		Output: long word
+//		
+//		test #6: perfectionist
+//		Output: long word
+//		
+//		test #7: super
+//		Output: not long word
+//		
+//		
+//		
+//		4. True/False: Java is a strongly-typed language.
+//		True;
+//		Java requires the declaration of every variable with a data type. 
+//		A variable can not be created without the range of values it can 
+//		hold. Once declared, the data type of the variable cannot be changed.
+//		
+//		
+//		
+//		5. Smaller, Larger or Equal?
+//
+//		Given the variables num1 and myNumber, create an if/else if statement 
+//		that compares myNumber to num1. Based on which condition evaluates to 
+//		true, print one of the following messages:
+//		- num1 + " is smaller than my number, " + myNumber
+//		- num1 + " is larger than my number, " + myNumber
+//		- num1 + " is equal to my number, " + myNumber
+//		
+//		int num1 = 156;
+//		int myNumber = in.nextInt();
+//		
+//		if (num1 < myNumber) {
+//			System.out.println(num1 + " is smaller than my number, " + myNumber);
+//		} else if (num1 > myNumber) {
+//			System.out.println(num1 + " is larger than my number, " + myNumber);
+//		} else {
+//			System.out.println(num1 + " is equal to my number, " + myNumber);
+//		}
+//		
+//		
+//		
+//		6. Which of the following is the correct syntax to print a full name 
+//		using the Java programming language System.out.println(), 
+//		given a firstName and a lastName?
+//		
+//		A. System.out.println(firstName + " " + lastName)
+//		B. System.out.println(firstName + " " + lastName);
+//		C. System.out.println(firstName + lastName);
+//		D. System.out.println(firstName + lastName)
+//
+//		B.
+//
+//
+//
+//		7. Which Day Is The Hottest?
+//
+//		Given three variables, sundayTemp, mondayTemp, and tuesdayTemp, write 
+//		a program that will determine which day is the hottest.
+//		
+//		- If sundayTemp is the highest, print "Sunday"
+//		- If mondayTemp is the highest, print "Monday"
+//		- If tuesdayTemp is the highest, print "Tuesday"
+//		- Assume that none of the temperatures are the same
+//		
+//		double sundayTemp = in.nextDouble();
+//		double mondayTemp = in.nextDouble();
+//		double tuesdayTemp = in.nextDouble();
+//		
+//		if (sundayTemp > mondayTemp && sundayTemp > tuesdayTemp) {
+//			System.out.println("Sunday");
+//		} else if (mondayTemp > sundayTemp && mondayTemp > tuesdayTemp) {
+//			System.out.println("Monday");
+//		} else {
+//			System.out.println("Tuesday");
+//		}
+//		
+//		
+//		
+//		8. What would be the correct Java data type to use when declaring a 
+//		variable to store the price of a grocery store item?
+//		A. double
+//		B. short
+//		C. int
+//		
+//		A
+//		
+//		
+//		
+//		9. Who Is the Oldest?
+//
+//		Given three variables, personOneAge, personTwoAge, and personThreeAge, 
+//		write a program that will determine who is the oldest.
+//		
+//		- If Person one is the oldest, print "Person one is the oldest."
+//		- If Person two is the oldest, print "Person two is the oldest."
+//		- If Person three is the oldest, print "Person three is the oldest."
+//		- Assume that no one is the same age
+//		
+//		int personOneAge = in.nextInt();
+//		int personTwoAge = in.nextInt();
+//		int personThreeAge = in.nextInt();
+//		
+//		if (personOneAge > personTwoAge && personOneAge > personThreeAge) {
+//			System.out.println("Person one is the oldest.");
+//		} else if (personTwoAge > personOneAge && personTwoAge > personThreeAge) {
+//			System.out.println("Person two is the oldest.");
+//		} else {
+//			System.out.println("Person three is the oldest.");
+//		}
+//		
+//		
+//		
+//		10. True/False: In Java, an else is always required when using 
+//		an if conditional statement.
+//		False
+//		
+		in.close();
 	}
 
 }
