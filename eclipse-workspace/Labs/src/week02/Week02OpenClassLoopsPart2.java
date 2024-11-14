@@ -100,18 +100,137 @@ public class Week02OpenClassLoopsPart2 {
 //		- If countDown is less than 3 or greater than 10, then the only 
 //		message printed to the console is "We have lift off!"
 //		
-		int countDown = in.nextInt();
-		
-		if (countDown >= 3 && countDown <= 10) {
-			
-			while (countDown > 0) {
-				System.out.println(countDown + "...");
-				countDown--;
-			}
-		}
-		
-		System.out.println("We have lift off!");
+//		int countDown = in.nextInt();
 //		
+//		if (countDown >= 3 && countDown <= 10) {
+//			
+//			while (countDown > 0) {
+//				System.out.println(countDown + "...");
+//				countDown--;
+//			}
+//		}
+//		
+//		System.out.println("We have lift off!");
+//		
+//		
+//		
+//		16. How many times will the value of x print to the console in the code below?
+//		
+//		int x = 100;
+//		int y = 5;
+//
+//		if(x < 100 && y > 1){
+//		    while(x > y){
+//		        System.out.println(x);
+//		        x--;  
+//		    }
+//		} else{
+//		    System.out.println("Your loop did not run.");
+//		}
+//		
+//		A. 95
+//		B. 0
+//		C. "Your loop did not run."
+//		D. 94
+//		
+//		B
+//		
+//		
+//		
+//		17. do While Loop using length()
+//
+//		Given the variable userWord and wordLength, create a do while loop 
+//		that prints the word stored in userWord.
+//		
+//		- Declare a variable called counter and set it equal to wordLength, 
+//		use counter to keep track of the count
+//		- If wordLength is less than 5 characters, then print userWord to 
+//		the console 1 time
+//		- If the word is 5 or more characters long, then print userWord to 
+//		the console wordLength number of times
+//		- This is how it should work: if userWord is "Loops", then wordLength 
+//		would equal 5 and so "Loops" would print 5 times. If the word is "Java", 
+//		then "Java" would only print 1 time because wordLength would less than 5
+//		
+//		String userWord = in.nextLine();
+//		int wordLength = userWord.length();
+//		int counter = wordLength;
+//		
+//		do {
+//			System.out.println(userWord);
+//			counter--;
+//		} while (counter > 0 && wordLength >= 5);
+//		
+//		
+//		
+//		18. How many times does the do while loop below run?
+//		
+//		int i = 1;
+//		do {
+//			System.out.println(i);
+//			i++;
+//		} while (i <= 10);
+//
+//		A. 9
+//		B. 1
+//		C. 11
+//		D. 10
+//		
+//		D
+//		
+//		
+//		19. Concatenate A String its Length Number of Times
+//
+//		Write a for loop that starts at zero and loops the length of a 
+//		user-entered String saved in the given variable userWord. 
+//		Every time the loop runs, the userWord is added to the given 
+//		variable longString to make a repeating string.
+//		
+//		- For example, if String userWord = "Hello", the loop would 
+//		run 5 times and concatenate the word "Hello" to longString 5 
+//		times, because "Hello" 
+//		has 5 letters. The output would be HelloHelloHelloHelloHello.
+//		- Every time the loop processes, userWord should be 
+//		added to longString
+//		- Outside of the for loop, use System.out.println(); to print 
+//		longString to the console.
+//		
+//		String userWord = in.next();
+//		String longString = "";
+//		
+//		for (int i = 0; i < userWord.length(); i++) {
+//			longString += userWord;
+//		}
+//		
+//		System.out.println(longString);
+//		
+//		
+//		
+//		20. What will the following code do if the user enters in the 
+//		word "password" as their password?
+//		
+		System.out.println("Enter a password that is at least 10 characters: ");
+		String userPassword = in.nextLine();
+
+		do{
+		    if ( userPassword.length() < 10 ) {
+		        System.out.println("Your password is not long enough.");
+		        userPassword = in.nextLine();
+		    } else {
+		        System.out.println("Your password is long enough.");
+		    }
+
+		} while ( userPassword.length() < 10 );
+//
+//
+//		A. "Your password is not long enough." will print to the console, 
+//		but the console will be waiting for the user to type in another 
+//		password
+//		B. "Your password is not long enough." will print to the console.
+//		C. nothing
+//		D. "Your password is long enough." will print to the console
+//		
+//		A
 //		
 //		
 		in.close();
