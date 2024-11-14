@@ -84,11 +84,11 @@ public class Week02OpenClassLoopsPart1 {
 //		6. What will be the value of the variable counter when the following 
 //		for loop finishes running? // 50
 //		
-		int counter = 0;
-		for (int i = 1; i < 100; i += 2) {
-			counter++;
-			System.out.println(counter);
-		}
+//		int counter = 0;
+//		for (int i = 1; i < 100; i += 2) {
+//			counter++;
+//			System.out.println(counter);
+//		}
 //
 //
 //
@@ -101,6 +101,47 @@ public class Week02OpenClassLoopsPart1 {
 //		starting with userNumber to 100
 //		- If not, print "Your number was not between 1 and 100." to the console.
 //
+//		int userNumber = in.nextInt();
+//		if (userNumber >= 1 && userNumber <= 100) {
+//			while (userNumber <= 100) {
+//				System.out.println(userNumber);
+//				userNumber++;
+//			}
+//		} else {
+//			System.out.println("Your number was not between 1 and 100.");
+//		}
+//
+//
+//
+//		8. What happens if you forget to add an incrementor or decrementor in a while loop?
+//				create an infinite loop
+//
+//
+//
+//		9. Multiplication Table
+//
+//		Create a for loop that prints out a multiplication table from 1 
+//		through 10 for a given variable num.
+//		- Print the multiplication table to the console
+//		- Make sure the spacing is the same as the expected output
+//		- For example, if the value of num is 1, each iteration of the 
+//		loop should look like the following:
+//		`1 x 1 = 1`
+//		`1 x 2 = 2`
+//		`1 x 3 = 3` … and so on up to `1 x 10 = 10`.
+//		
+		int num = in.nextInt();
+		
+		System.out.println("Multiplication table of " + num + ":");
+		for (int i = 1; i <= 10; i++) {
+			System.out.println(num + " x " + i + " = " + num * i);
+		}
+//
+//
+//
+//		10. True or False: for loops and while loops will run the same 
+//		amount of times if all of the conditions are the same.
+//		true
 //
 //
 //
