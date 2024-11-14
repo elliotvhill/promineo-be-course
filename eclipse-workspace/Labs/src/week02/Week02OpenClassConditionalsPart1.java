@@ -23,46 +23,50 @@ public class Week02OpenClassConditionalsPart1 {
 //		“It's not looking too good.”
 //				
 //				        
-//			int wins = 8;
-//			int losses = 2;
-//			boolean isFall = false;
+		int wins = 8;
+		int losses = 2;
+		boolean isFall = false;
 ////		
 //			
-////			// Step 1: We want to check if the number of wins is 
-////			// greater than the number of losses and if it's fall season.
-////			// If both conditions are true, the program will print 
-////			// that the team is likely to make the playoffs.
-//			if (wins > losses && isFall) {
-//				System.out.println("It's looking good for your team to make the playoffs.");
+////			// Step 1: We want to check if the number of wins is greater
+////			// than the number of losses and if it's fall season.
+////			// If both conditions are true, the program will print that the 
+//			// team is likely to make the playoffs.
 ////			
-////			// Step 2: If the number of wins is greater than the number of losses but it's not fall season,
-////			// the program will print that the team has potential, but it's too early to decide.
-//			} else if (wins > losses && !isFall) {
-//				System.out.println("Your favorite team has promise, but it's too early to tell.");
-////				        
-//			} else {
-////			// Step 3: If neither of the above conditions are true (meaning wins are not greater than losses),
-////			// the program will print that things aren't looking good for the team.
-//				System.out.println("It's not looking too good.");
-//			}
+////			// Step 2: If the number of wins is greater than the number of 
+//			// losses but it's not fall season, the program will print that 
+//			// the team has potential, but it's too early to decide.
+
+////			// Step 3: If neither of the above conditions are true (meaning 
+//			// wins are not greater than losses), the program will print that 
+//			// things aren't looking good for the team.
+
+		if (wins > losses && isFall) {
+			System.out.println("It's looking good for your team to make the playoffs.");
+		} else if (wins > losses && !isFall) {
+			System.out.println("Your favorite team has promise, but it's too early to tell.");
+//				        
+		} else {
+			System.out.println("It's not looking too good.");
+		}
 //				      
-//
 //			test: 4, 6, true // not looking good
 //			test: 8, 2, false // too early
-
+//
+//
 //		12. What is the output of this code?
-//				int num = 7;
-//				String message;
-//
-//				if (num > 10) {
-//				    message = "The number is greater than 10.";
-//				} else if (num > 5) {
-//				    message = "The number is greater than 5 but less than or equal to 10.";
-//				} else {
-//				    message = "The number is less than or equal to 5.";
-//				}
-//
-//				System.out.println(message);
+		int num = 7;
+		String message;
+
+		if (num > 10) {
+			message = "The number is greater than 10.";
+		} else if (num > 5) {
+			message = "The number is greater than 5 but less than or equal to 10.";
+		} else {
+			message = "The number is less than or equal to 5.";
+		}
+
+		System.out.println(message);
 //				
 //				Multiple-choice options (select one)
 //				B.
@@ -82,37 +86,38 @@ public class Week02OpenClassConditionalsPart1 {
 //		        int num3 = in.nextInt();
 //		        int num4 = in.nextInt();
 //		        
-////		        
-////		        // Step 1: We check if num1 is greater than or equal to num2.
-////		        // If this condition is true, we move to the next step.
 //		        
+//		        // Step 1: We check if num1 is greater than or equal to num2.
+//		        // If this condition is true, we move to the next step.
+//		        
+//			    // Step 2: Inside the first condition, we now check if num3 is 
+//				// greater than or equal to num4.
+//				// If both conditions are true, the program will print "both statements are true".
+
+//		        // Step 3: Regardless of whether the conditions were true or false, 
+//		        // the program will print "program ended".
+//				
 //		        if (num1 >= num2) {
-////			        // Step 2: Inside the first condition, we now check if num3 is greater than or equal to num4.
 //		        		if (num3 >= num4) {
-////				        // If both conditions are true, the program will print "both statements are true".
 //		        			System.out.println("both statements are true");
 //		        		}
 //		        }
-////		        // Step 3: Regardless of whether the conditions were true or false, 
-////		        // the program will print "program ended".
 //		        System.out.println("program ended");
 //		        
-//		        
-//		        // Example: 
-//		        // Let's say num1 = 5, num2 = 3, num3 = 4, and num4 = 2.
-//		        // Since 5 is greater than 3, and 4 is greater than 2, the program will print:
-//		        // "both statements are true"
-//		        // "program ended"
 //
 //		test: 5, 5, 5, 5
 //		test: 1, 2, 3, 4
-
-//		14. Would the following code give the same result as the code in Question #13? // yes
+//
+//		        
+//		14. Would the following code give the same result as the code in Question #13? 
+//		        
 //			if (num1 >= num2 && num3 >= num4){
 //				System.out.println("both statements are true");
 //				}
 //			System.out.println("program ended");
-
+//
+//
+//
 //		15. `switch` Statement Practice
 //
 //		Given a variable monthNumber, write a switch statement to 
@@ -172,10 +177,9 @@ public class Week02OpenClassConditionalsPart1 {
 //		test: 13
 //		test: 12
 //		test: 4
-//		test: 6
-//		test: 1
-//		test: 2
-
+//
+//
+//
 //		16. Java will execute all of the code below the matched case 
 //		in a switch statement unless a break; statement is inserted.
 //		true
@@ -192,36 +196,93 @@ public class Week02OpenClassConditionalsPart1 {
 //		program work as desired no matter the letter case of the name of the month.
 //				
 
-		String month = in.nextLine();
+//		String month = in.nextLine();
+////
+//		int days = -1;
+//		switch (month.toLowerCase()) {
+//		case "january":
+//		case "march":
+//		case "may":
+//		case "july":
+//		case "august":
+//		case "october":
+//		case "december":
+//			days = 31;
+//			break;
+//		case "april":
+//		case "june":
+//		case "september":
+//		case "november":
+//			days = 30;
+//			break;
+//		case "february":
+//			days = 28;
+//			break;
+//		}
 //
-		int days = -1;
-		switch (month.toLowerCase()) {
-		case "january":
-		case "march":
-		case "may":
-		case "july":
-		case "august":
-		case "october":
-		case "december":
-			days = 31;
-			break;
-		case "april":
-		case "june":
-		case "september":
-		case "november":
-			days = 30;
-			break;
-		case "february":
-			days = 28;
-			break;
-		}
+//		/***** DO NOT CHANGE THE CODE BELOW THIS LINE *****/
+//		if (days == -1) {
+//			System.out.println("Invalid month");
+//		} else {
+//			System.out.println("Has " + days + " days");
+//		}
+//
+//
+//
+//		18. Can a switch statement in Java be coded as an if/else if/else statement?
+//		yes
+//
+//
+//
+//		19. What Day is it?
+//
+//		Given the String variable day, determine if the day of the week stored 
+//		in day is a weekday, is a weekend day, or an Invalid day.
+//		- When checking the value of day, make sure that your code 
+//		takes into account letter case
+//		- If the value of day is Monday, Tuesday, Wednesday, Thursday, 
+//		or Friday, then print to the console the day and " is a weekday."
+//		- The output for Tuesday should look like this: "Tuesday is a weekday."
+//		- If the value of day is Saturday or Sunday, then print to the 
+//		console the day and " is a weekend day."
+//		- The output for Saturday should look like this: "Saturday is a weekend day."
+//		- Otherwise, print "Invalid day!"
+//
+//
+//		If want to correct case, use `substring` method:
+//		String capitalStr = day.substring(0, 1).toUpperCase() + day.substring(1).toLowerCase();
+//				
+//				
+		String day = in.nextLine();
 
-		/***** DO NOT CHANGE THE CODE BELOW THIS LINE *****/
-		if (days == -1) {
-			System.out.println("Invalid month");
-		} else {
-			System.out.println("Has " + days + " days");
+		switch (day.toLowerCase()) {
+		case "saturday":
+		case "sunday":
+			System.out.println(day + " is a weekend day.");
+			break;
+		case "monday":
+		case "tuesday":
+		case "wednesday":
+		case "thursday":
+		case "friday":
+			System.out.println(day + " is a weekday.");
+			break;
+		default:
+			System.out.println("Invalid day!");
+			break;
 		}
+//
+//
+//
+//		
+//		20. If you have a specific set of values and a specific set of 
+//		operations that you want to perform on each of those values, 
+//		what Java conditional statement would be the best choice to use?
+//
+//			A. if/else if/ else
+//			B. switch
+//		answer: B
+//
 
 		in.close();
 	}
