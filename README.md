@@ -4,6 +4,21 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 
 _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/week_0/2023PTBESyllabus.pdf)_
 
+## Week 3
+
+### Questions and topics to discuss
+
+* Increment `counter` variable from within `sysout`:
+
+```java
+int[] gradesArray = {100, 97, 80, 85, 79};
+int counter = 1;
+		System.out.println("Grades:");
+		for (int grade : gradesArray) {
+			System.out.println((counter++) + ": " + grade);
+		}
+```
+
 
 ## Week 2
 
