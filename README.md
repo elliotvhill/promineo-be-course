@@ -82,23 +82,6 @@ int numberOfCookies = 18;
 </details>
 
 
-<!-- <details open><summary><strong>Topic 3</strong></summary>
-
-* 
-* 
-* 
-
-</details> -->
-
-
-<!-- ### Meeting Notes: DATE
-
-* 
-* 
-*  -->
-
-
-
 
  
 ## Week 1
