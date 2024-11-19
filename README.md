@@ -19,6 +19,10 @@ int counter = 1;
 		}
 ```
 
+* `ArrayIceCreamOrder` example menu application ([link](https://learn.promineotech.com/mod/book/view.php?id=20014&chapterid=1943))
+    * Default constructor vs other constructors? Is it that we need to define separate constructors for all user cases _(i.e. if user does not input values for each variable)_?
+    * Getters & setters
+
 
 ## Week 2
 
