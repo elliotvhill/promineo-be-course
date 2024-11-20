@@ -10,18 +10,51 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
 
 * Increment `counter` variable from within `sysout`:
 
-```java
-int[] gradesArray = {100, 97, 80, 85, 79};
-int counter = 1;
-		System.out.println("Grades:");
-		for (int grade : gradesArray) {
-			System.out.println((counter++) + ": " + grade);
-		}
-```
+    ```java
+    int[] gradesArray = {100, 97, 80, 85, 79};
+    int counter = 1;
+            System.out.println("Grades:");
+            for (int grade : gradesArray) {
+                System.out.println((counter++) + ": " + grade);
+            }
+    ```
 
 * `ArrayIceCreamOrder` example menu application ([link](https://learn.promineotech.com/mod/book/view.php?id=20014&chapterid=1943))
     * Default constructor vs other constructors? Is it that we need to define separate constructors for all user cases _(i.e. if user does not input values for each variable)_?
     * Getters & setters
+
+* Lab 3 questions:
+    * Question 12: "_calculate the sum_ of all the letters" -- what does this mean? Should we _concatenate_ all the letters? Or count how many are in the strings combined?
+    * Method 16: using a for loop with an if statement seems verbose... why doesnt using a ternary work? e.g. something like this:
+
+        ```java
+        public static boolean stringExists(String[] arr, String str) {
+            for (int i = 0; i < arr.length; i++) {
+                boolean stringMatch = arr[i].equals(str);
+                stringMatch == true ? true : false;
+            }
+        }
+        // Throws "System error on token: invalid '==' operator"
+        ```
+    * Question 19: strange output
+        ```java
+        // 19. Write and test a method that takes an array of Strings and
+		// returns an array of int where each element
+		// matches the length of the string at that position
+			String[] teams = {"Chelsea", "Arsenal", "Ipswich", "West Ham"};
+			stringLengths(teams);
+
+        // Method 19:
+            public static int[] stringLengths(String[] arr) {
+                int[] lengths = new int[arr.length];
+                for (int i = 0; i < arr.length; i++) {
+                    lengths[i] = arr[i].length();
+                }
+                System.out.println(lengths); // Output: [I@251a69d7
+                return lengths;
+            }
+        ```
+    
 
 
 ## Week 2
