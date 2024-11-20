@@ -140,7 +140,8 @@ public class Week03ArraysAndMethodsLab {
 		// matches the length of the string at that position
 		System.out.println("Question 19:");
 		String[] teams = {"Chelsea", "Arsenal", "Ipswich", "West Ham"};
-		System.out.println(stringLengths(teams));
+		int[] teamLengths = stringLengths(teams);
+		System.out.println(teamLengths); // Output: [I@251a69d7
 
 		// 20. Write and test a method that takes an array of strings and
 		// returns true if the sum of letters for all strings with an even amount of
@@ -206,6 +207,7 @@ public class Week03ArraysAndMethodsLab {
 		int[] lengths = new int[arr.length];
 		for (int i = 0; i < arr.length; i++) {
 			lengths[i] = arr[i].length();
+			System.out.println(lengths[i]);
 		}
 		return lengths;
 	}
@@ -221,6 +223,7 @@ public class Week03ArraysAndMethodsLab {
 				oddSum += arr[i].length();
 			}
 		}
+		System.out.println("Evens: " + evenSum + ", Odds: " + oddSum);
 		return evenSum > oddSum;
 	}
 
