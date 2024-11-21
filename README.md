@@ -21,11 +21,12 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
 
 * `ArrayIceCreamOrder` example menu application ([link](https://learn.promineotech.com/mod/book/view.php?id=20014&chapterid=1943))
     * Default constructor vs other constructors? Is it that we need to define separate constructors for all user cases _(i.e. if user does not input values for each variable)_?
+        * Is this an example of _overloading_ a method? Please explain
     * Getters & setters
 
 * Lab 3 questions:
     * Question 12: "_calculate the sum_ of all the letters" -- what does this mean? Should we _concatenate_ all the letters? Or count how many are in the strings combined?
-    * Method 16: using a for loop with an if statement seems verbose... why doesnt using a ternary work? e.g. something like this:
+    * Method question 16: using a for loop with an if statement seems verbose... why doesnt using a ternary work? e.g. something like this:
 
         ```java
         public static boolean stringExists(String[] arr, String str) {
@@ -54,7 +55,16 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
                 return lengths;
             }
         ```
+        * **Explanation:** have to use `.toString()` method to print arrays to console
     
+* Open Class lesson Methods part 1:
+    * What is the use case for overloading a method? Why use the same method name? Couldn't that potentially be confusing?
+* Open Class lesson Methods part 2:
+    * Question 13: sumOfDigits Method -- I just don't get the math
+* Open Class Arrays part 1:
+    * States that declaring the length of an array is _optional_ -- I thought it was _required_?
+        * ...Or are they just referring to declaring with an Array initializer vs. a `new` constructor?
+    * Aren't arrays immutable in Java? _**Answer:** No, values can be exchanged; **length** cannot, though_
 
 
 ## Week 2
