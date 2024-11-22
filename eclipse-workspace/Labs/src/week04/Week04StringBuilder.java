@@ -55,7 +55,7 @@ public class Week04StringBuilder {
 		 *  without using the reverse() method, and then print the result to the Console.
 		 */
 		
-		
+		System.out.println(reverseString("Dandelion"));
 		
 	}
 	
@@ -67,6 +67,14 @@ public class Week04StringBuilder {
 		return result.toString(); // use .toString() to match return type declared in method signature
 	}
 
+	public static String reverseString(String str) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < str.length(); i++) {
+			sb.append(str.charAt(str.length() - 1 - i));
+		}
+		return sb.toString();
+	}
+	
 }
 
 
