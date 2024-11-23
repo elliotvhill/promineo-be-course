@@ -4,6 +4,14 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 
 _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/week_0/2023PTBESyllabus.pdf)_
 
+## Week 4
+
+### Questions and topics to discuss
+
+* Method overloading _(again)_:
+    * Referenced in Java Docs [when discussing StringBuilder](https://docs.oracle.com/javase/tutorial/java/data/buffers.html#:~:text=The%20principal%20operations%20on%20a%20StringBuilder%20that%20are%20not%20available%20in%20String%20are%20the%20append()%20and%20insert()%20methods%2C%20which%20are%20overloaded%20so%20as%20to%20accept%20data%20of%20any%20type.)
+    * What is the use case for overloading a method?
+
 ## Week 3
 
 ### Questions and topics to discuss
@@ -38,23 +46,30 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
         // Throws "System error on token: invalid '==' operator"
         ```
     * Question 19: strange output
-        ```java
-        // 19. Write and test a method that takes an array of Strings and
-		// returns an array of int where each element
-		// matches the length of the string at that position
-			String[] teams = {"Chelsea", "Arsenal", "Ipswich", "West Ham"};
-			stringLengths(teams);
 
-        // Method 19:
-            public static int[] stringLengths(String[] arr) {
-                int[] lengths = new int[arr.length];
-                for (int i = 0; i < arr.length; i++) {
-                    lengths[i] = arr[i].length();
+        <details><summary><em>Code:</em></summary>
+
+        ```java
+            // 19. Write and test a method that takes an array of Strings and
+            // returns an array of int where each element
+            // matches the length of the string at that position
+                String[] teams = {"Chelsea", "Arsenal", "Ipswich", "West Ham"};
+                stringLengths(teams);
+
+            // Method 19:
+                public static int[] stringLengths(String[] arr) {
+                    int[] lengths = new int[arr.length];
+                    for (int i = 0; i < arr.length; i++) {
+                        lengths[i] = arr[i].length();
+                    }
+                    System.out.println(lengths); // Output: [I@251a69d7
+                    return lengths;
                 }
-                System.out.println(lengths); // Output: [I@251a69d7
-                return lengths;
-            }
         ```
+            
+            
+        </details>
+
         * **Explanation:** have to use `.toString()` method to print arrays to console
     
 * Open Class lesson Methods part 1:
@@ -121,9 +136,10 @@ int numberOfCookies = 18;
 </details>
 
 
-<details open><summary><strong>Other code questions</strong></summary>
+<details><summary><strong>Other code questions</strong></summary>
 
 * What does the Java error `dead code` mean?
+    > _In Eclipse, "dead code" is code that will never be executed. Usually it's in a conditional branch that logically will never be entered._
 
 
 </details>
