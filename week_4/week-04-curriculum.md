@@ -220,9 +220,9 @@ What happens if you add a duplicate to a Set?
 
 Questions to ask: 
 
-1. Is an error thrown? 
+1. Is an error thrown?  **_No_**  
 
-2. Does the duplicate get stored?
+2. Does the duplicate get stored? **_No_**  
 
 ```java   
 vegetables.add("Carrot");
