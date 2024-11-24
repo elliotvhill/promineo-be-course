@@ -71,10 +71,10 @@ public class ArrayIceCreamOrder {
 		 * Print out customer and order information like a receipt
 		 */
 		for (int i = 0; i < boxSize; i++) {
-			System.out.println(star); // print stars to create the 'box' as if a receipt
+			System.out.print(star); // print stars to create the 'box' as if a receipt
 		}
 		System.out.println("\nIce Cream Order:\n--------------");
-		System.out.println("Name:\n\t" + this.user + "\nOrder: \n\t");
+		System.out.print("Name:\n\t" + this.user + "\nOrder: \n\t");
 		System.out.println(this.size + " " + this.cupOrCone);
 
 		System.out.println("Flavors:\n\t");
