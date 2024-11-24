@@ -29,7 +29,7 @@ public class Week04Collections {
 		 * List Methods: 
 		 * .add()
 		 * .get()
-		 * 
+		 * .contains() // will search Strings for a sequence of chars, for example
 		 */
 		
 		List<String> students = new ArrayList<String>();
