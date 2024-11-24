@@ -7,6 +7,7 @@
 package week04;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -47,6 +48,9 @@ public class Week04StringBuilderListSetMapLab {
 		stringList.add("Octopus");
 		stringList.add("Grima");
 		
+		// Alternately, create list in one line:
+		List<String> stringList2 = Arrays.asList("Geralt", "Triss", "Dandelion", "Ouch", "Barad Dur", "Yennifer", "Yarpen", "Octopus", "Grima");
+		
 		
 		// 3. Write and test a method that takes a list of strings 
 		//			and returns the shortest string
@@ -64,7 +68,7 @@ public class Week04StringBuilderListSetMapLab {
 		//			and returns a string with all the list elements concatenated to each other,
 		// 			separated by a comma
 		
-//		System.out.println(concatenateListEls(stringList));
+		System.out.println(concatenateListEls(stringList));
 
 		
 		// 6. Write and test a method that takes a list of strings and a string 
@@ -315,11 +319,17 @@ public class Week04StringBuilderListSetMapLab {
 	// Method 5:
 	
 	public static String concatenateListEls(List<String> list) {
-		String result = "";
+		StringBuilder result = new StringBuilder(); // better to use StringBuilder here bc Strings take up individual memory
 		for (String el : list) {
-			result += el + ",";
+			result.append(el + ",");
 		}
-		return result;
+		return result.toString();
+		
+//		String result = "";
+//		for (String el : list) {
+//			result += el + ",";
+//		}
+//		return result;
 	}
 	
 	
@@ -329,10 +339,10 @@ public class Week04StringBuilderListSetMapLab {
 		String firstEl = list.get(0);
 		String lastEl = list.get(list.size() - 1);
 		String temp = firstEl;
-		System.out.println("First: " + firstEl + " Last: " + lastEl);
+		
 		firstEl = lastEl;
 		lastEl = temp;
-		System.out.println("First: " + firstEl + " Last: " + lastEl);
+		
 		return list;
 	}
 	
