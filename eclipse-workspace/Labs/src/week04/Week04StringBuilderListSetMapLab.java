@@ -47,6 +47,7 @@ public class Week04StringBuilderListSetMapLab {
 		stringList.add("Yarpen");
 		stringList.add("Octopus");
 		stringList.add("Grima");
+		stringList.add("Grima");
 		
 		// Alternately, create list in one line:
 		List<String> stringList2 = Arrays.asList("Geralt", "Triss", "Dandelion", "Ouch", "Barad Dur", "Yennifer", "Yarpen", "Octopus", "Grima");
@@ -68,7 +69,7 @@ public class Week04StringBuilderListSetMapLab {
 		//			and returns a string with all the list elements concatenated to each other,
 		// 			separated by a comma
 		
-		System.out.println(concatenateListEls(stringList));
+//		System.out.println(concatenateListEls(stringList));
 
 		
 		// 6. Write and test a method that takes a list of strings and a string 
@@ -93,18 +94,26 @@ public class Week04StringBuilderListSetMapLab {
 		//		c. The third containing values divisible by 5, and 
 		//		d. The fourth all numbers from the input List not divisible by 2, 3, or 5
 
-		List<Integer> numbers2 = new ArrayList<Integer>();
-		numbers2.add(8);
-		numbers2.add(17);
-		numbers2.add(36);
-		numbers2.add(95);
-		numbers2.add(3);
-		numbers2.add(14);
-		numbers2.add(56);
-		numbers2.add(49);
-		numbers2.add(71);
+//		List<Integer> numbers2 = new ArrayList<Integer>();
+//		numbers2.add(8);
+//		numbers2.add(17);
+//		numbers2.add(36);
+//		numbers2.add(95);
+//		numbers2.add(3);
+//		numbers2.add(14);
+//		numbers2.add(56);
+//		numbers2.add(49);
+//		numbers2.add(71);
 		
-//		System.out.println(divideNumbers(numbers2));
+		// Create list using shorthand:
+//		List<Integer> numbers2 = Arrays.asList(8, 17, 36, 95, 3, 14, 56, 49, 71);
+		List<Integer> numbers2 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 16, 20, 25, 30);
+		
+		// iterate over list of list, then each int in inner lists
+		List<List<Integer>> sortedNumbers = divideNumbers(numbers2);
+//		for (List<Integer> list : sortedNumbers) {
+//			System.out.println(list);
+//		}
 		
 		
 		// 8. Write and test a method that takes a list of strings 
@@ -133,10 +142,11 @@ public class Week04StringBuilderListSetMapLab {
 		tvShows.add("Schitt's Creek");
 		tvShows.add("Breaking Bad");
 		tvShows.add("Rick and Morty");
-		tvShows.add("Bosch");
+		tvShows.add("bosch");
 		
-//		System.out.println(searchForChar(tvShows, 'B'));
-		/* how to make it case insensitive? regex? */
+		System.out.println(searchForChar(tvShows, 'B'));
+		/* how to make it case insensitive? regex? 
+		 * No -> can just Character.toLowerCase(char) method */
 		
 		
 		// 11. Write and test a method that takes a set of strings 
@@ -182,45 +192,107 @@ public class Week04StringBuilderListSetMapLab {
 		greetings.put("Italian", "Ciao");
 		greetings.put("French", "Salut");
 		
-//		System.out.println(lookupGreeting(greetings, "Italian"));
+		System.out.println(lookupGreeting(greetings, "Italian"));
+		System.out.println(lookupGreeting(greetings, "Arabic"));
 		
 		
 		// 15. Write and test a method that takes a List<String> 
 		//			and returns a Map<Character, Integer> containing a count of 
 		//			all the strings that start with a given character
 		
-		System.out.println(countStringsInList(stringList));
+		System.out.println(countStartingLetters(stringList));
 
 	}
 	
 	
 	// Method 15:
 	
-	public static Map<Character, Integer> countStringsInList(List<String> list) {
+	public static Map<Character, Integer> countStartingLetters(List<String> list) {
 		Map<Character, Integer> results = new HashMap<Character, Integer>();
+		 // My first solution: --> BUG: overwrites charCount to 2 at most for duplicate chars by setting charCount = 1 initially
+			/*
+			 * T: O(n) - scales linearly w/ size of List 
+			 * S: O(n) - also scales linearly bc stores a char for each el in List 
+			 * Total: O(n+n) = O(2n) = O(n)
+			 */
+//		for (String str : list) {
+//			int charCount = 1; // causes miscount bug if charCount > 2
+//			
+//			if (!results.containsKey(str.charAt(0))) {
+//				results.put(str.charAt(0), charCount);
+//			} else {
+//				charCount++;
+//				results.replace(str.charAt(0), charCount);
+//			}
+//		}
 		
+		// Instructor solution: 
+		/*
+		 * T: O(n) - scales linearly w/ size of List  
+		 * S: O(n) - also scales linearly based on n  
+		 * Total: O(n+n) = O(2n) = O(n)
+		 */
+//		for (String str : list) {
+//			// Get first letter
+//			char c = str.charAt(0); // only takes O(1) space bc primitive type
+//			// If char doeesn't exist in list
+//			if (results.get(c) == null) {
+//				results.put(c, 1);
+//			} else {
+//				// Increment char count
+//				results.put(c, results.get(c) + 1);
+//			}
+//		}
+		
+		// Another alternate solution:
+		/*
+		 * T: O(n) - scales linearly w/ size of List  
+		 * S: O(n) - only creating new Map in memory  
+		 * Total: O(n+n) = O(2n) = O(n)
+		 * This is slightly less efficient due to the potential for two get calls per iteration
+		 */
 		for (String str : list) {
-			int charCount = 1;
-			
-			if (!results.containsKey(str.charAt(0))) {
-				results.put(str.charAt(0), charCount);
+			// Check if first char exists in list
+			if (results.get(str.charAt(0)) == null) {
+				results.put(str.charAt(0), 1);
 			} else {
-				charCount++;
-				results.replace(str.charAt(0), charCount);
+				// Increment char count
+				results.put(str.charAt(0), results.get(str.charAt(0)) + 1);
 			}
 		}
+		
 		return results;
 	}
 	
 	
 	// Method 14:
 	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
+	
 	public static String lookupGreeting(Map<String, String> input, String str) {
-		return input.get(str);
+//		return input.get(str); // doesn't account for invalid inputs...
+		
+		// DOES account for invalid inputs i.e. missing words:
+		for (String key : input.keySet()) {
+			if (key.equals(str)) {
+				return input.get(str);
+			}
+		}
+		return "Could not find word";
 	}
 
 	
 	// Method 12:
+	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
 	
 	public static Set<Integer> findEvenNums(Set<Integer> numbers) {
 		Set<Integer> evenNumbers = new HashSet<Integer>();
@@ -235,6 +307,12 @@ public class Week04StringBuilderListSetMapLab {
 	
 	// Method 11:
 	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
+	
 	public static List<String> convertSetToList(Set<String> strings) {
 		List<String> results = new ArrayList<String>();
 		for (String str : strings) {
@@ -245,11 +323,17 @@ public class Week04StringBuilderListSetMapLab {
 
 	// Method 10:
 	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
+	
 	public static Set<String> searchForChar(Set<String> input, char a) {
 		Set<String> results = new HashSet<String>();
 		
 		for (String str : input) {
-			if (str.charAt(0) == a) {
+			if (str.charAt(0) == a || str.charAt(0) == Character.toLowerCase(a)) {
 				results.add(str);
 			}
 		}
@@ -258,6 +342,12 @@ public class Week04StringBuilderListSetMapLab {
 
 	
 	// Method 8:
+	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
 	
 	public static List<Integer> getStringLengths(List<String> strings) {
 		List<Integer> stringLengths = new ArrayList<Integer>();
@@ -272,36 +362,69 @@ public class Week04StringBuilderListSetMapLab {
 	
 	// Method 7:
 	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
+	
 	public static List<List<Integer>> divideNumbers(List<Integer> numbers) {
 		
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		List<Integer> divisibleByTwo = new ArrayList<Integer>();
-		List<Integer> divisibleByThree = new ArrayList<Integer>();
-		List<Integer> divisibleByFive = new ArrayList<Integer>();
-		List<Integer> allOtherNums = new ArrayList<Integer>();
+//		List<Integer> divisibleByTwo = new ArrayList<Integer>();
+//		List<Integer> divisibleByThree = new ArrayList<Integer>();
+//		List<Integer> divisibleByFive = new ArrayList<Integer>();
+//		List<Integer> allOtherNums = new ArrayList<Integer>();
+//		
+		// Initial attempt -- does NOT check all numbers for all divisors
+//		for (int num : numbers) {
+//			if (num % 2 == 0) {
+//				divisibleByTwo.add(num);
+//			} else if (num % 3 == 0) {
+//				divisibleByThree.add(num);
+//			} else if (num % 5 == 0) {
+//				divisibleByFive.add(num);
+//			} else {
+//				allOtherNums.add(num);
+//			}
+//		}
+//		
+//		result.add(divisibleByTwo);
+//		result.add(divisibleByThree);
+//		result.add(divisibleByFive);
+//		result.add(allOtherNums);
 		
-		for (int num : numbers) {
-			if (num % 2 == 0) {
-				divisibleByTwo.add(num);
-			} else if (num % 3 == 0) {
-				divisibleByThree.add(num);
-			} else if (num % 5 == 0) {
-				divisibleByFive.add(num);
-			} else {
-				allOtherNums.add(num);
-			}
+		// Alternately, don't need to name lists, can just add them to the list of lists, optionally using a loop to do so:
+		for (int i = 0; i < 4; i++) {
+			result.add(new ArrayList<Integer>());
 		}
 		
-		result.add(divisibleByTwo);
-		result.add(divisibleByThree);
-		result.add(divisibleByFive);
-		result.add(allOtherNums);
+		for (Integer num : numbers) {
+			if (num % 2 == 0) {
+				result.get(0).add(num);
+			}
+			if (num % 3 == 0) {
+				result.get(1).add(num);
+			}
+			if (num % 5 == 0) {
+				result.get(2).add(num);
+			}
+			if (num % 2 != 0 && num % 3 != 0 && num % 5 != 0) {
+				result.get(3).add(num);
+			}
+		}
 		
 		return result;
 	}
 
 	
 	// Method 6:
+	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
 	
 	public static List<String> searchForString(List<String> list, String str) {
 		List<String> results = new ArrayList<String>();
@@ -317,6 +440,12 @@ public class Week04StringBuilderListSetMapLab {
 
 	
 	// Method 5:
+	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
 	
 	public static String concatenateListEls(List<String> list) {
 		StringBuilder result = new StringBuilder(); // better to use StringBuilder here bc Strings take up individual memory
@@ -335,6 +464,12 @@ public class Week04StringBuilderListSetMapLab {
 	
 	// Method 4:
 	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
+	
 	public static List<String> switchFirstAndLastEls(List<String> list) {
 		String firstEl = list.get(0);
 		String lastEl = list.get(list.size() - 1);
@@ -348,6 +483,12 @@ public class Week04StringBuilderListSetMapLab {
 	
 	
 	// Method 3:
+	
+	/*
+	 * T: O()
+	 * S: O()
+	 * Total: O()
+	 */
 	
 	public static String findShortestString(List<String> list) {
 		// iterate through list and get string lengths
