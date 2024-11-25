@@ -83,10 +83,6 @@
     // Use case: type specificity, use with arrays of ints, return actual ints for use in calculations
     ```
 
-    #### Resources consulted: 
-
-    * [Array `getInt()` Method in Java](https://www.geeksforgeeks.org/array-getint-method-in-java/)
-
 ### Collections 
 
 Resource: [**Java Tutorials on Interfaces**](https://docs.oracle.com/javase/tutorial/collections/interfaces/index.html)
@@ -133,3 +129,10 @@ Resource: [**Java Tutorials on Interfaces**](https://docs.oracle.com/javase/tuto
     Map<String, String> map = new HashMap<String, String>();
     ```
 
+    #### Resources consulted: 
+
+    * [Class String | Java Docs](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html#method-summary)
+    * [Class Array | Java Docs](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/reflect/Array.html#getInt(java.lang.Object,int))
+    * [Array `getInt()` Method in Java](https://www.geeksforgeeks.org/array-getint-method-in-java/)
+    * [Interface Map<K,V>](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Map.html)
+    
