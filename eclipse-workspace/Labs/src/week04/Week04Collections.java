@@ -121,25 +121,27 @@ public class Week04Collections {
 		
 		System.out.println(racerPlaces.get(1));
 		
-		Map<String, String> dictionary = new HashMap<String, String>();
-		dictionary.put("word1", "definition1");
-		dictionary.put("word2", "definition2");
-		dictionary.put("word3", "definition3");
 		
 		
-		
-		racerPlaces.remove(1);
-		
-		Set<Integer> racerKeys = racerPlaces.keySet();
-		for (Integer key : racerKeys) {
-//			System.out.println(key); // Print list of keys
-			System.out.println(key + " : " + racerPlaces.get(key)); // Print keys and values from the keys retrieved
-		}
-		
-		Collection<String> racers = racerPlaces.values();
-		for (String racer : racers) {
-			System.out.println(racer);
-		}
+//		Map<String, String> dictionary = new HashMap<String, String>();
+//		dictionary.put("word1", "definition1");
+//		dictionary.put("word2", "definition2");
+//		dictionary.put("word3", "definition3");
+//		
+//		
+//		
+//		racerPlaces.remove(1);
+//		
+//		Set<Integer> racerKeys = racerPlaces.keySet();
+//		for (Integer key : racerKeys) {
+////			System.out.println(key); // Print list of keys
+//			System.out.println(key + " : " + racerPlaces.get(key)); // Print keys and values from the keys retrieved
+//		}
+//		
+//		Collection<String> racers = racerPlaces.values();
+//		for (String racer : racers) {
+//			System.out.println(racer);
+//		}
 		
 	}
 
