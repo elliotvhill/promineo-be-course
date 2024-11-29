@@ -1,5 +1,7 @@
 package week04Assignment;
 
+import java.util.Arrays;
+
 public class Week04Collections {
 
 	public static void main(String[] args) {
@@ -27,6 +29,7 @@ public class Week04Collections {
 		System.out.println(sum / ages2.length);
 
 		/* Question 2 */
+		System.out.println();
 		System.out.println("Question 2:");
 
 		// Create array of String names
@@ -57,6 +60,7 @@ public class Week04Collections {
 		// How do you access the last element of any array?
 		// array[array.length - 1]
 
+		System.out.println();
 		System.out.println("Question 3:");
 		System.out.println(names[names.length - 1]);
 
@@ -65,10 +69,12 @@ public class Week04Collections {
 		// How do you access the first element of any array?
 		// array[0]
 
+		System.out.println();
 		System.out.println("Question 4:");
 		System.out.println(names[0]);
 
 		/* Question 5 */
+		System.out.println();
 		System.out.println("Question 5:");
 
 		// Create array of int nameLengths
@@ -77,11 +83,10 @@ public class Week04Collections {
 		for (int i = 0; i < names.length; i++) {
 			nameLengths[i] = names[i].length();
 		}
-		for (int length : nameLengths) {
-			System.out.println(length);
-		}
+		System.out.println(Arrays.toString(nameLengths));
 
 		/* Question 6 */
+		System.out.println();
 		System.out.println("Question 6:");
 
 		// Loop through nameLengths and calculate sum
@@ -93,41 +98,48 @@ public class Week04Collections {
 
 		/* Question 7 */
 		// See method outside main below
+		System.out.println();
 		System.out.println("Question 7:");
 		System.out.println(concatenateWord("Dandelion", 5));
 
 		/* Question 8 */
 		// See method outside main below
+		System.out.println();
 		System.out.println("Question 8:");
 		System.out.println(getFullName("Geralt", "of Rivia"));
 
 		/* Question 9 */
 		// See method outside main below
+		System.out.println();
 		System.out.println("Question 9:");
 		int[] numbersToSum = { 17, 54, 38, 29 };
 		System.out.println(isSumOver100(numbersToSum));
 
 		/* Question 10 */
 		// See method outside main below
+		System.out.println();
 		System.out.println("Question 10:");
 		double[] doubleArr = { 2.3, 5.9, 2.6, 10.2, 6.4 };
 		System.out.println(averageOfDoubles(doubleArr));
 
 		/* Question 11 */
 		// See method outside main below
+		System.out.println();
 		System.out.println("Question 11:");
 		double[] doubleArr2 = { 2.43, 16.9, 12.6, 19.2, 6.4 };
 		System.out.println(compareAverages(doubleArr, doubleArr2));
 
 		/* Question 12 */
 		// See method outside main below
+		System.out.println();
 		System.out.println("Question 12:");
 		System.out.println(willBuyDrink(true, 15.0));
-//		System.out.println(willBuyDrink(true, 7.0));
-//		System.out.println(willBuyDrink(false, 15.0));
+		System.out.println(willBuyDrink(true, 7.0));
+		System.out.println(willBuyDrink(false, 15.0));
 
 		/* Question 13 */
 		// See method outside main below
+		System.out.println();
 		System.out.println("Question 13:");
 		System.out.println(calculateEarnings(100.0, 0.1));
 
