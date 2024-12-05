@@ -1,4 +1,4 @@
-package week04Assignment;
+package week04;
 
 import java.util.ArrayList;
 import java.util.HashMap;
