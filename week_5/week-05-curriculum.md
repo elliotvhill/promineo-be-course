@@ -72,6 +72,127 @@ In the next chapter, **2. Classes**, you will find a Java example that creates a
 
 ## 2. Classes
 
+Let's create an example of a **class** and an **object**.
+
+First, we are going to create a class called _Animal_.  This class will have two constructors, getters, setters, and a `describe()` method.
+
+#### This is the class `Animal.java`:
+
+Notice that the class name is written in pascal case (not camel case).
+
+```java
+package com.promineotech;
+
+public class Animal {
+    String name;
+    String type;
+    double weight;
+    double height;
+    String location;
+
+    public Animal() { } // Side question: why is this here?
+
+    public Animal(String name, String type,
+    double weight, double height, String location ) {
+        this.name = name;
+        this.type = type;
+        this.weight = weight;
+        this.height = height;
+        this.location = location;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getWeight() {
+        return this.weight;
+    }
+    
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(double height) {
+        this.height  = height;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void describe() {
+        System.out.println("Animal Description");
+        System.out.println("------------------");
+        System.out.println("\tName: " + name);
+        System.out.println("\tType: " + type);
+        System.out.println("\tWeight: " + weight + " lb.");
+        System.out.println("\tHeight: " + height + " in.");
+        System.out.println("\tLocated at: " + location);
+    }
+}
+```
+
+Here is the class containing the main method that creates an **object** from the above **class**:
+
+```java
+package com.promineotech;
+
+public class AnimalMain {
+    public static void main(String[] args) {
+
+        // Use the Constructor to set the information upon 
+        //     creation of the Object.
+        Animal elephant = new Animal("Dumbo", "elephant", 8000, 108, "Disneyland");
+
+        elephant.describe();
+
+        System.out.println("\n\nLet's access individual fields:");
+        System.out.println("-------------------------------");
+        System.out.println("Our elephant is named: " + elephant.getName());
+
+        // EXAMPLE:  Create an Object with the Default Constructor
+        //           and use the Setters to store information
+        System.out.println("\n\n\n");
+        Animal kangaroo = new Animal();
+
+        kangaroo.setName("Jack");
+        kangaroo.setType("Kangaroo");
+        kangaroo.setWeight(150);
+        kangaroo.setHeight(48);
+        kangaroo.setLocation("Taronga Zoo");
+
+        kangaroo.describe();
+    }
+}
+```
+
+### Resources:
+
+- [The Java Tutorials: Classes](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
+- [The Java Tutorials: Objects](https://docs.oracle.com/javase/tutorial/java/javaOO/objects.html)
+
+
 
 ## 3. The Pillars of Object-Oriented Programming
 
