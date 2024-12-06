@@ -4,6 +4,16 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 
 _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/week_0/2023PTBESyllabus.pdf)_
 
+## Week 5
+
+### Questions and topics to discuss
+
+* OOP:
+    *  I still have a really hard time wrapping my head around this, and figuring out how to describe/explain it (i.e. in an interview situation).
+    * Why _wouldn't_ one use OOP these days?
+    * I honestly don't understand why _such huge_ emphasis is placed on it-- i.e. _always_ specifically called out in job descriptions, etc. It seems like pretty intuitive principles...?
+
+
 ## Week 4
 
 ### Questions and topics to discuss
@@ -11,6 +21,7 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
 * Method overloading _(again)_:
     * Referenced in Java Docs [when discussing StringBuilder](https://docs.oracle.com/javase/tutorial/java/data/buffers.html#:~:text=The%20principal%20operations%20on%20a%20StringBuilder%20that%20are%20not%20available%20in%20String%20are%20the%20append()%20and%20insert()%20methods%2C%20which%20are%20overloaded%20so%20as%20to%20accept%20data%20of%20any%20type.)
     * What is the use case for overloading a method?
+* `new ArrayList<>()` vs `new ArrayList<String>()` -- just for stronger typing?
 
 ## Week 3
 
