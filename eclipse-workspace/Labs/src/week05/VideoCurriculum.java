@@ -11,10 +11,10 @@ public class VideoCurriculum {
 
 		// Create new instance of Student using a default Constructor:
 		Student student1 = new Student();
-		student1.firstName = "Geralt";
-		student1.lastName = "of Rivia";
-		student1.gradeLevel = 12;
-		student1.phoneNumber = "1234567890";
+//		student1.firstName = "Geralt";
+//		student1.lastName = "of Rivia";
+//		student1.gradeLevel = 12;
+//		student1.phoneNumber = "1234567890";
 		
 		student1.introduceStudent();
 		

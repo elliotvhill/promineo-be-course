@@ -5,9 +5,14 @@ public class Encapsulation {
 	public static void main(String[] args) {
 		
 		Student student = new Student();
-		student.firstName = "Elrond";
-		System.out.println(student.firstName);
+//		student.firstName = "Elrond";
+//		System.out.println(student.firstName);
 		// Above code is considered poor practice -- need instead to encapsulate object's data
+		
+		// Same functionality using getters & setters:
+		student.setFirstName("Elrond");
+		student.setPhoneNumber("1234567890");
+		student.introduceStudent();
 		
 		/*
 		 * Access Modifiers:
@@ -18,6 +23,9 @@ public class Encapsulation {
 		 */
 		
 		
+		RectangleVideoCurriculum rect = new RectangleVideoCurriculum(10.0, 15.0);
+		rect.setLength(10);
+		System.out.println(rect.getArea());
 		
 
 	}
