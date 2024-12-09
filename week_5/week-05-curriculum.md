@@ -196,6 +196,11 @@ public class AnimalMain {
 
 ## 3. The Pillars of Object-Oriented Programming
 
+<!-- ### Encapsulation
+
+### Inheritance, Abstraction, and Polymorphism -->
+
+
 
 ## 4. Exceptions
 
