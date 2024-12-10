@@ -196,17 +196,218 @@ public class AnimalMain {
 
 ## 3. The Pillars of Object-Oriented Programming
 
-<!-- ### Encapsulation
+### Encapsulation
 
-### Inheritance, Abstraction, and Polymorphism -->
+Below code is considered poor practice:
+
+```java
+/**** App.java ****/
+
+Student student = new Student();
+student.firstName = "Elrond";
+System.out.println(student.firstName);
+```
+
+Instead, use access modifiers, getters and setters:
+
+```java
+/**** Student.java ****/
+
+// Class fields
+	private String firstName;
+	private String lastName;
+	private String phoneNumber;
+	private int gradeLevel;
+
+// Private checkLength method
+private boolean checkLength(String str, int length) {
+		return str.length() > length;
+	}
+
+// Getters & Setters
+public void setFirstName(String firstName) {
+		if (checkLength(firstName, 1)) {
+			this.firstName = firstName;
+		}
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+// etc.
+```
+
+**Access Modifiers:**
+
+- `public`: accessible everywhere
+- `private`: only accessible from within the class itself
+- `protected`: only accessible within the class, other classes in the same package, and all subclasses
+- No Modifier: same as protected EXCEPT not accessible in subclasses in different packages
+
+### Inheritance, Abstraction, and Polymorphism
+
+
+**Object-Oriented Programming** is an **Imperative Programming Paradigm**.
+
+Let's step back a little bit, and give you some background on programming paradigms.
+
+**Definitions:**
+
+- A **paradigm** is a way, or a method that can be used to solve a problem. 
+
+- A **programming paradigm** is the way that one solves a given problem (or task), by programming.  Also described as a _framework_ that defines how problems can be solved.
+
+- A **programming language** (e.g. Java, Pascal, C#, etc.) is separate from a programming paradigm. A programming language is a tool that is used to write code to solve problems.
+
+
+There are a number of **programming paradigms**.  Each one has a set of rules and principles.  If a **programming language** is going to support a **programming paradigm**,  the **programming language** must support or adhere to those rules and principles    The **programming paradigm** is enforced by a **programming language compiler** during the program compilation stage.  Each **programming paradigm** is simply a different approach to solve a problem, and provides a style and organization to do so.  
+
+Here is a brief overview of a few **Programming Paradigms**:
+
+**Imperative:**  These types of paradigms are command driven. 
+
+- Details:  Support of an **imperative programming paradigm** looks like this:
+
+    - The program code directs the program execution as sequence of statements executed one by one.
+
+    - The statements will direct the computer to perform tasks.
+
+    - The programmer designs and programs each statement in detail, and each of those statements will direct **what** is to be accomplished by specifying **how** it is to be done.
+
+    - A program in an **imperative programming paradigm** is simply a set of statements, run in order, that execute to completion.
+
+- **Types:**  Two common imperative programming paradigms are as follow:
+
+    - **Procedural** -- Based on a set of procedures (also referred to as functions, methods or subroutines).  Each procedure, function, method or subroutine performs a specific operation.  C, FORTRAN, and Pascal support this paradigm.
+
+    - **Object-Oriented** --  All program components are objects.   The unique feature here is that an object contains properties and functions.  All data and associated methods are combined into a single object.  Some would say that this is an extension of procedural programming concepts.   **Java** supports this paradigm.
+    
+
+
+**Declarative:**  These types of paradigms are logic focused.
+
+- **Details:** Support of a **declarative programming paradigm** looks like this:
+
+    - The control flow is not the important part of this program: the logic of a computation is expressed without describing the control flow of the computation.
+
+    - Focused on achieving the end result.
+
+    - This approach describes **to what** is to be done, instead of _how_ it should be achieved.
+    
+- **Types:**
+
+    - **Functional** -- based on mathematical functions.  Attempts to solve problems with composing functions as program components.  Functions can be passed as arguments, and can also be returned as a value.  _Pure functional languages, (e.g. Haskell) allow only pure functional programs._  However, some languages allow both functional and procedural programs, and **Java** is one of these programming languages, though to effectively use functional programming in Java, it is advisable to use Java 8 or later.
+
+    - **Logic** -- based on **logic** and **control**, or, in other words, facts and rules.  Control is defined as an order of rules.  In this type, **logic** defines _what_ needs to be solved whereas the **control** defines _how_ it should be solved.  Prolog is an example of this paradigm.  
+
+_**Note:**  many of the current programming languages are general purpose languages, and as such, they support more than one programming paradigm._
+
+Our focus here is on **Object-Oriented Programming** (**OOP**).  There are a number of programming languages that support the **object oriented programming paradigm**, including **Java**, JavaScript, C3, Ruby, and others.   
+
+**There are four pillars of OOP which are:**
+
+1. **Encapsulation** -- Data Security -- binding related data and methods together into objects -- data hiding (hide the unnecessary).
+
+2. **Inheritance** -- Code reusability -- acquiring the existing functionality of a parent class, with the ability to add additional functionality and features into the child class -- an object can inherit some properties and methods from another object.
+
+3. **Polymorphism** --  Many Forms --  A single object can have multiple behaviors, or respond in different ways to the same function.  
+
+4. **Abstraction** -- Present a simplified view -- Hide the complexity from the user (show only what is necessary).
+
+Each pillar is essential, and important, but these pillars are also dependent upon each other.  Without encapsulation, abstraction and inheritance are not possible.  Additionally, polymorphism does not exist without inheritance.   
+
+Each of these pillars is essential to the paradigm, and together define object-oriented programming.   OOP as a whole functions through objects that contain properties and methods, and the relationships of these objects with other objects.
+
+
+### Resources:
+
+- [The Java Tutorials -- Object-Oriented Programming Concepts](https://docs.oracle.com/javase/tutorial/java/concepts/index.html)
 
 
 
 ## 4. Exceptions
 
+### What is an Exception?
+
+**Exception:**  An exception is defined as an event that occurs that is contrary to the expected behavior of the application or program that has been written.  Instead of functioning as expected, something happens that causes an unexpected result.
+
+**In Java, there are two types of Exceptions:**
+
+- **_Checked Exceptions_** -- these are checked by the compiler at compiler time.
+
+    - **Example:**   syntax errors -- a missing semi-colon or closing curly brace, incorrect datatype assignment, returning the wrong data type from a method, etc.
+
+- **_Unchecked Exceptions_** -- these are not caught by the compiler; included here are runtime exceptions and errors.
+
+    - **Runtime Exception Example:** Trying to access a Null Address, Out-of-Bounds Indices  
+    **Class:**  _RuntimeException, NullPointerException, ArithmeticException, etc._
+
+    - **Error Exception Example:**  Serious issues that cause an application to abort, or to stop running, including Memory or Stack Overflow Errors  
+    **Class:**  _OutOfMemory, StackOverflow, VirtualMachineError, etc._
+
+
+### What is Exception Handling?
+
+**Exception Handling:**  In programming, how the code deals with or handles **Unchecked Exceptions** is called **Exception Handling**.  What does an application do with an unexpected occurrence?  An application needs to make sure it has a plan for when things go wrong.
+
+
+#### Comparing Diagnosing Car Troubles to Exceptions:
+
+To get a better idea of what an **Exception** is and why **Exception Handling** is important, let's take a look at something a bit more familiar: a car.     
+
+Imagine as you are driving or riding along, the car engine stops working.  What is wrong?  Why did your car stop?  How do we get our car engine running again?  The solution totally depends on what the problem with the car is:
+
+- Would filling the car with gas fix a dead battery? 
+
+- Would changing a tire fix an overheated engine?
+
+- Would adding oil fix being out of gas?
+
+It's important to know what a problem is before we randomly start fixing things in the hope that we fix the right issue.  
+
+- If there is no electricity in your car, filling your gas tank will not help
+
+- If your check engine light is on,  changing a tire will not solve it
+
+- If your gas gauge is on Empty, adding oil will not help that issue.
+
+Cars are designed with features to help you diagnose issues.  There are gauges, warnings, and codes that indicate when something needs to be addressed in your car.
+
+
+#### The Moral of the Story:
+
+As a car owner, it is good practice to notice when something is not as you expect (e.g. a warning light comes on, the gas gauge is on Empty, the car is slow to start, etc.)
+
+As a software developer,  it is good practice to use **Exception Handling** in your programming to gracefully handled unexpected events.  We cannot predict every failure in our programs, but we can definitely catch exceptions, and communicate back to the user clues as to what the issue is.
+
+- **Invalid Input:**  What does the application do when a user puts in an invalid username and/or password?  Instead of crashing, or quitting, the program can validate the input, and reprompt a user for their username and/or password.
+
+- **Network Failure:** When you are accessing a server over a network, and the internet is down, what does the application do?  Crash?  Or give an error that says `network unavailable, try again later.`?
+
+
+The video in this chapter covers the way to handle exceptions in  Java, which include:
+
+- Diagnose and fix checked exceptions before running your code.
+- Use `try/catch` blocks & the `throws` keyword to handle unchecked exceptions
+
+
+### Resources:
+
+- [The Java Tutorials:  Exceptions](https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html)
+- [Java 17 Exception Class Documentation](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Exception.html)
 
 ## 5. Interfaces
 
+- Interfaces solve the problem of multiple inheritance -- e.g. having a House class and a Car class but needing to create an RV
+
+- Interfaces _only_ have abstract methods -- define method _signatures_ we want it to have; not the bodies
+
+### Resources:
+
+- [Example:  The Java Tutorials -- What is an Interface?](https://docs.oracle.com/javase/tutorial/java/concepts/interface.html)
+- [The Java Tutorials -- Interfaces](https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html)
 
 ## 6. OOP Menu App
+
 
