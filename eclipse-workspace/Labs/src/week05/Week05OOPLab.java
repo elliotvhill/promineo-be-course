@@ -11,8 +11,7 @@ public class Week05OOPLab {
 	// This Lab will give you a basic look at creating an Object Oriented Card Game.
 	// The idea here is to prepare you for your Week 6 Unit Final Project.
 	// There are many ways to implement this Lab, please use the tools that you
-	// know,
-	// and go from there.
+	// know, and go from there.
 	// These exercises are intended to be coded in order 1 through 5.
 
 	public static void main(String[] args) {
@@ -42,8 +41,10 @@ public class Week05OOPLab {
 		//
 		System.out.println("\nQuestion 1: Card Class");
 		// Add your code here to instantiate a Card
+		Card threeOfClubs = new Card("three", "Clubs", 3);
 
 		// Call the describe method on the newly instantiated card.
+		threeOfClubs.describe();
 
 		// 2. Deck Class:
 		// Create a class called Deck.
@@ -53,15 +54,18 @@ public class Week05OOPLab {
 		//
 		// Constructor: The constructor for the Deck Class should
 		// instantiate all 52 standard playing cards and add them to the cards list.
-		//
+		
 		// Methods:
+		//
 		// a. describe() to describe the deck to the Console --
 		// print out all of the cards in the deck.
 		//
 		System.out.println("\nQuestion 2: Deck Class");
 		// Add your code here to instantiate a Deck
+		Deck deck = new Deck();
 
 		// Call the describe method on the newly instantiated deck.
+		deck.describe();
 
 		// 3. Deck shuffle() Method:
 		// Add a shuffle method within the Deck Class
