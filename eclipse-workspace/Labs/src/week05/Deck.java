@@ -1,11 +1,15 @@
 package week05;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Deck {
 
 	private List<Card> cards = new ArrayList<Card>();
+	private static Random random = new Random();
+	
 	private static String[] cardNames = { "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
 			"Jack", "Queen", "King", "Ace" };
 
@@ -20,13 +24,24 @@ public class Deck {
 	};
 
 	public void describe() {
-		Deck deck = new Deck();
 		for (Card card : cards) {
 			System.out.println(String.format("Card name: %-8s Suit: %-8s Value: %d", card.getName(), card.getSuit(),
 					card.getValue()));
 		}
 	}
+	
+	public List<Card> shuffle() {
+		Collections.shuffle(cards);
+		return cards;
+	}
 
+	public Card draw() {
+		int randomIndex = random.nextInt(53);
+		Card cardDrawn = cards.get(randomIndex);
+		cards.remove(randomIndex);
+		return cardDrawn;
+	}
+	
 	public List<Card> createClubsCards() {
 		List<Card> clubs = new ArrayList<Card>();
 		for (int i = 0; i < 13; i++) {

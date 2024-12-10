@@ -71,13 +71,24 @@ public class Week05OOPLab {
 		// Add a shuffle method within the Deck Class
 		System.out.println("\nQuestion 3: Deck shuffle() method");
 		// Test your method here
+		deck.shuffle();
 
 		// Call the describe method on the newly shuffled deck.
+		System.out.println();
+		deck.describe();
+		
+//		deck.shuffle();
+//		System.out.println();
+//		deck.describe();
 
 		// 4. Deck draw() Method:
 		// Add a draw method within the Deck Class
 		System.out.println("\nQuestion 4: Deck draw() method");
 		// Test your method here
+		Card drawnCard = deck.draw();
+		System.out.println(String.format("You drew the %s (%d) of %s", drawnCard.getName(), drawnCard.getValue(), drawnCard.getSuit()));
+//		System.out.println("\nRemaining cards in deck:\n");
+//		deck.describe();
 
 		// 5. Create Game Board:
 		// Create and test a method that takes an int as a parameter (representing the
