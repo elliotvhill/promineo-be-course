@@ -36,9 +36,15 @@ public class Deck {
 	}
 
 	public Card draw() {
-		int randomIndex = random.nextInt(53);
+		int deckSize = 0;
+		for (Card card : cards) {
+			deckSize++;
+		}
+		
+		int randomIndex = random.nextInt(0, deckSize);
 		Card cardDrawn = cards.get(randomIndex);
 		cards.remove(randomIndex);
+		deckSize--;
 		return cardDrawn;
 	}
 	

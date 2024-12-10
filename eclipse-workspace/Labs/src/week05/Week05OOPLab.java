@@ -6,6 +6,11 @@
 //
 package week05;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Week05OOPLab {
 
 	// This Lab will give you a basic look at creating an Object Oriented Card Game.
@@ -100,9 +105,40 @@ public class Week05OOPLab {
 		// and deal the cards out to the "players" in the Map.
 		System.out.println("\nQuestion 5: Create Game");
 		// Call your method here
+		dealCardsToPlayers(2);
+		System.out.println();
 
 	}
 
 	// Method 5:
 
+	public static Map<String, List<Card>> dealCardsToPlayers(int numOfPlayers) {
+			Deck deck = new Deck();
+			deck.shuffle();
+			Map<String, List<Card>> players = new HashMap<>();
+			List<Card> playerCards = new ArrayList<Card>();
+			
+			if (numOfPlayers % 2 == 0 || numOfPlayers == 1) {
+			for (int i = 0; i < numOfPlayers; i++) {
+				StringBuilder playerName = new StringBuilder();
+				playerName.append("Player ");
+				playerName.append(i + 1);
+//			System.out.println(playerName.toString());
+				
+				// Deal cards from deck to players
+				int cardsPerPlayer = 52 / numOfPlayers;
+				while (cardsPerPlayer > 0) {
+					Card cardToDeal = deck.draw();
+					playerCards.add(cardToDeal);
+					cardsPerPlayer--;
+				}
+				
+				players.put(playerName.toString(), playerCards);
+			}
+		} else {
+			System.out.println("You need an even number of players to play!");
+		}
+		return players;
+	}
+	
 }
