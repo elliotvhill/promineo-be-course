@@ -8,26 +8,28 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
 
 ### Questions and topics to discuss
 
-* OOP:
-    *  I still have a really hard time wrapping my head around this, and figuring out how to describe/explain it (i.e. in an interview situation).
-    * Why _wouldn't_ one use OOP these days?
-    * I honestly don't understand why _such huge_ emphasis is placed on it-- i.e. _always_ specifically called out in job descriptions, etc. It seems like pretty intuitive principles...?
+- OOP:
+    - I still have a really hard time wrapping my head around this, and figuring out how to describe/explain it (i.e. in an interview situation).
+    - Why _wouldn't_ one use OOP these days?
+    - I honestly don't understand why _such huge_ emphasis is placed on it-- i.e. _always_ specifically called out in job descriptions, etc. It seems like pretty intuitive principles...?
+- Exceptions:
+    - If you handle an unchecked exception...does that mean it's now a _checked_ exception...?
 
 
 ## Week 4
 
 ### Questions and topics to discuss
 
-* Method overloading _(again)_:
-    * Referenced in Java Docs [when discussing StringBuilder](https://docs.oracle.com/javase/tutorial/java/data/buffers.html#:~:text=The%20principal%20operations%20on%20a%20StringBuilder%20that%20are%20not%20available%20in%20String%20are%20the%20append()%20and%20insert()%20methods%2C%20which%20are%20overloaded%20so%20as%20to%20accept%20data%20of%20any%20type.)
-    * What is the use case for overloading a method?
-* `new ArrayList<>()` vs `new ArrayList<String>()` -- just for stronger typing?
+- Method overloading _(again)_:
+    - Referenced in Java Docs [when discussing StringBuilder](https://docs.oracle.com/javase/tutorial/java/data/buffers.html#:~:text=The%20principal%20operations%20on%20a%20StringBuilder%20that%20are%20not%20available%20in%20String%20are%20the%20append()%20and%20insert()%20methods%2C%20which%20are%20overloaded%20so%20as%20to%20accept%20data%20of%20any%20type.)
+    - What is the use case for overloading a method?
+- `new ArrayList<>()` vs `new ArrayList<String>()` -- just for stronger typing?
 
 ## Week 3
 
 ### Questions and topics to discuss
 
-* Increment `counter` variable from within `sysout`:
+- Increment `counter` variable from within `sysout`:
 
     ```java
     int[] gradesArray = {100, 97, 80, 85, 79};
@@ -38,59 +40,67 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
             }
     ```
 
-* `ArrayIceCreamOrder` example menu application ([link](https://learn.promineotech.com/mod/book/view.php?id=20014&chapterid=1943))
-    * Default constructor vs other constructors? Is it that we need to define separate constructors for all user cases _(i.e. if user does not input values for each variable)_?
-        * Is this an example of _overloading_ a method? Please explain
-    * Getters & setters
+- `ArrayIceCreamOrder` example menu application ([link](https://learn.promineotech.com/mod/book/view.php?id=20014&chapterid=1943))
+    - Default constructor vs other constructors? Is it that we need to define separate constructors for all user cases _(i.e. if user does not input values for each variable)_?
+        - Is this an example of _overloading_ a method? Please explain
+    - Getters & setters
 
-* Lab 3 questions:
-    * Question 12: "_calculate the sum_ of all the letters" -- what does this mean? Should we _concatenate_ all the letters? Or count how many are in the strings combined?
-    * Method question 16: using a for loop with an if statement seems verbose... why doesnt using a ternary work? e.g. something like this:
+<details><summary><strong>Lab 3 questions</strong></summary>
 
-        ```java
-        public static boolean stringExists(String[] arr, String str) {
-            for (int i = 0; i < arr.length; i++) {
-                boolean stringMatch = arr[i].equals(str);
-                stringMatch == true ? true : false;
-            }
+- Question 12: "_calculate the sum_ of all the letters" -- what does this mean? Should we _concatenate_ all the letters? Or count how many are in the strings combined?
+
+- Method question 16: using a for loop with an if statement seems verbose... why doesnt using a ternary work? e.g. something like this:
+
+    ```java
+    public static boolean stringExists(String[] arr, String str) {
+        for (int i = 0; i < arr.length; i++) {
+            boolean stringMatch = arr[i].equals(str);
+            stringMatch == true ? true : false;
         }
-        // Throws "System error on token: invalid '==' operator"
-        ```
-    * Question 19: strange output
+    }
+    // Throws "System error on token: invalid '==' operator"
+    ```
+- Question 19: strange output
 
-        <details><summary><em>Code:</em></summary>
+    <details><summary><em>Code:</em></summary>
 
-        ```java
-            // 19. Write and test a method that takes an array of Strings and
-            // returns an array of int where each element
-            // matches the length of the string at that position
-                String[] teams = {"Chelsea", "Arsenal", "Ipswich", "West Ham"};
-                stringLengths(teams);
+    ```java
+        // 19. Write and test a method that takes an array of Strings and
+        // returns an array of int where each element
+        // matches the length of the string at that position
+            String[] teams = {"Chelsea", "Arsenal", "Ipswich", "West Ham"};
+            stringLengths(teams);
 
-            // Method 19:
-                public static int[] stringLengths(String[] arr) {
-                    int[] lengths = new int[arr.length];
-                    for (int i = 0; i < arr.length; i++) {
-                        lengths[i] = arr[i].length();
-                    }
-                    System.out.println(lengths); // Output: [I@251a69d7
-                    return lengths;
+        // Method 19:
+            public static int[] stringLengths(String[] arr) {
+                int[] lengths = new int[arr.length];
+                for (int i = 0; i < arr.length; i++) {
+                    lengths[i] = arr[i].length();
                 }
-        ```
-            
-            
-        </details>
+                System.out.println(lengths); // Output: [I@251a69d7
+                return lengths;
+            }
+    ```
+        
+        
+    </details>
 
-        * **Explanation:** have to use `.toString()` method to print arrays to console
+    - **Explanation:** have to use `.toString()` method to print arrays to console
+
+</details>
     
-* Open Class lesson Methods part 1:
-    * What is the use case for overloading a method? Why use the same method name? Couldn't that potentially be confusing?
-* Open Class lesson Methods part 2:
-    * Question 13: sumOfDigits Method -- I just don't get the math
-* Open Class Arrays part 1:
-    * States that declaring the length of an array is _optional_ -- I thought it was _required_?
-        * ...Or are they just referring to declaring with an Array initializer vs. a `new` constructor?
-    * Aren't arrays immutable in Java? _**Answer:** No, values can be exchanged; **length** cannot, though_
+<details><summary><strong>Open Class lessons questions</strong></summary>
+    
+- Open Class lesson Methods part 1:
+    - What is the use case for overloading a method? Why use the same method name? Couldn't that potentially be confusing?
+- Open Class lesson Methods part 2:
+    - Question 13: sumOfDigits Method -- I just don't get the math
+- Open Class Arrays part 1:
+    - States that declaring the length of an array is _optional_ -- I thought it was _required_?
+        - ...Or are they just referring to declaring with an Array initializer vs. a `new` constructor?
+    - Aren't arrays immutable in Java? _**Answer:** No, values can be exchanged; **length** cannot, though_
+
+</details>
 
 
 ## Week 2
@@ -149,7 +159,7 @@ int numberOfCookies = 18;
 
 <details><summary><strong>Other code questions</strong></summary>
 
-* What does the Java error `dead code` mean?
+- What does the Java error `dead code` mean?
     > _In Eclipse, "dead code" is code that will never be executed. Usually it's in a conditional branch that logically will never be entered._
 
 
@@ -164,55 +174,55 @@ int numberOfCookies = 18;
 
 <details ><summary><strong>1. Intros</strong></summary>
 
-* What is your background?
-    * What did you study?
+- What is your background?
+    - What did you study?
     
-    * Have you done any other coding coursework/classes/boot camps?
+    - Have you done any other coding coursework/classes/boot camps?
     
-    * Experience in other SWE areas? _(e.g. DevOps, Front End, Data Eng, etc.)_
+    - Experience in other SWE areas? _(e.g. DevOps, Front End, Data Eng, etc.)_
     
-    * Where have you worked? 
+    - Where have you worked? 
     
-    * How'd you get into the field?
+    - How'd you get into the field?
 
-* Other hobbies?
+- Other hobbies?
 
-* Open to connecting on LinkedIn and/or other platforms?
+- Open to connecting on LinkedIn and/or other platforms?
 
 </details>
 
   
 <details ><summary><strong>2. Time and Space Complexity, Big O Notation</strong></summary>
 
-* Will this be discussed at all in the course?
+- Will this be discussed at all in the course?
 
-* Any recommendations on resources? 
+- Any recommendations on resources? 
 
-* Any way to practice determining time & space complexity? (i.e. something like LeetCode but for Big O?)
-    * _Apart from analyzing my own code, of course_
+- Any way to practice determining time & space complexity? (i.e. something like LeetCode but for Big O?)
+    - _Apart from analyzing my own code, of course_
 
 </details>
 
   
 <details ><summary><strong>3. Other</strong></summary>
 
-* Anything you wish you had known going into the course?
-    * _e.g. quirks of Java, code conventions, organization, etc._
+- Anything you wish you had known going into the course?
+    - _e.g. quirks of Java, code conventions, organization, etc._
 
-* Using GitLab vs. GitHub during the course -- does it matter?
-    * How about professionally?
+- Using GitLab vs. GitHub during the course -- does it matter?
+    - How about professionally?
 
-    * Do more organizations use GitLab or something similar? GitPod? etc.
+    - Do more organizations use GitLab or something similar? GitPod? etc.
     
-* Thoughts on text editors -- Eclipse vs. VS Code?
+- Thoughts on text editors -- Eclipse vs. VS Code?
 
-* **Open source:**
-    * Suggestions for getting started & overcoming fear/imposter syndrome
+- **Open source:**
+    - Suggestions for getting started & overcoming fear/imposter syndrome
     
-    * How do you show off your OS work on a resume or LinkedIn, for example?
+    - How do you show off your OS work on a resume or LinkedIn, for example?
 
-* Question about reassigning variables:
-    * This code incorrectly returns `true` for both sysouts:
+- Question about reassigning variables:
+    - This code incorrectly returns `true` for both sysouts:
         <details><summary>Example 1</summary>
         
         ```Java
@@ -233,7 +243,7 @@ int numberOfCookies = 18;
         ```
         </details>
 
-    * This code incorrectly returns `false` for both sysouts:
+    - This code incorrectly returns `false` for both sysouts:
 
         <details><summary>Example 2</summary>
 
@@ -264,26 +274,26 @@ int numberOfCookies = 18;
 
 #### Intros
 
-* Mike was a BE student, previous background in IT.
-* Started going to office hours a lot, helping others, and was offered position of his mentor when she left.
+- Mike was a BE student, previous background in IT.
+- Started going to office hours a lot, helping others, and was offered position of his mentor when she left.
 
 #### Big O
 
-* Outside scope of the course, but could ask Instructor about it
+- Outside scope of the course, but could ask Instructor about it
 
 #### Open Source
 
-* Mike does not have experience with OS projects.
-* Suggested reaching out to one of the FE mentors to meet with next week, if desired.
+- Mike does not have experience with OS projects.
+- Suggested reaching out to one of the FE mentors to meet with next week, if desired.
 
 #### Git platforms
 
-* GitHub is used to submit assignments and is preferred.
+- GitHub is used to submit assignments and is preferred.
 
 #### Editors
 
-* Can use either Eclipse or VS Code for course -- Mike has a lot of experience helping students with both.
-* Eclipse does a better job of visualizing the Java hierarchy--i.e. projects, packages, classes, etc. -- than VS Code.
+- Can use either Eclipse or VS Code for course -- Mike has a lot of experience helping students with both.
+- Eclipse does a better job of visualizing the Java hierarchy--i.e. projects, packages, classes, etc. -- than VS Code.
 
 --  
 
@@ -579,14 +589,14 @@ Thank you very much. Bye. Bye.
 
 ### Resources Shared
 
-* https://www.geeksforgeeks.org/introduction-to-java/?ref=lbp
-* https://www.geeksforgeeks.org/loops-in-java/#
-* https://www.programiz.com/java-programming/for-loop
-* https://introcs.cs.princeton.edu/java/home/
-* https://www.youtube.com/@alexlorenlee/videos
-* https://www.youtube.com/@CodingWithJohn
-* https://en.wikibooks.org/wiki/Java_Programming/Getting_started
-* https://math.hws.edu/javanotes/index.html
-* https://docs.oracle.com/javase/tutorial/getStarted/TOC.html
-* https://javaranch.com/
-* https://codingbat.com/
+- https://www.geeksforgeeks.org/introduction-to-java/?ref=lbp
+- https://www.geeksforgeeks.org/loops-in-java/#
+- https://www.programiz.com/java-programming/for-loop
+- https://introcs.cs.princeton.edu/java/home/
+- https://www.youtube.com/@alexlorenlee/videos
+- https://www.youtube.com/@CodingWithJohn
+- https://en.wikibooks.org/wiki/Java_Programming/Getting_started
+- https://math.hws.edu/javanotes/index.html
+- https://docs.oracle.com/javase/tutorial/getStarted/TOC.html
+- https://javaranch.com/
+- https://codingbat.com/
