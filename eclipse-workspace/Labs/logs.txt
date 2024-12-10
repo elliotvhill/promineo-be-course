@@ -1,0 +1,4 @@
+Mon Dec 09 19:14:22 EST 2024 - INFO: Hello
+Mon Dec 09 19:14:22 EST 2024 - WARNING: This is a warning
+Mon Dec 09 19:14:22 EST 2024 - ERROR: Oops, this is an error
+Mon Dec 09 19:14:22 EST 2024 - FATAL: FATAL ERROR
