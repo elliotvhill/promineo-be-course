@@ -7,15 +7,17 @@ import java.util.Random;
 
 public class Deck {
 
-	private List<Card> cards = new ArrayList<Card>();
+	// Create a List to store cards
+	private static List<Card> cards = new ArrayList<Card>();
 	private static Random random = new Random();
-	
+
 	private static String[] cardNames = { "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
 			"Jack", "Queen", "King", "Ace" };
 
 	// Constructor
 	public Deck() {
 
+		// Add all cards of each suit to the deck
 		cards.addAll(createClubsCards());
 		cards.addAll(createHeartsCards());
 		cards.addAll(createSpadesCards());
@@ -29,25 +31,28 @@ public class Deck {
 					card.getValue()));
 		}
 	}
-	
+
 	public List<Card> shuffle() {
-		Collections.shuffle(cards);
+		Collections.shuffle(cards); // uses built-in Collections shuffle method
 		return cards;
 	}
 
 	public Card draw() {
+		// Get initial count of deck size to track when cards are drawn
 		int deckSize = 0;
 		for (Card card : cards) {
 			deckSize++;
 		}
-		
+
+		// Use Random object to pick a random index
 		int randomIndex = random.nextInt(0, deckSize);
 		Card cardDrawn = cards.get(randomIndex);
+		// Make sure card is removed from the deck and that deck size is decremented
 		cards.remove(randomIndex);
 		deckSize--;
 		return cardDrawn;
 	}
-	
+
 	public List<Card> createClubsCards() {
 		List<Card> clubs = new ArrayList<Card>();
 		for (int i = 0; i < 13; i++) {

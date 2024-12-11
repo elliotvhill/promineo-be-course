@@ -118,27 +118,34 @@ public class Week05OOPLab {
 			Map<String, List<Card>> players = new HashMap<>();
 			List<Card> playerCards = new ArrayList<Card>();
 			
+			// Check for even number of players or just a single player
 			if (numOfPlayers % 2 == 0 || numOfPlayers == 1) {
-			for (int i = 0; i < numOfPlayers; i++) {
-				StringBuilder playerName = new StringBuilder();
-				playerName.append("Player ");
-				playerName.append(i + 1);
+				// Create a player per numOfPlayers int
+				for (int i = 0; i < numOfPlayers; i++) {
+					// Use StringBuilder to build the player names to be stored in the Map
+					StringBuilder playerName = new StringBuilder();
+					playerName.append("Player ");
+					playerName.append(i + 1);
 //			System.out.println(playerName.toString());
-				
-				// Deal cards from deck to players
-				int cardsPerPlayer = 52 / numOfPlayers;
-				while (cardsPerPlayer > 0) {
-					Card cardToDeal = deck.draw();
-					playerCards.add(cardToDeal);
-					cardsPerPlayer--;
+
+					// Deal cards from deck to players
+					// Divide cards evenly
+					int cardsPerPlayer = 52 / numOfPlayers;
+					while (cardsPerPlayer > 0) {
+						// Draw a random card and add it to the player's hand
+						Card cardToDeal = deck.draw();
+						playerCards.add(cardToDeal);
+						// Decrement the remaining number of cards to deal for each player
+						cardsPerPlayer--;
+					}
+
+					// Add player name and their cards to the Map
+					players.put(playerName.toString(), playerCards);
 				}
-				
-				players.put(playerName.toString(), playerCards);
+			} else {
+				System.out.println("You need an even number of players to play!");
 			}
-		} else {
-			System.out.println("You need an even number of players to play!");
-		}
-		return players;
+			return players;
 	}
 	
 }
