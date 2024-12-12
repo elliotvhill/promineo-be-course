@@ -4,14 +4,8 @@
 
 ```java
 public interface Logger {
-
-	private void log(String str) {
-		// method body
-	}
-	
-	private void error(String str) {
-		// method body
-	}
+	public void log(String str);
+	public void error(String str);
 }
 ```
 
@@ -20,17 +14,13 @@ public interface Logger {
 a. `log`:
 
 ```java
-private void log(String str) {
-	// method body
-}
+public void log(String str);
 ```
 
 b. `error`:
 
 ```java
-private void error(String str) {
-	// method body
-}
+public void error(String str);
 ```
 
 ### 3. Create two classes that implement the Logger interface
