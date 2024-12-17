@@ -43,7 +43,7 @@ public class Week06TicTacToeLab {
 	//		- One way to display the game board would be as follows:
 	//				+---+---+---+       to		+---+---+---+		+---+---+---+		+---+---+---+
 	//				| 1 | 2 | 3 |	   find		|---|---|---|		| | | | | | |		| \ |   | / |
-	//				+---+---+---+	   a win	+---+---+---+		+---+---+---+		+---+---+---+
+	//				+---+---+---+	   a win		+---+---+---+		+---+---+---+		+---+---+---+
 	//				| 4 | 5 | 6 |	-- look-->	|---|---|---|	&	| | | | | | |   & 	|   | X |   |
 	//				+---+---+---+	 at these	+---+---+---+		+---+---+---+		+---+---+---+
 	//				| 7 | 8 | 9 |	8 patterns	|---|---|---|		| | | | | | |		| / |   | \ |
@@ -54,7 +54,7 @@ public class Week06TicTacToeLab {
 	//
 	//		1. Create a class with a main method -- this Lab can be implemented in just one class.
 	//				
-	//				Alternatively, you could create an object with it's own methods. 
+	//				Alternatively, you could create an object with its own methods. 
 	//				(e.g. GameBoard.java)
 	//
 	//		2. You will need to declare a gameBoard.  
