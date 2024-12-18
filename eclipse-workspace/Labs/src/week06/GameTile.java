@@ -9,15 +9,14 @@ public class GameTile {
 	// "O" tile = 0
 
 	Map<Integer, Boolean> tiles = new HashMap<Integer, Boolean>();
-	int tileValue;
+	String tileValue;
 	boolean isOccupied;
 
-	void generateNewTile() {
-		// initialize game tiles with values 1-9
-		for (int i = 0; i < 9; i++) {
-			this.tileValue = i + 1;
-		}
-		// set tiles to not occupied
+	// Default constructor
+	public GameTile(String tileValue) {
+		// Set initial tile value (1-9) as string
+		this.tileValue = tileValue;
+		// Set tile to not occupied
 		this.isOccupied = false;
 	}
 
@@ -29,19 +28,13 @@ public class GameTile {
 		this.isOccupied = isOccupied;
 	}
 
-	int getTileValue(GameTile tile) {
-		return tile.tileValue;
-	}
+//	GameTile getTile(int userInput) {
+//		return GameBoard.get();
+//	}
 
-	// setTileValue can take an arg int for the initial value of each tile
-	// (i.e. before they are occupied with either X or O
-	void setTileValue(int num) {
-		this.tileValue = num;
+	String setTileValue(GameTile tile) {
+		this.tileValue = tile.tileValue;
+		return this.tileValue.toString();
 	};
-
-	// set tile value to "X" or "O"
-	void setTileValue(char xOrO) {
-		this.tileValue = xOrO;
-	}
 
 }

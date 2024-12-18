@@ -104,21 +104,34 @@ public class Week06TicTacToeLab {
 	public static void main(String[] args) {
 
 		GameBoard board = new GameBoard();
-		char player1 = 'x';
-		char player2 = 'o';
+		String player1 = "x";
+		String player2 = "o";
 		int chosenTile;
 		Scanner input = new Scanner(System.in);
 		
 		// player1 (x) always starts
-		System.out.println("Player 1 goes first");
-		System.out.println("Player 1, you are X's");
+		System.out.println("Player 1 goes first. You are X's.");
+		
+		System.out.println();
+		
+		// Print out a new board to the console
 		board.printNewBoard();
+		System.out.println();
+		
 		// prompt user for input where to make a move
 		System.out.print("Where would you like to place an X? ");
 		chosenTile = input.nextInt();
 		
 		// find tile at index input and set to player 1 value (x)
 		board.findGameTile(chosenTile).setTileValue(player1);
+		
+		// Update board and print to console
+		board.updateGameBoard(chosenTile, player1);
+		
+		// Prompt player2 for O's move
+		
+		
+		// TODO: Player class? Method for take turn/make move, is passed player1/2 as arg
 		
 		
 		// check for valid input
