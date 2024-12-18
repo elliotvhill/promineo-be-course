@@ -103,22 +103,29 @@ public class Week06TicTacToeLab {
 
 	public static void main(String[] args) {
 
+		GameBoard board = new GameBoard();
 		char player1 = 'x';
 		char player2 = 'o';
+		int chosenTile;
 		Scanner input = new Scanner(System.in);
 		
 		// player1 (x) always starts
-		// get (9) tiles
-		// tiles are numbered 1-9
+		System.out.println("Player 1 goes first");
+		System.out.println("Player 1, you are X's");
+		board.printNewBoard();
 		// prompt user for input where to make a move
+		System.out.print("Where would you like to place an X? ");
+		chosenTile = input.nextInt();
+		
+		// find tile at index input and set to player 1 value (x)
+		board.findGameTile(chosenTile).setTileValue(player1);
+		
+		
 		// check for valid input
 		// check rows for win
 		// check columns for win
 		// check diagonals for win
 		// check for draw
-
-		GameBoard board = new GameBoard();
-		board.printNewBoard();
 		
 		
 	}

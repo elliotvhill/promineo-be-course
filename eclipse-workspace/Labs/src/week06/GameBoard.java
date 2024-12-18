@@ -17,6 +17,11 @@ public class GameBoard {
 		}
 		return gameBoard;
 	}
+	
+	// find tile
+	public GameTile findGameTile(int tileNum) {
+		return gameBoard[tileNum];
+	}
 
 	// update and print game board to console after each turn
 	public GameTile[] updateGameBoard(int tileNumber, char xOrO) {
