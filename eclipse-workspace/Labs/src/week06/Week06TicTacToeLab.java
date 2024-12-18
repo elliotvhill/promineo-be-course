@@ -115,18 +115,18 @@ public class Week06TicTacToeLab {
 		System.out.println();
 		
 		// Print out a new board to the console
-		board.printNewBoard();
+		board.printBoard();
 		System.out.println();
 		
 		// prompt user for input where to make a move
 		System.out.print("Where would you like to place an X? ");
 		chosenTile = input.nextInt();
 		
-		// find tile at index input and set to player 1 value (x)
-		board.findGameTile(chosenTile).setTileValue(player1);
+		// Find tile at index input and set to player 1 value (x)
+		board.updateGameTile(chosenTile, "X");
 		
 		// Update board and print to console
-		board.updateGameBoard(chosenTile, player1);
+		board.printBoard();
 		
 		// Prompt player2 for O's move
 		

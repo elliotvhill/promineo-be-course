@@ -5,56 +5,46 @@ import java.util.List;
 
 public class GameBoard {
 
-	public GameTile[] gameBoard = new GameTile[9];
-	
+	static GameTile[] gameBoard;
+
 	// Default constructor
-	public void setStartingTiles() {
-		// Set each tile value to 1-9 and isOccupied to false
+	public void gameBoard(GameTile tile) {
 		for (int i = 0; i < 9; i++) {
-			gameBoard[i] = new GameTile(i + 1, false);
+			tile.tileNumber = i + 1;
+			tile.isOccupied = false;
+			tile.tileValue = null;
 		}
-	}
+	};
 	
 	// Get tile
-	public GameTile getTile(int userInput) {
-		GameTile foundTile;
-		for (GameTile tile : gameBoard) {
-			if (tile.tileValue.equals(Integer.toString(userInput))) {
-				return foundTile = tile;
-			} else {
-				System.out.println("Tile not found.");
-			}
-		}
+	public GameTile findTile(int userInput) {
+		GameTile foundTile = gameBoard[userInput - 1];
+		return foundTile;
 	}
 	
-	public void findAndUpdateGameTile(int userInput) {
-		userInput -= 1;
-		GameTile foundTile = gameBoard[userInput];
-		gameBoard[userInput].setTileValue(foundTile); // sets tileValue to new value passed as string
+	// Update game tile
+	public void updateGameTile(int index, String xOrO) {
+		gameBoard[index].tileValue = xOrO;
+		gameBoard[index].isOccupied = true;
 	}
 
-	// update and print game board to console after each turn
-	public GameTile[] updateGameBoard(int tileNumber, String xOrO) {
-		gameBoard[tileNumber].setTileValue(xOrO);
-		gameBoard[tileNumber].setIsOccupied(true);
-		
+	// Print game board to console
+	public void printBoard() {
 		System.out.println("+---+---+---+");
 		for (GameTile tile : gameBoard) {
-			System.out.print(String.format("| %s ", tile.tileValue.toString()));
+			System.out.print(String.format("| %s ", tile.tileValue));
 		}
 		System.out.println("+---+---+---+");
-		
-		return gameBoard;
 	}
 	
 	// print NEW game board to console
-	public void printNewBoard() {
-		System.out.println("+---+---+---+");
-		for (int i = 0; i < gameBoard.length - 1; i+=3) {
-			System.out.print(String.format(
-					"| %s | %s | %s |\n+---+---+---+\n", i + 1, i + 2, i + 3));
-		}
-	}
+//	public void printNewBoard() {
+//		System.out.println("+---+---+---+");
+//		for (int i = 0; i < gameBoard.length - 1; i+=3) {
+//			System.out.print(String.format(
+//					"| %s | %s | %s |\n+---+---+---+\n", i + 1, i + 2, i + 3));
+//		}
+//	}
 
 	public void getGameResult() {
 
