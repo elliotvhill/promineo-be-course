@@ -5,13 +5,13 @@ import java.util.List;
 
 public class GameBoard {
 
-	static GameTile[] gameBoard;
+	static GameTile[] gameBoard = new GameTile[9];
 
 	// Default constructor
-	public void gameBoard(GameTile tile) {
+	public void setGameBoard(GameTile tile) {
+		// Set each tile value to 1-9 and isOccupied to false
 		for (int i = 0; i < 9; i++) {
-			tile.tileNumber = i + 1;
-			tile.isOccupied = false;
+			gameBoard[i] = new GameTile(i + 1, false, i);
 			tile.tileValue = null;
 		}
 	};
@@ -31,8 +31,8 @@ public class GameBoard {
 	// Print game board to console
 	public void printBoard() {
 		System.out.println("+---+---+---+");
-		for (GameTile tile : gameBoard) {
-			System.out.print(String.format("| %s ", tile.tileValue));
+		for (int i = 0; i < 9; i++) {
+			System.out.print(String.format("| %s ", gameBoard[i].tileValue));
 		}
 		System.out.println("+---+---+---+");
 	}
