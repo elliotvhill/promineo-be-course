@@ -8,7 +8,7 @@ public class GameTile {
 	// "X" tile = -1
 	// "O" tile = 0
 
-	static Map<HashMap<String, Boolean>, Integer> tiles = new HashMap<HashMap<String, Boolean>, Integer>();
+	static Map<Integer, HashMap<String, Boolean>> tiles = new HashMap<Integer, HashMap<String, Boolean>>();
 	String tileValue;
 	boolean isOccupied;
 	int tileNumber;
