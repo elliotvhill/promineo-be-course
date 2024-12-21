@@ -103,7 +103,11 @@ public class Week06TicTacToeLab {
 
 	public static void main(String[] args) {
 
+		// Instantiate a new game board
 		GameBoard board = new GameBoard();
+		// Generate the game board
+		board.generateGameBoard();
+		
 		String player1 = "x";
 		String player2 = "o";
 		int chosenTile;
@@ -111,11 +115,10 @@ public class Week06TicTacToeLab {
 		
 		// player1 (x) always starts
 		System.out.println("Player 1 goes first. You are X's.");
-		
 		System.out.println();
 		
-		// Print out a new board to the console
-		board.printBoard();
+		// Print the game board to the console
+		board.printGameBoard();
 		System.out.println();
 		
 		// prompt user for input where to make a move
@@ -123,10 +126,10 @@ public class Week06TicTacToeLab {
 		chosenTile = input.nextInt();
 		
 		// Find tile at index input and set to player 1 value (x)
-		board.updateGameTile(chosenTile, "X");
+		board.updateGameBoard(chosenTile, "X");
 		
 		// Update board and print to console
-		board.printBoard();
+		board.printGameBoard();
 		
 		// Prompt player2 for O's move
 		

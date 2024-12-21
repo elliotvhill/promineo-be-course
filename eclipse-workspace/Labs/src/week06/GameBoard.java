@@ -1,24 +1,33 @@
 package week06;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class GameBoard {
 
-	// 9 gameboard tiles/slots
-	List<Map<String, Boolean>> gameTiles = new ArrayList<Map<String, Boolean>>();
-	
-	// Default constructor
-	public GameBoard() {}
+	String[] gameBoard = new String[9];
 
-	
-	// Methods
-	private void generateGameBoard() {
+	// Generate a new game board
+	public void generateGameBoard() {
 		for (int i = 0; i < 9; i++) {
-			// Generate a new tile with a value 1-9 (as a string) and isOccupied false
-			GameTile tile = new GameTile(Integer.toString(i + 1), false);
+			// Generate a new tile with a value 1-9
+			this.gameBoard[i] = String.valueOf(i + 1);
 		}
 	}
-	
+
+	// Print game board to console
+	public void printGameBoard() {
+		System.out.println("+---+---+---+");
+		for (int i = 0; i < gameBoard.length; i += 3) {
+			System.out.print(String.format("| %s | %s | %s |\n+---+---+---+\n", gameBoard[i], gameBoard[i + 1],
+					gameBoard[i + 2]));
+		}
+	}
+
+	public String[] updateGameBoard(int tileToUpdate, String xOrO) {
+		for (int i = 0; i < gameBoard.length; i++) {
+			if (gameBoard[i].equals(String.valueOf(tileToUpdate))) {
+				gameBoard[i] = xOrO;
+				return gameBoard;
+			}
+		}
+		return gameBoard;
+	}
 }
