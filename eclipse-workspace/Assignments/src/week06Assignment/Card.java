@@ -14,7 +14,7 @@ public class Card {
 	}
 	
 	public void describe() {
-		System.out.println(String.format("Card: %s Suit: %s Value: %d", name, suit, value));
+		System.out.println(String.format("%s (%d) of %s", name, value, suit));
 	}
 	
 	public String getName() {
