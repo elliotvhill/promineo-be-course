@@ -1,6 +1,7 @@
 package week06Assignment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Deck {
@@ -15,17 +16,24 @@ public class Deck {
 		for (String suit : suits) {
 			// Generate cards of each name and value
 			for (int i = 0; i < 13; i++) {
-				Card cardToAddToDeck = new Card(cardNames[i], suit, i + 2);
-				cards.add(cardToAddToDeck);
-				System.out.println(String.format("Card added: %s of %s, value: %d", cardToAddToDeck.getName(),
-						cardToAddToDeck.getSuit(), cardToAddToDeck.getValue()));
+				Card cardToAdd = new Card(cardNames[i], suit, i + 2);
+				cards.add(cardToAdd);
 			}
 		}
-		System.out.println("Deck size: " + cards.size());
 		return cards;
 	}
 
-	// shuffle method
-	// draw method
+	// Shuffle method
+	
+	public List<Card> shuffle() {
+		// Use built-in Collections shuffle method
+		Collections.shuffle(cards);
+		for (Card card : cards) {
+			card.describe();
+		}
+		return cards;
+	}
+	
+	// Draw method
 
 }
