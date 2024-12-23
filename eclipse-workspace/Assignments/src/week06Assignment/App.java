@@ -12,6 +12,9 @@ public class App {
 
 		Deck deck = new Deck();
 		deck.generateNewDeck();
+		
+		// Shuffle deck
+		deck.shuffle();
 
 	}
 
