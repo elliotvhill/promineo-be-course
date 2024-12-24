@@ -6,11 +6,12 @@ import java.util.List;
 
 public class Deck {
 
-	public List<Card> cards = new ArrayList<Card>();
+	static List<Card> cards = new ArrayList<Card>();
 	private String[] cardNames = { "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack",
 			"Queen", "King", "Ace" };
 	private String[] suits = { "Hearts", "Spades", "Diamonds", "Clubs" };
 
+	// Constructor -- generate deck
 	public List<Card> generateNewDeck() {
 		// Generate cards of each suit
 		for (String suit : suits) {
@@ -24,7 +25,6 @@ public class Deck {
 	}
 
 	// Shuffle method
-	
 	public List<Card> shuffle() {
 		// Use built-in Collections shuffle method
 		Collections.shuffle(cards);
@@ -35,5 +35,13 @@ public class Deck {
 	}
 	
 	// Draw method
+	public Card draw() {
+		// Remove first card from deck
+		Card drawnCard = cards.remove(0);
+		if (cards.size() == 0) {
+			System.out.println("Error: No cards left to draw.");
+		}
+		return drawnCard;
+	}
 
 }
