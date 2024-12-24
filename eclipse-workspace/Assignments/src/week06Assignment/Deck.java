@@ -23,14 +23,15 @@ public class Deck {
 		}
 		return cards;
 	}
+	
+	public int getDeckSize() {
+		return cards.size();
+	}
 
 	// Shuffle method
 	public List<Card> shuffle() {
 		// Use built-in Collections shuffle method
 		Collections.shuffle(cards);
-		for (Card card : cards) {
-			card.describe();
-		}
 		return cards;
 	}
 	
