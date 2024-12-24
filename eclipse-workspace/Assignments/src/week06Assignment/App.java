@@ -17,6 +17,16 @@ public class App {
 		Player player2 = new Player("Dandelion", 0);
 		player2.describe();
 
+		// Draw and deal cards to player1's hand
+		for (int i = 26; i > 0; i--) {
+			player1.draw(deck);
+		}
+		
+		// Deal remaining cards to player2's hand
+		while (deck.getDeckSize() >= 0) {
+			player2.hand.add(deck.draw());
+		}
+		
 	}
 
 }
