@@ -1,11 +1,12 @@
 package week06Assignment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
 
 	private String name;
-	private List<Card> hand;
+	List<Card> hand = new ArrayList<Card>();
 	private int score;
 	
 	// Initial constructor before player has drawn any cards
