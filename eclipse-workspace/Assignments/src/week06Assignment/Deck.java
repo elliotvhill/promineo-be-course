@@ -7,6 +7,7 @@ import java.util.List;
 public class Deck {
 
 	static List<Card> cards = new ArrayList<Card>();
+
 	private String[] cardNames = { "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack",
 			"Queen", "King", "Ace" };
 	private String[] suits = { "Hearts", "Spades", "Diamonds", "Clubs" };
@@ -23,26 +24,16 @@ public class Deck {
 		}
 		return cards;
 	}
-	
-	public int getDeckSize() {
-		return cards.size();
-	}
 
 	// Shuffle method
 	public List<Card> shuffle() {
-		// Use built-in Collections shuffle method
 		Collections.shuffle(cards);
 		return cards;
 	}
-	
+
 	// Draw method
 	public Card draw() {
-		// Remove first card from deck
-		Card drawnCard = cards.remove(0);
-		if (cards.size() == 0) {
-			System.out.println("Error: No cards left to draw.");
-		}
-		return drawnCard;
+		return cards.removeFirst();
 	}
 
 }

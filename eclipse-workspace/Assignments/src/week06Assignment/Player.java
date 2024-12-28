@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Player {
 
-	private String name;
-	List<Card> hand = new ArrayList<Card>();
+	private List<Card> hand = new ArrayList<Card>();
 	private int score;
+	private String name;
 	
 	// Initial constructor before player has drawn any cards
 	public Player(String name, int score) {
@@ -15,44 +15,62 @@ public class Player {
 		this.score = 0;
 	}
 	
-	public Player(String name, List<Card> hand, int score) {
-		this.name = name;
+	// Constructor -- initializes score to 0 to start
+	public Player(List<Card> hand, String name) {
 		this.hand = hand;
 		this.score = 0;
+		this.name = name;
+	}
+	
+	// Getters & Setters
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String playerName) {
+		name = playerName;
 	}
 	
 	public int getScore() {
 		return score;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
 	public List<Card> getHand() {
 		return hand;
 	}
 	
-	public void describe(){
-		// TODO: add hand to describe print statement
-		System.out.println(String.format("Player: %s\nScore: %d\nHand: ", name, score));
+	public void setHand(List<Card> playerHand) {
+		hand = playerHand;
 	}
 	
-//	Draw a card and add to player's hand
-	public List<Card> draw(Deck deck){
+	
+	// Describe method
+	public void describe() {
+		// If player has been dealt cards
+		if (hand.size() != 0) {
+			System.out.println(String.format("\nPlayer: %s\n Score: %d\n Hand:\n", name, score));
+			for (Card card : hand) {
+				card.describe();
+			}
+		} else {
+			// Player doesn't have any cards
+			System.out.println(String.format("\nPlayer: %s\n Score: %d", name, score));
+		}
+	}
+	
+	// Flip method -- return and remove first card in player's hand
+	public Card flip() {
+		return hand.removeFirst();
+	}
+	
+	// Draw method -- draw card from deck and add to player's hand
+	public void draw(Deck deck) {
 		hand.add(deck.draw());
-		return hand;
 	}
 	
-	// Remove and return the top card in the hand
-	public Card flip(List<Card> hand){
-		Card flippedCard = ((Deck) hand).draw();
-		hand.remove(flippedCard);
-		return flippedCard;
-	}
-	
-	// Increment player's score
-	public int incrementScore(){
+	// Increment score method
+	public int incrementScore() {
 		return score++;
 	}
 	
