@@ -20,8 +20,8 @@ public class App {
 			player2.draw(deck);
 		}
 
-		// While players' hands are not empty
 		for (int i = 52; i >= 0; i--) {
+			// While players' hands are not empty
 			while (player1.getHand().size() != 0 && player2.getHand().size() != 0) {
 				// Players take turns flipping cards
 				Card player1Card = player1.flip();
