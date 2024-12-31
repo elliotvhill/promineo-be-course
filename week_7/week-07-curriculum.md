@@ -143,3 +143,62 @@ There are **three** important directories that Maven expects to find:
 - **Project resources:** `src/main/resources`
 - **Built class files:** `target/classes`
 
+
+## Working with data
+
+### N-tier application design
+
+We want to **separate** areas of concern _(i.e. "tiers")_:
+
+- User input and output
+- Business rules
+- Data acquisition and persistence
+
+If areas of concern are **not** separated, it can lead to:
+
+- Complex classes
+- Code that is **hard to maintain**
+- **Buggy** code
+- Code that violates the **single-responsibility principle (SRP)**
+
+The **single-responsibility principle** is part of the five **SOLID** principles of **OOP**. **SRP** states that each **module**, **package**, **class**, and **method** is responsible for a **_single aspect_** of application functionality or area of concern.
+
+**For example:**
+
+- **Method:** _creates_ a connection to a database
+- **Class:** _obtains_ and _pools_ connections
+- **Package:** contains classes that _manage_ database input/output
+
+In Java, there are **two** ways to separate concerns:
+
+1. Ultra-large applications may separate the different concerns into **libraries** or **JAR files**
+2. Smaller applications may use **packages** to separate the concerns
+
+<details><summary><em>What are the concerns?</em></summary>
+
+- User input and output
+- Business rules
+- Data acquisition and persistence
+
+</details>
+
+A **package** is a way of organizing your Java source code into different **directories**. If all your **source code** is in one file, packages may **not** make sense to use. However, if you were to have **30 files**, packages make sense to use — the **compiler** can handle the complexity; people **cannot**.
+
+
+### Creating a small application
+
+#### Designing with three _tiers_ or _layers_:
+
+- **Input/Output Layer** — interacts with a user
+    - _*Note:* the "user" could also be another microservice or Java application_
+- **Service Layer** — applies business rules
+    - _Examples of business rules — use cases to sort results by name, by color, etc._
+- **Data "DAO" Layer** — reads and writes tables
+    - _**Data Access Object** — a class that has attributes or methods to shuttle data back and forth between layers_
+
+#### Packaging the layers:
+
+- **Input/Output layer** — "main" package (e.g. `recipes`)
+- **Service Layer:** — "service" package (e.g. `recipes.service`)
+    - "entities" package (e.g. `recipes.entity`) — _entities are DAOs_
+- **Data (DAO) Layer:** — "dao" package (e.g. `recipes.dao`)
