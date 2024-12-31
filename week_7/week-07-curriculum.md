@@ -202,3 +202,68 @@ A **package** is a way of organizing your Java source code into different **dire
 - **Service Layer:** — "service" package (e.g. `recipes.service`)
     - "entities" package (e.g. `recipes.entity`) — _entities are DAOs_
 - **Data (DAO) Layer:** — "dao" package (e.g. `recipes.dao`)
+
+
+## Connect to the Database
+
+#### Video Contents
+- How connections connect
+- How drivers translate from JDBC to MySQL
+- Video project:
+    1. Create recipe schema and a user
+    2. Implement a "main" class
+    3. Implement a class to obtain a connection
+
+
+### More about connections
+
+A **connection** to MySQL is done with **Transmission Control Protocol (TCP)**. 
+
+**Transmission Control Protocol (TCP)**:
+
+- **Connects** two computers together _(like a circuit or a phone call)_
+- Is **reliable** — the data is guaranteed to be received in the _right order_
+- Is **bidirectional** — data is **sent** and **received** by either side
+- Can have **multiple connections** open simultaneously
+
+The connection **remains open** until it is _explicitly_ closed. When the connection is established, data is exchanged so that **both sides agree** on the **data format**, **compression**, **encryption**, etc.
+
+**Establishing** a connection is _slow_; **using** a connection is _fast_. **Connections** can be **reused** and **pooled** (but not if they're closed). **TCP** is managed by **computer hardware**.
+
+#### Database language
+
+Each database has its own different **language** (i.e. _protocol_) that it uses to communicate with clients. The **Java Database Connectivity (JDBC)** classes _do not know_ the language that MySQL (or any other database) uses — this is where the **database driver** comes in.
+
+#### Database drivers
+
+The **database driver** works with the computer hardware to **establish** a reliable connection with the **database server**. The **MySQL driver** "**translates**" between JDBC calls and the MySQL language.
+
+<details><summary><strong>Example</strong></summary>
+
+Programmer writes in JDBC format:
+
+```sql
+String sql = "SELECT * FROM table";
+String url = "jdbc:mysql://host:port/schema";
+Connection conn = DriverManager.getConnection(url); -- finds and loads driver
+PreparedStatement ps = conn.prepareStatement(sql);
+ResultSet rs = ps.executeQuery(); -- sends request to MySQL
+```
+
+_Driver translates and sends to MySQL server_
+
+MySQL server receives:
+
+```sql
+[03] COM_QUERY
+SELECT * FROM table
+```
+
+</details>
+
+
+#### Driver selection
+
+When the application starts up, **JDBC** finds all database drivers on the **classpath**. It then selects the correct driver based on the **connection string** (url) passed to the `DriverManager` class.
+
+&emsp; MySQL connection string format: `jdbc:mysql://host:port/schema`
