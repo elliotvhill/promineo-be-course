@@ -296,7 +296,7 @@ Expected STDOUT:
 <details><summary><strong>Solution:</strong></summary>
 
 ```sql
--- insert solution code here
+SELECT * FROM film_text LIMIT 5;
 ```
 
 </details>
@@ -318,7 +318,7 @@ Expected STDOUT:
 <details><summary><strong>Solution:</strong></summary>
 
 ```sql
--- insert solution code here
+SELECT * FROM film_text WHERE title LIKE "Z%";
 ```
 
 </details>
@@ -338,7 +338,7 @@ Expected STDOUT:
 <details><summary><strong>Solution:</strong></summary>
 
 ```sql
--- insert solution code here
+SELECT COUNT(*) FROM actor;
 ```
 
 </details>
@@ -359,7 +359,7 @@ Expected STDOUT:
 <details><summary><strong>Solution:</strong></summary>
 
 ```sql
--- insert solution code here
+SELECT COUNT(*) AS "Count of Actors" FROM actor;
 ```
 
 </details>
@@ -388,7 +388,7 @@ Expected STDOUT:
 <details><summary><strong>Solution:</strong></summary>
 
 ```sql
--- insert solution code here
+SELECT * FROM actor WHERE actor_id < 10;
 ```
 
 </details>
@@ -420,7 +420,7 @@ Expected STDOUT:
 <details><summary><strong>Solution:</strong></summary>
 
 ```sql
--- insert solution code here
+SELECT actor_id, first_name, last_name FROM actor WHERE actor_id < 10;
 ```
 
 </details>
@@ -454,7 +454,7 @@ Expected STDOUT:
 <details><summary><strong>Solution:</strong></summary>
 
 ```sql
--- insert solution code here
+SELECT actor_id AS "Actor Id", first_name AS "First Name", last_name AS "Last Name" FROM actor WHERE actor_id < 10;
 ```
 
 </details>
