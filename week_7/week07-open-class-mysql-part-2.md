@@ -133,8 +133,11 @@ Retrieve the `customer_id`, and the average of the `amount` paid for a rental in
 
 ```sql
 -- My solution:
+SELECT customer_id, AVG(amount) FROM payment GROUP BY customer_id LIMIT 5;
 
 -- Instructor solution:
+SELECT customer_id, AVG(amount) FROM payment
+GROUP BY customer_id LIMIT 5;
 ```
 
 </details>
@@ -167,8 +170,7 @@ _Note: If you are struggling with the `ROUND()` function, refer to the example a
 
 ```sql
 -- My solution:
-
--- Instructor solution:
+SELECT customer_id, ROUND(AVG(amount),2) FROM payment GROUP BY customer_id LIMIT 5;
 ```
 
 </details>
@@ -194,8 +196,12 @@ Retrieve the `customer_id`, and the average of the `amount` paid for a rental in
 
 ```sql
 -- My solution:
+SELECT customer_id AS "Id", ROUND(AVG(amount),2) AS "Average Spent" FROM payment GROUP BY customer_id LIMIT 5;
 
 -- Instructor solution:
+SELECT customer_id AS "Id", ROUND(AVG(amount),2) AS "Average Spent"
+FROM payment
+GROUP BY customer_id LIMIT 5;
 ```
 
 </details>
@@ -222,8 +228,16 @@ _Use `AVG()`, `GROUP BY`, `ROUND()`, and `INNER JOIN`_
 
 ```sql
 -- My solution:
+SELECT customer_id, first_name, last_name, ROUND(AVG(amount),2) FROM PAYMENT
+JOIN customer USING (customer_id)
+GROUP BY customer_id
+LIMIT 5;
 
 -- Instructor solution:
+SELECT customer_id, first_name, last_name, ROUND(AVG(amount),2)
+FROM payment
+INNER JOIN customer USING (customer_id)
+GROUP BY customer_id LIMIT 5;
 ```
 
 </details>
@@ -253,8 +267,17 @@ _Use `AVG()`, `GROUP BY`, `ROUND()`, `INNER JOIN` and column aliases_
 
 ```sql
 -- My solution:
+SELECT customer_id AS "Id", first_name AS "First Name", last_name AS "Last Name", ROUND(AVG(amount),2) AS "Average Spent" FROM payment
+JOIN customer USING (customer_id)
+GROUP BY customer_id
+LIMIT 5;
 
 -- Instructor solution:
+SELECT customer_id AS "Id", first_name AS "First Name", last_name AS "Last Name",
+    ROUND(AVG(amount),2) AS "Average Spent"
+FROM payment
+INNER JOIN customer USING (customer_id)
+GROUP BY customer_id LIMIT 5;
 ```
 
 </details>
@@ -291,6 +314,10 @@ _Use `AVG()`, `GROUP BY`, `ROUND()`, `INNER JOIN`, column aliases, and `||`_
 
 ```sql
 -- My solution:
+SELECT customer_id AS "Id", first_name || " " || last_name AS "Customer Name",
+    ROUND(AVG(amount),2) AS "Average Spent" FROM payment
+JOIN customer USING (customer_id)
+GROUP BY customer_id LIMIT 5;
 
 -- Instructor solution:
 ```
@@ -327,8 +354,14 @@ Retrieve data from the **Sakila** database that solves the following request:
 
 ```sql
 -- My solution:
+SELECT customer_id AS "Id", COUNT(rental_id) AS "Number of Rentals" FROM customer JOIN rental 
+    USING (customer_id) WHERE first_name = "AUSTIN" GROUP BY customer_id;
 
 -- Instructor solution:
+SELECT customer_id AS "Id", COUNT(rental_id) AS "Number of Rentals"
+FROM rental
+JOIN customer USING (customer_id)
+WHERE first_name = "AUSTIN";
 ```
 
 </details>
@@ -359,8 +392,22 @@ _Notice that both the staff and the store have an address, so use_ `JOIN address
 
 ```sql
 -- My solution:
+SELECT staff_id, first_name, last_name, store_id, address, city, country
+FROM staff
+JOIN store USING (store_id)
+JOIN address ON store.address_id = address.address_id
+JOIN city USING (city_id)
+JOIN country USING (country_id)
+GROUP BY staff_id;
 
 -- Instructor solution:
+SELECT staff_id, first_name, last_name, store_id, address.address, 
+    city.city, country.country
+FROM staff
+JOIN store USING (store_id)
+JOIN address ON store.address_id = address.address_id
+JOIN city USING (city_id)
+JOIN country USING (country_id);
 ```
 
 </details>
