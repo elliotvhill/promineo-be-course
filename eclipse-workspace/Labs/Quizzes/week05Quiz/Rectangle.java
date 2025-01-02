@@ -2,8 +2,8 @@ package week05Quiz;
 
 public class Rectangle implements Shape {
 	
-	private double width;
-	private double length;
+	double width;
+	double length;
 
 	@Override
 	public double calculatePerimeter() {
