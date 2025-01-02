@@ -17,6 +17,81 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
     WHERE ci.city LIKE 'Ab%';
     ```
 
+#### Open Class MySQL questions part 2 — Question #18
+`SELECT` Statement — `JOIN` two tables, `payment` and `customer` -- Use column aliases & `||`
+- Expected output and output on Open Class works properly
+
+    <details><summary>Code:</summary>
+
+    ```sql
+    SELECT customer_id AS "Id", first_name AS "First Name", last_name AS "Last Name", 
+        ROUND(AVG(amount),2) AS "Average Spent" FROM payment
+    JOIN customer USING (customer_id)
+    GROUP BY customer_id LIMIT 5;
+
+    -- Output:
+    | Id  | Customer Name    | Average Spent |
+    | --- | ---------------- | ------------- |
+    |  1  | MARY SMITH       | 3.71          |
+    |  2  | PATRICIA JOHNSON | 4.77          |
+    |  3  | LINDA WILLIAMS   | 5.21          |
+    |  4  | BARBARA JONES    | 3.72          |
+    |  5  | ELIZABETH BROWN  | 3.81          |
+    ```
+
+    </details>
+    
+- Query run locally returns `0`'s for customer names
+
+    <details><summary>Code:</summary>
+
+    ```sql
+    SELECT customer_id AS "Id", first_name AS "First Name", last_name AS "Last Name", 
+        ROUND(AVG(amount),2) AS "Average Spent" FROM payment
+    JOIN customer USING (customer_id)
+    GROUP BY customer_id LIMIT 5;
+
+    -- Output:
+    +----+---------------+---------------+
+    | Id | Customer Name | Average Spent |
+    +----+---------------+---------------+
+    |  1 |             0 |          3.71 |
+    |  2 |             0 |          4.77 |
+    |  3 |             0 |          5.22 |
+    |  4 |             0 |          3.72 |
+    |  5 |             0 |          3.81 |
+    +----+---------------+---------------+
+    ```
+
+    </details>
+
+
+#### Open Class MySQL questions part 2 — Questions #19 and #20
+
+Mastery #1: Complex SELECT Statement – List the customer_id & the count of films rented by the customer with a first_name of "AUSTIN".
+
+- Doesn't the solution _have_ to include a `GROUP BY` clause because we're using an aggregate function?
+
+    <details><summary>Provided Instructor solution:</summary>
+
+    ```sql
+    SELECT customer_id AS "Id", COUNT(rental_id) AS "Number of Rentals"
+    FROM rental
+    JOIN customer USING (customer_id)
+    WHERE first_name = "AUSTIN";
+    -- The above throws an error if try to run query without GROUP BY locally:
+
+    --     ERROR 1140 (42000): In aggregated query without GROUP BY,
+    --     expression #1 of SELECT list contains nonaggregated column
+    --     'sakila.customer.customer_id'; this is incompatible with
+    --     sql_mode=only_full_group_by
+    ```
+
+    </details>
+
+
+
+
 ## Week 5
 
 ### Questions and topics to discuss
