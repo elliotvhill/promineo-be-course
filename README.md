@@ -4,6 +4,19 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 
 _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/week_0/2023PTBESyllabus.pdf)_
 
+## Week 7
+
+### Questions
+
+#### Open Class MySQL questions part 1 — `JOIN` example:
+- Why isn't the `AS` keyword needed when using table aliases?
+    
+    ```sql
+    SELECT ci.city, co.country FROM city ci
+    INNER JOIN country co USING (country_id)
+    WHERE ci.city LIKE 'Ab%';
+    ```
+
 ## Week 5
 
 ### Questions and topics to discuss
