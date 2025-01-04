@@ -9,8 +9,8 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
 ### Questions
 
 #### Open Class MySQL questions part 1 — `JOIN` example:
-- Why isn't the `AS` keyword needed when using table aliases?
-    
+
+-   Why isn't the `AS` keyword needed when using table aliases?
     ```sql
     SELECT ci.city, co.country FROM city ci
     INNER JOIN country co USING (country_id)
@@ -18,13 +18,15 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
     ```
 
 #### Open Class MySQL questions part 2 — Question #18
-`SELECT` Statement — `JOIN` two tables, `payment` and `customer` -- Use column aliases & `||`
-- Expected output and output on Open Class works properly
 
-    <details><summary>Code:</summary>
+`SELECT` Statement — `JOIN` two tables, `payment` and `customer` -- Use column aliases & `||`
+
+-   Expected output and output on Open Class works properly
+
+      <details><summary>Code:</summary>
 
     ```sql
-    SELECT customer_id AS "Id", first_name AS "First Name", last_name AS "Last Name", 
+    SELECT customer_id AS "Id", first_name AS "First Name", last_name AS "Last Name",
         ROUND(AVG(amount),2) AS "Average Spent" FROM payment
     JOIN customer USING (customer_id)
     GROUP BY customer_id LIMIT 5;
@@ -39,14 +41,15 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
     |  5  | ELIZABETH BROWN  | 3.81          |
     ```
 
-    </details>
-    
-- Query run locally returns `0`'s for customer names
+      </details>
 
-    <details><summary>Code:</summary>
+
+-   Query run locally returns `0`'s for customer names
+
+      <details><summary>Code:</summary>
 
     ```sql
-    SELECT customer_id AS "Id", first_name AS "First Name", last_name AS "Last Name", 
+    SELECT customer_id AS "Id", first_name AS "First Name", last_name AS "Last Name",
         ROUND(AVG(amount),2) AS "Average Spent" FROM payment
     JOIN customer USING (customer_id)
     GROUP BY customer_id LIMIT 5;
@@ -63,16 +66,15 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
     +----+---------------+---------------+
     ```
 
-    </details>
-
+      </details>
 
 #### Open Class MySQL questions part 2 — Questions #19 and #20
 
 Mastery #1: Complex SELECT Statement – List the customer_id & the count of films rented by the customer with a first_name of "AUSTIN".
 
-- Doesn't the solution _have_ to include a `GROUP BY` clause because we're using an aggregate function?
+-   Doesn't the solution _have_ to include a `GROUP BY` clause because we're using an aggregate function?
 
-    <details><summary>Provided Instructor solution:</summary>
+      <details><summary>Provided Instructor solution:</summary>
 
     ```sql
     SELECT customer_id AS "Id", COUNT(rental_id) AS "Number of Rentals"
@@ -87,37 +89,37 @@ Mastery #1: Complex SELECT Statement – List the customer_id & the count of fil
     --     sql_mode=only_full_group_by
     ```
 
-    </details>
+      </details>
 
+#### "Turning" Checked Exceptions into Unchecked Exceptions
 
-
+-   ...what does this mean? What does it do and why do it?
 
 ## Week 5
 
 ### Questions and topics to discuss
 
-- OOP:
-    - I still have a really hard time wrapping my head around this, and figuring out how to describe/explain it (i.e. in an interview situation).
-    - Why _wouldn't_ one use OOP these days?
-    - I honestly don't understand why _such huge_ emphasis is placed on it-- i.e. _always_ specifically called out in job descriptions, etc. It seems like pretty intuitive principles...?
-- Exceptions:
-    - If you handle an unchecked exception...does that mean it's now a _checked_ exception...?
-
+-   OOP:
+    -   I still have a really hard time wrapping my head around this, and figuring out how to describe/explain it (i.e. in an interview situation).
+    -   Why _wouldn't_ one use OOP these days?
+    -   I honestly don't understand why _such huge_ emphasis is placed on it-- i.e. _always_ specifically called out in job descriptions, etc. It seems like pretty intuitive principles...?
+-   Exceptions:
+    -   If you handle an unchecked exception...does that mean it's now a _checked_ exception...?
 
 ## Week 4
 
 ### Questions and topics to discuss
 
-- Method overloading _(again)_:
-    - Referenced in Java Docs [when discussing StringBuilder](https://docs.oracle.com/javase/tutorial/java/data/buffers.html#:~:text=The%20principal%20operations%20on%20a%20StringBuilder%20that%20are%20not%20available%20in%20String%20are%20the%20append()%20and%20insert()%20methods%2C%20which%20are%20overloaded%20so%20as%20to%20accept%20data%20of%20any%20type.)
-    - What is the use case for overloading a method?
-- `new ArrayList<>()` vs `new ArrayList<String>()` -- just for stronger typing?
+-   Method overloading _(again)_:
+    -   Referenced in Java Docs [when discussing StringBuilder](<https://docs.oracle.com/javase/tutorial/java/data/buffers.html#:~:text=The%20principal%20operations%20on%20a%20StringBuilder%20that%20are%20not%20available%20in%20String%20are%20the%20append()%20and%20insert()%20methods%2C%20which%20are%20overloaded%20so%20as%20to%20accept%20data%20of%20any%20type.>)
+    -   What is the use case for overloading a method?
+-   `new ArrayList<>()` vs `new ArrayList<String>()` -- just for stronger typing?
 
 ## Week 3
 
 ### Questions and topics to discuss
 
-- Increment `counter` variable from within `sysout`:
+-   Increment `counter` variable from within `sysout`:
 
     ```java
     int[] gradesArray = {100, 97, 80, 85, 79};
@@ -128,16 +130,16 @@ Mastery #1: Complex SELECT Statement – List the customer_id & the count of fil
             }
     ```
 
-- `ArrayIceCreamOrder` example menu application ([link](https://learn.promineotech.com/mod/book/view.php?id=20014&chapterid=1943))
-    - Default constructor vs other constructors? Is it that we need to define separate constructors for all user cases _(i.e. if user does not input values for each variable)_?
-        - Is this an example of _overloading_ a method? Please explain
-    - Getters & setters
+-   `ArrayIceCreamOrder` example menu application ([link](https://learn.promineotech.com/mod/book/view.php?id=20014&chapterid=1943))
+    -   Default constructor vs other constructors? Is it that we need to define separate constructors for all user cases _(i.e. if user does not input values for each variable)_?
+        -   Is this an example of _overloading_ a method? Please explain
+    -   Getters & setters
 
 <details><summary><strong>Lab 3 questions</strong></summary>
 
-- Question 12: "_calculate the sum_ of all the letters" -- what does this mean? Should we _concatenate_ all the letters? Or count how many are in the strings combined?
+-   Question 12: "_calculate the sum_ of all the letters" -- what does this mean? Should we _concatenate_ all the letters? Or count how many are in the strings combined?
 
-- Method question 16: using a for loop with an if statement seems verbose... why doesnt using a ternary work? e.g. something like this:
+-   Method question 16: using a for loop with an if statement seems verbose... why doesnt using a ternary work? e.g. something like this:
 
     ```java
     public static boolean stringExists(String[] arr, String str) {
@@ -148,9 +150,10 @@ Mastery #1: Complex SELECT Statement – List the customer_id & the count of fil
     }
     // Throws "System error on token: invalid '==' operator"
     ```
-- Question 19: strange output
 
-    <details><summary><em>Code:</em></summary>
+-   Question 19: strange output
+
+      <details><summary><em>Code:</em></summary>
 
     ```java
         // 19. Write and test a method that takes an array of Strings and
@@ -169,11 +172,10 @@ Mastery #1: Complex SELECT Statement – List the customer_id & the count of fil
                 return lengths;
             }
     ```
-        
-        
-    </details>
 
-    - **Explanation:** have to use `.toString()` method to print arrays to console
+      </details>
+
+    -   **Explanation:** have to use `.toString()` method to print arrays to console
 
 </details>
     
@@ -190,7 +192,6 @@ Mastery #1: Complex SELECT Statement – List the customer_id & the count of fil
 
 </details>
 
-
 ## Week 2
 
 ### Questions and topics to discuss
@@ -203,7 +204,7 @@ Mastery #1: Complex SELECT Statement – List the customer_id & the count of fil
 // 6. Cookie Distribution:
 		// Note: You will evenly distribute all of the cookies to the children
 		// and as the adult you get to keep the remaining cookies for yourself.
-		
+
 		// a. Create two variables called numberOfCookies and numberOfChildren.
 		// b. Initialize the two variables to integer values.
 		// b. Use a conditional to print the following based on the following
@@ -219,9 +220,9 @@ Mastery #1: Complex SELECT Statement – List the customer_id & the count of fil
 ```java
 int numberOfCookies = 18;
 		int numberOfChildren = 14;
-		
+
 		int result = numberOfCookies % numberOfChildren;
-		
+
 		if (result == 0) {
 			System.out.println("Sad Face");
 		} else if (result < 2) {
@@ -236,104 +237,105 @@ int numberOfCookies = 18;
 //		Q: Can we assume cookies remain whole?
 //		i.e. if cookies cannot be divided evenly
 //		among children, does adult keep _all_ cookies?
-		
-//		Q: For time/space optimization, does it make sense to use memory 
+
+//		Q: For time/space optimization, does it make sense to use memory
 //		or to repeat the calculation w/o using extra storage?
 ```
 
-
 </details>
-
 
 <details><summary><strong>Other code questions</strong></summary>
 
-- What does the Java error `dead code` mean?
+-   What does the Java error `dead code` mean?
     > _In Eclipse, "dead code" is code that will never be executed. Usually it's in a conditional branch that logically will never be entered._
-
 
 </details>
 
-
-
- 
 ## Week 1
 
 ### Questions and topics to discuss
 
 <details ><summary><strong>1. Intros</strong></summary>
 
-- What is your background?
-    - What did you study?
-    
-    - Have you done any other coding coursework/classes/boot camps?
-    
-    - Experience in other SWE areas? _(e.g. DevOps, Front End, Data Eng, etc.)_
-    
-    - Where have you worked? 
-    
-    - How'd you get into the field?
+-   What is your background?
 
-- Other hobbies?
+    -   What did you study?
 
-- Open to connecting on LinkedIn and/or other platforms?
+    -   Have you done any other coding coursework/classes/boot camps?
+
+    -   Experience in other SWE areas? _(e.g. DevOps, Front End, Data Eng, etc.)_
+
+    -   Where have you worked?
+
+    -   How'd you get into the field?
+
+-   Other hobbies?
+
+-   Open to connecting on LinkedIn and/or other platforms?
 
 </details>
 
-  
 <details ><summary><strong>2. Time and Space Complexity, Big O Notation</strong></summary>
 
-- Will this be discussed at all in the course?
+-   Will this be discussed at all in the course?
 
-- Any recommendations on resources? 
+-   Any recommendations on resources?
 
-- Any way to practice determining time & space complexity? (i.e. something like LeetCode but for Big O?)
-    - _Apart from analyzing my own code, of course_
+-   Any way to practice determining time & space complexity? (i.e. something like LeetCode but for Big O?)
+    -   _Apart from analyzing my own code, of course_
 
 </details>
 
-  
 <details ><summary><strong>3. Other</strong></summary>
 
-- Anything you wish you had known going into the course?
-    - _e.g. quirks of Java, code conventions, organization, etc._
+-   Anything you wish you had known going into the course?
 
-- Using GitLab vs. GitHub during the course -- does it matter?
-    - How about professionally?
+    -   _e.g. quirks of Java, code conventions, organization, etc._
 
-    - Do more organizations use GitLab or something similar? GitPod? etc.
-    
-- Thoughts on text editors -- Eclipse vs. VS Code?
+-   Using GitLab vs. GitHub during the course -- does it matter?
 
-- **Open source:**
-    - Suggestions for getting started & overcoming fear/imposter syndrome
-    
-    - How do you show off your OS work on a resume or LinkedIn, for example?
+    -   How about professionally?
 
-- Question about reassigning variables:
-    - This code incorrectly returns `true` for both sysouts:
-        <details><summary>Example 1</summary>
-        
-        ```Java
-        public static void main(String[] args) {
+    -   Do more organizations use GitLab or something similar? GitPod? etc.
 
-            int ageRequiredToDrive = 16;
-            int currentAge = 14;
-            currentAge = 30;
+-   Thoughts on text editors -- Eclipse vs. VS Code?
 
-            boolean canPersonDrive = (currentAge >= ageRequiredToDrive);
+-   **Open source:**
 
-            System.out.println(canPersonDrive); // returns 'true'
-            
-            currentAge = 14;
-            System.out.println(canPersonDrive); // returns 'true' 
-            // Explanation: still returns true bc value of canPersonDrive still holds value of 'true' (bc 30 >= 16)
+    -   Suggestions for getting started & overcoming fear/imposter syndrome
+
+    -   How do you show off your OS work on a resume or LinkedIn, for example?
+
+-   Question about reassigning variables:
+
+    -   This code incorrectly returns `true` for both sysouts:
+          <details><summary>Example 1</summary>
+          
+          ```Java
+          public static void main(String[] args) {
+
+              int ageRequiredToDrive = 16;
+              int currentAge = 14;
+              currentAge = 30;
+
+              boolean canPersonDrive = (currentAge >= ageRequiredToDrive);
+
+              System.out.println(canPersonDrive); // returns 'true'
+
+              currentAge = 14;
+              System.out.println(canPersonDrive); // returns 'true'
+              // Explanation: still returns true bc value of canPersonDrive still holds value of 'true' (bc 30 >= 16)
+
         }
+
         ```
         </details>
 
-    - This code incorrectly returns `false` for both sysouts:
+        ```
 
-        <details><summary>Example 2</summary>
+    -   This code incorrectly returns `false` for both sysouts:
+
+          <details><summary>Example 2</summary>
 
         ```Java
         public static void main(String[] args) {
@@ -341,68 +343,71 @@ int numberOfCookies = 18;
             int ageRequiredToDrive = 16;
             int currentAge = 14;
             boolean canPersonDrive = (currentAge >= ageRequiredToDrive);
-            
+
             currentAge = 30;
             System.out.println(canPersonDrive); // returns 'false'
-            
+
             currentAge = 24;
             System.out.println(canPersonDrive); // returns 'false'
             // Explanation: again, value of canPerson drive hasn't changed -- it's still 'false' (bc 14 <= 16)
         }
         ```
-        
-        </details>
+
+          </details>
 
     _**Answer:** the variable `canPersonDrive` is simmply never updated, which is wwhy it continues to return the same value after `currentAge` is reassigned -- we're not running any kind of function that would automatically update `canPersonDrive`; it's statically defined._
 
 </details>
 
-
 ### Meeting Notes: Nov 9, 2024
 
 #### Intros
 
-- Mike was a BE student, previous background in IT.
-- Started going to office hours a lot, helping others, and was offered position of his mentor when she left.
+-   Mike was a BE student, previous background in IT.
+-   Started going to office hours a lot, helping others, and was offered position of his mentor when she left.
 
 #### Big O
 
-- Outside scope of the course, but could ask Instructor about it
+-   Outside scope of the course, but could ask Instructor about it
 
 #### Open Source
 
-- Mike does not have experience with OS projects.
-- Suggested reaching out to one of the FE mentors to meet with next week, if desired.
+-   Mike does not have experience with OS projects.
+-   Suggested reaching out to one of the FE mentors to meet with next week, if desired.
 
 #### Git platforms
 
-- GitHub is used to submit assignments and is preferred.
+-   GitHub is used to submit assignments and is preferred.
 
 #### Editors
 
-- Can use either Eclipse or VS Code for course -- Mike has a lot of experience helping students with both.
-- Eclipse does a better job of visualizing the Java hierarchy--i.e. projects, packages, classes, etc. -- than VS Code.
+-   Can use either Eclipse or VS Code for course -- Mike has a lot of experience helping students with both.
+-   Eclipse does a better job of visualizing the Java hierarchy--i.e. projects, packages, classes, etc. -- than VS Code.
 
---  
+--
 
 <details><summary><em>Fathom.ai summary</em></summary>
-
 
 **Elliot Hill: Back End Mentor Session**
 
 Mentor session overview @ 0:00
+
 > Michael and Elliot introduce themselves and discuss the purpose of the mentor session, which is for Elliot to ask general questions about the back-end development course and get advice from Michael, who previously completed the same bootcamp program.
 
 Code editor preferences @ 3:36
+
 > Elliot discusses his experience using Eclipse versus VS Code, noting that he is more comfortable with VS Code but is leaning towards using Eclipse for the course since it provides better visibility into the Java project structure. Michael advises that either editor is acceptable, as the focus is on learning to code rather than the specific IDE.
 
 GitHub and version control @ 4:54
+
 > Elliot shares his past issues with his GitHub account being suspended, and asks if it's acceptable to use GitLab instead. Michael confirms that GitHub is the preferred platform for submitting assignments, but Elliot can use VS Code to manage his code and submit it through other means if needed.
 
 Advice for bootcamp success @ 9:15
+
 > Michael provides advice based on his own experience going through the bootcamp, emphasizing the importance of taking advantage of mentor sessions, closely following the video lessons, and not getting stuck on any one problem for too long. He encourages Elliot to use the available resources and not be afraid to ask for help.
 
 Recap and next steps @ 12:44
+
 > Elliot summarizes the key topics discussed and thanks Michael for the helpful advice. Michael reminds Elliot about the additional resources provided, and encourages him to continue reaching out to mentors if he needs further assistance.
 
 </details>
@@ -443,7 +448,7 @@ Coding concepts are the same, the syntax is different.
 **Elliot Hill**  
 Exactly. Yeah, yeah. So I just had more questions about like the course in general and just like the field in general, if that's cool.
 
-I'm curious. uh like to talk especially about open source projects um because that's open source okay uh the assignments oh no sorry just in general like yeah open source um because we have assignments that are open class but you're talking about yeah yeah yeah um yeah i i have not really dealt into you know trying to contribute to any open source projects yet i have i have a lot of imposter syndrome um and i just like wonder like do you have much experience with open 
+I'm curious. uh like to talk especially about open source projects um because that's open source okay uh the assignments oh no sorry just in general like yeah open source um because we have assignments that are open class but you're talking about yeah yeah yeah um yeah i i have not really dealt into you know trying to contribute to any open source projects yet i have i have a lot of imposter syndrome um and i just like wonder like do you have much experience with open
 
 **Michael Goeres**  
 I have no experience in that either, unfortunately. I almost refer you to Michael Barnell the front end mentor; I think he's done a couple open source things and if you'd like to schedule a mentor we can change that for next week.
@@ -459,7 +464,7 @@ That's all right.
 **Elliot Hill**  
 So I kind of more specific to the class talking about code editors. I have never used Eclipse until now.
 
-I'm coming from VS code. Um, does it really matter? I'm, I'm leaning more towards sticking with Eclipse. for the course because it seems like it's good to know and and used in the field a lot. But I like I said, I've got more experience with VS code and I'm struggling with the the key bindings 
+I'm coming from VS code. Um, does it really matter? I'm, I'm leaning more towards sticking with Eclipse. for the course because it seems like it's good to know and and used in the field a lot. But I like I said, I've got more experience with VS code and I'm struggling with the the key bindings
 
 **Michael Goeres**  
 Yeah, 100% you are allowed to use VS code.
@@ -491,7 +496,7 @@ Only two months because I have another that was suspended and they never respond
 Wow.
 
 **Michael Goeres**  
-So he ended up, he ended up submitting his assignments to me on Slack. Oh, okay. 
+So he ended up, he ended up submitting his assignments to me on Slack. Oh, okay.
 
 **Elliot Hill**  
 Yeah. So that's that's why like more recently I made this and I've mostly been on git lab now using that.
@@ -517,14 +522,14 @@ Yeah. And that's kind of like going back to that. like, I don't know. I feel lik
 
 I feel like VS Code, in a lot of ways, maybe makes things too easy sometimes, especially if you're new.
 
-You know, it's kind of like a crutch, there's a lot of crutches 
+You know, it's kind of like a crutch, there's a lot of crutches
 
 **Michael Goeres**  
 The nice thing about Eclipse is it teaches you about the Java hierarchy better than...
 
 Because in Java, in Eclipse, there's a project. And with the project, there's the SRC folder. And then with the SRC folder, you make a package, then with the package, you make a class.
 
-Yeah. in VS Code, you make the project, but then the packages don't really come out looking like packages. Because in Eclipse, package looks like a little four-door file cabinet. 
+Yeah. in VS Code, you make the project, but then the packages don't really come out looking like packages. Because in Eclipse, package looks like a little four-door file cabinet.
 
 **Elliot Hill**  
 Yeah. Yeah. I have noticed that.
@@ -547,7 +552,7 @@ Yeah, outside the scope of this course, but.
 **Elliot Hill**  
 Got it. Good to know. That was my question. Yeah. Yeah. I've, I've looked at some resources and I'm like trying to wrap my head around it, but having a little tough time.
 
-Okay. I figured that was the case. 
+Okay. I figured that was the case.
 
 And then I kind of just broadly, I believe I understand and you went through the bootcamp yourself?
 
@@ -587,7 +592,7 @@ you haven't found it, just submit the answer, and then every question after you 
 I may even say half an hour. I say half an hour to an hour on any one question. Yeah, as your frustration level goes up, you're learning to go down.
 
 **Elliot Hill**  
-Yeah, that's definitely a trap I have fallen into. I was going to say in the past, actually quite frequently is I just spend too much time trying to fight problems and at a certain point have to just call and be like, okay, let me yeah, yeah, just see if I can get 
+Yeah, that's definitely a trap I have fallen into. I was going to say in the past, actually quite frequently is I just spend too much time trying to fight problems and at a certain point have to just call and be like, okay, let me yeah, yeah, just see if I can get
 
 **Michael Goeres**  
 Wave the white flag and yeah.
@@ -662,13 +667,13 @@ then my mentor moved on to a coding job and so I got her job. it works out well.
 Awesome. Yeah, yeah, I definitely I hope to help out as much as I can to my classmates and wherever I can.
 
 **Michael Goeres**  
-And I think you see the Michael's fathom note-taker. That's just an AI bot that records and takes a transcript, you'll always get a link to that. 
+And I think you see the Michael's fathom note-taker. That's just an AI bot that records and takes a transcript, you'll always get a link to that.
 
 **Elliot Hill**  
 Awesome. That's great, thank you.
 
 **Michael Goeres**  
-Cool. Yeah. Other than that, you guys have a good rest of your weekend. 
+Cool. Yeah. Other than that, you guys have a good rest of your weekend.
 
 **Elliot Hill**  
 Thank you very much. Bye. Bye.
@@ -677,14 +682,14 @@ Thank you very much. Bye. Bye.
 
 ### Resources Shared
 
-- https://www.geeksforgeeks.org/introduction-to-java/?ref=lbp
-- https://www.geeksforgeeks.org/loops-in-java/#
-- https://www.programiz.com/java-programming/for-loop
-- https://introcs.cs.princeton.edu/java/home/
-- https://www.youtube.com/@alexlorenlee/videos
-- https://www.youtube.com/@CodingWithJohn
-- https://en.wikibooks.org/wiki/Java_Programming/Getting_started
-- https://math.hws.edu/javanotes/index.html
-- https://docs.oracle.com/javase/tutorial/getStarted/TOC.html
-- https://javaranch.com/
-- https://codingbat.com/
+-   https://www.geeksforgeeks.org/introduction-to-java/?ref=lbp
+-   https://www.geeksforgeeks.org/loops-in-java/#
+-   https://www.programiz.com/java-programming/for-loop
+-   https://introcs.cs.princeton.edu/java/home/
+-   https://www.youtube.com/@alexlorenlee/videos
+-   https://www.youtube.com/@CodingWithJohn
+-   https://en.wikibooks.org/wiki/Java_Programming/Getting_started
+-   https://math.hws.edu/javanotes/index.html
+-   https://docs.oracle.com/javase/tutorial/getStarted/TOC.html
+-   https://javaranch.com/
+-   https://codingbat.com/
