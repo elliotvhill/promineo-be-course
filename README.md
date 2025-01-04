@@ -93,7 +93,7 @@ Mastery #1: Complex SELECT Statement – List the customer_id & the count of fil
 
 #### "Turning" Checked Exceptions into Unchecked Exceptions
 
--   ...what does this mean? What does it do and why do it?
+-   ...what does this mean? What does it do and why do it? How does this "keep [our] code clean"?
 
 ## Week 5
 
