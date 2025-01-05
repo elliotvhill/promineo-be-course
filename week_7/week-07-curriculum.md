@@ -9,24 +9,24 @@ Notes from the week 7 MySQL video lessons.
 A **Database** is an application that stores and serves up data — the _back end_.
 
 A **Database Client** is the _front end_:
-- Sends **requests** to a database
-- Parses **responses** from a database
-- _Examples: MySQL Command Line Interface (CLI), DBeaver, Java application_
+
+-   Sends **requests** to a database
+-   Parses **responses** from a database
+-   _Examples: MySQL Command Line Interface (CLI), DBeaver, Java application_
 
 The relationship between a **Database** and a **Client** is like a relationship between a banking application and a browser:
 
-- You don't confuse the **browser** with the bank **application** — the browser _connects_ to the bank application
-- Don't confuse the **database** and the **client** — the client _connects_ to the database
+-   You don't confuse the **browser** with the bank **application** — the browser _connects_ to the bank application
+-   Don't confuse the **database** and the **client** — the client _connects_ to the database
 
 #### Connections need...
 
-| Browser to Website | Client to Database |
-|--------------------|--------------------|
-| The _scheme_ (http/https) | The database _type_ (mysql) |
-| The _host_ name | The _host_ name |
-| The _port_ number | The _port_ number |
+| Browser to Website                                                        | Client to Database                                                     |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| The _scheme_ (http/https)                                                 | The database _type_ (mysql)                                            |
+| The _host_ name                                                           | The _host_ name                                                        |
+| The _port_ number                                                         | The _port_ number                                                      |
 | The _locator_ name <br />_(e.g. `https://exxon.com:8080/global_warming`)_ | The _schema_ name <br />_(e.g. `jdbc:mysql://localhost:3306/recipes`)_ |
-
 
 ### What is a schema?
 
@@ -34,39 +34,38 @@ A **Schema** is a **named collection** of data within a database. A **schema** h
 
 **Tables** are like spreadsheets:
 
-- Tables define **columns** of data.
-- Tables contain **rows** of data organized by column.
+-   Tables define **columns** of data.
+-   Tables contain **rows** of data organized by column.
 
 A **row** and a **column** is like a spreadsheet cell:
 
-- Spreadsheet cells can have _any_ type of data, however...
-- Table rows contain data _specified_ by the _column type_.
+-   Spreadsheet cells can have _any_ type of data, however...
+-   Table rows contain data _specified_ by the _column type_.
 
 _**Note:** Unforunately, MySQL has historically called schemas **"databases"**._
 
-- A **database** can have many **schemas**.
-- A **schema** can have many **tables**.
-- A **table** can have many **columns** (types).
-    - **Columns** have a _name_, a _type_, and other attributes.
-- **Tables** can have many **rows** (data).
-
+-   A **database** can have many **schemas**.
+-   A **schema** can have many **tables**.
+-   A **table** can have many **columns** (types).
+    -   **Columns** have a _name_, a _type_, and other attributes.
+-   **Tables** can have many **rows** (data).
 
 ### Database Clients
 
-| Client | Features |
-|--------|----------|
-| MySQL CLI | <ul><li>Very _basic_ interface</li><li>_Not_ user-friendly</li><li>Does _not_ autofill</li><li>It's _ugly_!</li></ul> |
-| DBeaver | <ul><li>Queries tables _automatically_</li><li>Generates `INSERT` statements _automatically_</li><li>Generates ERDs _automatically_</li><li>Limits data returned _automatically_</li><li>Has _intuitive_ graphical interface</li></ul> |
-
+| Client    | Features                                                                                                                                                                                                                               |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| MySQL CLI | <ul><li>Very _basic_ interface</li><li>_Not_ user-friendly</li><li>Does _not_ autofill</li><li>It's _ugly_!</li></ul>                                                                                                                  |
+| DBeaver   | <ul><li>Queries tables _automatically_</li><li>Generates `INSERT` statements _automatically_</li><li>Generates ERDs _automatically_</li><li>Limits data returned _automatically_</li><li>Has _intuitive_ graphical interface</li></ul> |
 
 ## Create Maven Project
 
 ### All About Apache Maven
 
 **Maven** is an **application build tool**:
-- Builds (compiles)
-- Tests
-- Packages
+
+-   Builds (compiles)
+-   Tests
+-   Packages
 
 ### How are we using Maven?
 
@@ -78,19 +77,19 @@ A **dependency** is a **Java library** that contains code used by our applicatio
 
 #### Which dependencies do we need?
 
-- **MySQL Connector/J** — this is a database **driver** _(written in Java)_
+-   **MySQL Connector/J** — this is a database **driver** _(written in Java)_
 
 A **database driver** supports the **Java Database Connectivity (JDBC) standard.**
 
 A **driver** is used to:
-- _Manage_ connections
-- Send SQL to a database
-- Manage results from the database in a consistent manner
+
+-   _Manage_ connections
+-   Send SQL to a database
+-   Manage results from the database in a consistent manner
 
 A **driver** is _specific_ to a particular **database**. Drivers are _(normally)_ maintained by the teams that write the database.
 
 The **driver** **connects** the _database_ and the _client_.
-
 
 ### How Maven Works
 
@@ -98,8 +97,8 @@ The **driver** **connects** the _database_ and the _client_.
 
 The **POM** controls the build and is described in an XML file (`pom.xml`) typically at the root of your project. **Eclipse** has an _internal_ version of **Maven** and a **Maven connector** — `m2e`.
 
-- Any changes made to the POM file are reflected in Eclipse.
-- Any dependencies added in the POM are added to the application runtime.
+-   Any changes made to the POM file are reflected in Eclipse.
+-   Any dependencies added in the POM are added to the application runtime.
 
 We can add the **MySQL driver** as a **dependency** in the **POM**. The **Maven-Eclipse connector** (`m2e`) tells Eclipse to add the driver to the **application runtime**. We then write Java code with **JDBC-compliant classes**. The Java classes load and talk to the **driver** in a consistent manner. The **driver** communicates with the **database** itself.
 
@@ -131,7 +130,6 @@ This **uniquely identifies** the dependency. All of these attributes **must** be
 6. Click in the dependency box
 7. Paste into `pom.xml`
 
-
 ### Maven Project Setup
 
 1. **Create** the Maven project
@@ -139,10 +137,10 @@ This **uniquely identifies** the dependency. All of these attributes **must** be
 3. Set the **compiler version** in the project
 
 There are **three** important directories that Maven expects to find:
-- **Source code:** `src/main/java`
-- **Project resources:** `src/main/resources`
-- **Built class files:** `target/classes`
 
+-   **Source code:** `src/main/java`
+-   **Project resources:** `src/main/resources`
+-   **Built class files:** `target/classes`
 
 ## Working with data
 
@@ -150,24 +148,24 @@ There are **three** important directories that Maven expects to find:
 
 We want to **separate** areas of concern _(i.e. "tiers")_:
 
-- User input and output
-- Business rules
-- Data acquisition and persistence
+-   User input and output
+-   Business rules
+-   Data acquisition and persistence
 
 If areas of concern are **not** separated, it can lead to:
 
-- Complex classes
-- Code that is **hard to maintain**
-- **Buggy** code
-- Code that violates the **single-responsibility principle (SRP)**
+-   Complex classes
+-   Code that is **hard to maintain**
+-   **Buggy** code
+-   Code that violates the **single-responsibility principle (SRP)**
 
 The **single-responsibility principle** is part of the five **SOLID** principles of **OOP**. **SRP** states that each **module**, **package**, **class**, and **method** is responsible for a **_single aspect_** of application functionality or area of concern.
 
 **For example:**
 
-- **Method:** _creates_ a connection to a database
-- **Class:** _obtains_ and _pools_ connections
-- **Package:** contains classes that _manage_ database input/output
+-   **Method:** _creates_ a connection to a database
+-   **Class:** _obtains_ and _pools_ connections
+-   **Package:** contains classes that _manage_ database input/output
 
 In Java, there are **two** ways to separate concerns:
 
@@ -176,55 +174,53 @@ In Java, there are **two** ways to separate concerns:
 
 <details><summary><em>What are the concerns?</em></summary>
 
-- User input and output
-- Business rules
-- Data acquisition and persistence
+-   User input and output
+-   Business rules
+-   Data acquisition and persistence
 
 </details>
 
 A **package** is a way of organizing your Java source code into different **directories**. If all your **source code** is in one file, packages may **not** make sense to use. However, if you were to have **30 files**, packages make sense to use — the **compiler** can handle the complexity; people **cannot**.
 
-
 ### Creating a small application
 
 #### Designing with three _tiers_ or _layers_:
 
-- **Input/Output Layer** — interacts with a user
-    - _*Note:* the "user" could also be another microservice or Java application_
-- **Service Layer** — applies business rules
-    - _Examples of business rules — use cases to sort results by name, by color, etc._
-- **Data "DAO" Layer** — reads and writes tables
-    - _**Data Access Object** — a class that has attributes or methods to shuttle data back and forth between layers_
+-   **Input/Output Layer** — interacts with a user
+    -   _*Note:* the "user" could also be another microservice or Java application_
+-   **Service Layer** — applies business rules
+    -   _Examples of business rules — use cases to sort results by name, by color, etc._
+-   **Data "DAO" Layer** — reads and writes tables
+    -   _**Data Access Object** — a class that has attributes or methods to shuttle data back and forth between layers_
 
 #### Packaging the layers:
 
-- **Input/Output layer** — "main" package (e.g. `recipes`)
-- **Service Layer:** — "service" package (e.g. `recipes.service`)
-    - "entities" package (e.g. `recipes.entity`) — _entities are DAOs_
-- **Data (DAO) Layer:** — "dao" package (e.g. `recipes.dao`)
-
+-   **Input/Output layer** — "main" package (e.g. `recipes`)
+-   **Service Layer:** — "service" package (e.g. `recipes.service`)
+    -   "entities" package (e.g. `recipes.entity`) — _entities are DAOs_
+-   **Data (DAO) Layer:** — "dao" package (e.g. `recipes.dao`)
 
 ## Connect to the Database
 
 #### Video Contents
-- How connections connect
-- How drivers translate from JDBC to MySQL
-- Video project:
+
+-   How connections connect
+-   How drivers translate from JDBC to MySQL
+-   Video project:
     1. Create recipe schema and a user
     2. Implement a "main" class
     3. Implement a class to obtain a connection
 
-
 ### More about connections
 
-A **connection** to MySQL is done with **Transmission Control Protocol (TCP)**. 
+A **connection** to MySQL is done with **Transmission Control Protocol (TCP)**.
 
 **Transmission Control Protocol (TCP)**:
 
-- **Connects** two computers together _(like a circuit or a phone call)_
-- Is **reliable** — the data is guaranteed to be received in the _right order_
-- Is **bidirectional** — data is **sent** and **received** by either side
-- Can have **multiple connections** open simultaneously
+-   **Connects** two computers together _(like a circuit or a phone call)_
+-   Is **reliable** — the data is guaranteed to be received in the _right order_
+-   Is **bidirectional** — data is **sent** and **received** by either side
+-   Can have **multiple connections** open simultaneously
 
 The connection **remains open** until it is _explicitly_ closed. When the connection is established, data is exchanged so that **both sides agree** on the **data format**, **compression**, **encryption**, etc.
 
@@ -260,7 +256,6 @@ SELECT * FROM table
 ```
 
 </details>
-
 
 #### Driver selection
 
