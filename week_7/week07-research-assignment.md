@@ -22,11 +22,15 @@
 
 4. Our course uses MySQL. What is the difference between MySQL and SQL?
 
-    <!-- > **SQL**...
+    > **SQL** is the actual programming language used to store and process data.
     > 
-    > **MySQL**... -->
+    > **MySQL** is a _tool_ — the system through which a database is managed. <sup>[[3](#source-3)][[5](#source-5)]</sup>
 
 5. Describe MySQL? What type of database management system is it? What company owns it? What makes it unique?
+
+    > MySQL is an open-source relational database, and is owned by Oracle. <sup>[[4](#source-4)]</sup>
+    > 
+    > 
 
 6. How is data organized in an RDBMS? What are the constructs that allow users to easily organize and access data?
 
@@ -36,9 +40,10 @@
 
 <a id="source-1"></a>1. [Difference between Schema and Database | Geeks for Geeks](https://www.geeksforgeeks.org/difference-between-schema-and-database/)  
 <a id="source-2"></a>2. [Difference between database and schema | StackOverflow](https://stackoverflow.com/questions/5323740/difference-between-database-and-schema)  
+<a id="source-3"></a>3. [What’s the difference between SQL and MySQL? | AWS](https://aws.amazon.com/compare/the-difference-between-sql-and-mysql/)  
+<a id="source-4"></a>4. [What is MySQL? | AWS](https://aws.amazon.com/rds/mysql/what-is-mysql/)  
+<a id="source-5"></a>5. [SQL vs MySQL | Geeks for Geeks](https://www.geeksforgeeks.org/sql-vs-mysql/)  
 
-<!-- <a id="source-3"></a>3. 
-
-<a id="source-4"></a>4. 
-
-<a id="source-5"></a>5.  -->
+<!-- <a id="source-6"></a>6.  -->
+<!-- <a id="source-7"></a>7.  -->
+<!-- <a id="source-8"></a>8.  -->
