@@ -1,10 +1,13 @@
-package week06Assignment;
+package week06Assignment.Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import week06Assignment.Deck;
+import week06Assignment.Player;
 
 class AppTest {
 
