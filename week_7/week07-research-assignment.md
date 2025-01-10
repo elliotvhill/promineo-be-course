@@ -51,9 +51,9 @@
 <a id="source-3"></a>3. [What’s the difference between SQL and MySQL? | AWS](https://aws.amazon.com/compare/the-difference-between-sql-and-mysql/)  
 <a id="source-4"></a>4. [What is MySQL? | AWS](https://aws.amazon.com/rds/mysql/what-is-mysql/)  
 <a id="source-5"></a>5. [SQL vs MySQL | Geeks for Geeks](https://www.geeksforgeeks.org/sql-vs-mysql/)  
-<a id="source-6"></a>6. [MySQL RDBMS | W3Schools](https://www.w3schools.com/MySQL/mysql_rdbms.asp)
-<a id="source-7"></a>7. [MySQL: Understanding What It Is and How It’s Used | Oracle](https://www.oracle.com/mysql/what-is-mysql/)
-<a id="source-8"></a>8. [Chapter 13 Data Types | MySQL Documentation](https://dev.mysql.com/doc/refman/9.1/en/data-types.html)
+<a id="source-6"></a>6. [MySQL RDBMS | W3Schools](https://www.w3schools.com/MySQL/mysql_rdbms.asp)  
+<a id="source-7"></a>7. [MySQL: Understanding What It Is and How It’s Used | Oracle](https://www.oracle.com/mysql/what-is-mysql/)  
+<a id="source-8"></a>8. [Chapter 13 Data Types | MySQL Documentation](https://dev.mysql.com/doc/refman/9.1/en/data-types.html)  
 
 <!-- <a id="source-9"></a>9.  -->
 <!-- <a id="source-10"></a>10.  -->
