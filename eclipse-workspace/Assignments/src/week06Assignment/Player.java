@@ -9,6 +9,9 @@ public class Player {
 	private int score;
 	private String name;
 
+	// Default constructor
+	public Player() {}
+	
 	// Initial constructor before player has drawn any cards
 	public Player(String name, int score) {
 		this.name = name;

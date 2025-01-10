@@ -13,6 +13,8 @@ public class Card {
 		this.value = value;
 	}
 	
+	public Card() {}
+
 	// Getters
 	public int getValue() {
 		return value;
