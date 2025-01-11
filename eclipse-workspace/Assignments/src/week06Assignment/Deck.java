@@ -36,4 +36,8 @@ public class Deck {
 		return cards.removeFirst();
 	}
 
+	public int getDeckSize() {
+		return cards.size();
+	}
+
 }
