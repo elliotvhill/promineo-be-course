@@ -7,14 +7,14 @@ public class Card {
 	private int value;
 	
 	// Default constructor
+	public Card() {}
+
 	public Card(String name, String suit, int value) {
 		this.name = name;
 		this.suit = suit;
 		this.value = value;
 	}
 	
-	public Card() {}
-
 	// Getters
 	public int getValue() {
 		return value;
