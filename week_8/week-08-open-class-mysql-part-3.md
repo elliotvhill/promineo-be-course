@@ -173,7 +173,7 @@ Remember, when using an aggregate function, a `GROUP BY` clause may be important
 <details><summary><em>My Solution:</em></summary>
 
 ```sql
-
+SELECT customer_id "Id", first_name "First Name", last_name "Last Name", ROUND(AVG(amount),2) "Average Spent" FROM customer JOIN payment USING (customer_id) GROUP BY customer_id LIMIT 5;
 ```
 
 </details>
@@ -181,6 +181,11 @@ Remember, when using an aggregate function, a `GROUP BY` clause may be important
 <details><summary><em>Instructor Solution:</em></summary>
 
 ```sql
+SELECT customer_id AS "Id", customer.first_name AS "First Name",
+    customer.last_name AS "Last Name", ROUND(AVG(payment.amount),2) AS "Average Spent"
+FROM payment
+INNER JOIN customer USING (customer_id)
+GROUP BY customer.customer_id LIMIT 5;
 ```
 
 </details>
