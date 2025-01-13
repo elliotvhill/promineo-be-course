@@ -484,6 +484,48 @@ A many-to-many relationship requires a **join table**. Each main table has a **p
 | 1           | Mexican |
 | 2           | Vegan   |
 
-<!-- ## Entity Relationship Diagrams -->
+## Entity Relationship Diagrams
+
+**Cardinality**: the **maximum** number of entities allowed in the relationship — _one_ or _many_.
+
+**Modality**: the **minimum** number of entities allowed in the relationship — _zero_ or _one_ (AKA _optional_ or _mandatory_).
+
+| Cardinality | Modality  | Notation |
+| ----------- | --------- | :------: |
+| One         | Optional  |  --o\|   |
+| One         | Mandatory |  --\|\|  |
+| Many        | Optional  |  --o\{   |
+| Many        | Mandatory |  --\|\{  |
+
+### Crow's Foot Notation
+
+-   Relationships are **bidirectional**
+-   A relationship line **must** have the crow's foot notation on **both ends** of the line
+-   Each end must express **cardinality** and **modality**
+-   **Cardinality** is shown at the end of the line
+-   **Modality** is shown just _inside_ the end of the line
+
+### ERD Conventions
+
+**Primary key** columns are above the line and are designated with `PK`. **Foreign key** columns are below the line and are designated with `FK`.
+
+#### Join tables
+
+-   Shown with dashes off of the main relationship
+
+#### Naming Conventions: Columns
+
+-   **Table** names and **column** names are lowercase with words separated by _underscores_ (`_`)
+-   **Common names** should have the table name prepended
+    -   Table recipe, column name: `recipe_name`
+
+#### Naming Conventions: Relationships
+
+-   **Primary key** columns are formed by adding `_id` onto the table name
+    -   Table recipe: `recipe_id`
+    -   Table ingredient: `ingredient_id`
+-   **Foreign key** columns are named the same as the primary key column in the **related table**
+    -   Table recipe (primary key): `recipe_id`
+    -   Table step (foreign key): `recipe_id`
 
 <!-- ## Indexes -->
