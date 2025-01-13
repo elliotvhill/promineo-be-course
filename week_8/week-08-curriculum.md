@@ -528,4 +528,166 @@ A many-to-many relationship requires a **join table**. Each main table has a **p
     -   Table recipe (primary key): `recipe_id`
     -   Table step (foreign key): `recipe_id`
 
-<!-- ## Indexes -->
+## Indexes
+
+### What are indexes?
+
+An index is a structure composed of the column(s) that make up the index; they are generally sorted in such a way that makes lookups very fast.
+
+Indexes provide the following:
+
+-   Faster lookup speed
+-   Uniqueness
+-   They define relationships — primary and foreign keys
+
+### Faster lookups
+
+-   Adding an index will _speed up lookups_ but _slow down inserts_
+-   Indexes may allow duplicates, as below:
+
+    ```sql
+    -- CREATE TABLE syntax
+    INDEX (name) -- one column
+    INDEX (color, style) -- multiple columns
+    KEY (name)
+    KEY (color, style)
+    ```
+
+### Unique indexes
+
+-   Indexes can require **uniqueness** one one or more columns
+-   A duplicate value across all columns of a unique index is an **error**
+-   A unique index is like a **Java Set**
+
+    ```sql
+    -- CREATE TABLE syntax
+    UNIQUE KEY (name) -- one column
+    UNIQUE KEY (color, style) -- multiple columns
+    UNIQUE INDEX (license_no)
+    UNIQUE (size)
+    ```
+
+### Compound unique index
+
+A **compound index** is indexed on **more than one** column.
+
+```sql
+CREATE TABLE recipe_category (
+    FOREIGN KEY (recipe_id) ...
+    FOREIGN KEY (category_id) ...
+    UNIQUE KEY (recipe_id, category_id)
+);
+```
+
+-   The **unique key** means that only one category of each type can be set for any given recipe
+-   You can have a Vegan category and a Mexican category, but not _two_ Vegan categories
+
+### Relationships defined
+
+-   A **primary key** in one table is **referenced** by a **foreign key** in another table
+-   Two rows are **related** if the primary key value and foreign key value _are the same_
+-   Primary keys are normally `INT`s
+
+### `CREATE TABLE` with indexes
+
+#### Relationship `CREATE TABLE` syntax:
+
+From this ERD:
+
+```mermaid
+erDiagram
+recipe ||--o{ step : ""
+recipe {
+    int recipe_id PK
+    string name
+    int num_servings
+}
+step {
+    int step_id PK
+    int recipe_id FK
+    int step_order
+    text step
+}
+```
+
+SQL syntax:
+
+```sql
+-- Recipe table
+recipe_id INT AUTO_INCREMENT NOT NULL,
+PRIMARY KEY (recipe_id)
+
+-- Step table
+step_id INT AUTO_INCREMENT NOT NULL,
+recipe_id INT,
+PRIMARY KEY (step_id),
+FOREIGN KEY (recipe_id)
+    REFERENCES recipe (recipe_id)
+```
+
+### Compound primary key
+
+-   It is _possible_ to declare a compound primary key using more than one column.
+-   However, if the table is referenced by another table (i.e. has a _foreign key_) it is best to use an **auto-increment _integer_** primary key.
+-   Otherwise, it's hard(er) to keep the key values **aligned** on related tables.
+-   **Object Relation Mapping (ORM)** tools (e.g. Hibernate or EclipseLink) may **require** integer primary key fields on all tables.
+
+### Many-to-many relationships
+
+-   Requires a **join table**
+-   Recipes and categories have a **many-to-many** relationship
+    -   A recipe can have _many_ categories
+    -   A category can have _many_ recipes
+-   The join table name is the name of the primary key tables separated by an _underscore_ (`_`)
+-   The name of the recipe and category join table is `recipe_category`
+
+#### Many-to-many `CREATE TABLE` statement:
+
+```sql
+CREATE TABLE recipe (
+    recipe_id INT AUTO_INCREMENT NOT NULL,
+    PRIMARY KEY (recipe_id)
+);
+
+CREATE TABLE category (
+    category_id INT AUTO_INCREMENT NOT NULL,
+    PRIMARY KEY (category_id)
+);
+
+CREATE TABLE recipe_category (
+    recipe_id INT,
+    category_id INT,
+    FOREIGN KEY (recipe_id) REFERENCES recipe (recipe_id),
+    FOREIGN KEY (category_id) REFERENCES category (category_id),
+    UNIQUE KEY (recipe_id, category_id)
+);
+```
+
+### Deleting child rows
+
+When a parent row (`recipe`) is **deleted**, child rows (`step`, `ingredient`, `recipe_category`) _also_ need to be deleted. Otherwise, the child rows will be **orphaned** with the foreign key referencing a value that does not exist in the parent.
+
+MySQL will _automatically_ delete the child rows when `ON DELETE CASCADE` is added to the `FOREIGN KEY` constraint.
+
+#### `ON DELETE CASCADE` syntax:
+
+```sql
+CREATE TABLE recipe (
+    recipe_id INT AUTO_INCREMENT NOT NULL,
+    PRIMARY KEY (recipe_id)
+);
+
+CREATE TABLE step (
+    step_id INT AUTO_INCREMENT NOT NULL,
+    recipe_id INT,
+    PRIMARY KEY (step_id)
+    FOREIGN KEY (recipe_id)
+        REFERENCES recipe (recipe_id)
+        ON DELETE CASCADE
+);
+```
+
+## Building the recipes database project:
+
+-   Add the `INDEX` statements to the schema definition
+-   Add the `JOIN` table to the schema for the many-to-many relationship between `recipe` and `category`
