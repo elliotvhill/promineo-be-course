@@ -765,7 +765,7 @@ LIMIT 5;
 <details><summary><em>Instructor Solution:</em></summary>
 
 ```sql
-SELECT film.title, COUNT(rental.rental_id) AS rental_count, 
+SELECT film.title, COUNT(rental.rental_id) AS rental_count,
        SUM(film.rental_duration*film.rental_rate) AS rental_amount
 FROM film
 JOIN inventory ON film.film_id = inventory.film_id
@@ -776,21 +776,3 @@ LIMIT 5;
 ```
 
 </details>
-
-<!-- ---
-
-<details><summary><em>My Solution:</em></summary>
-
-```sql
-
-```
-
-</details>
-
-<details><summary><em>Instructor Solution:</em></summary>
-
-```sql
-
-```
-
-</details> -->
