@@ -190,7 +190,6 @@ GROUP BY customer.customer_id LIMIT 5;
 
 </details>
 
-
 ### `CREATE TABLE` Syntax
 
 When creating a database, this statement will allow a change to be made to the structure of the database or schema. This is a **Data Definition Language (DDL)** statement.
@@ -249,14 +248,104 @@ CREATE TABLE employee (
 ```
 
 #### References:
-- [MySQL CREATE TABLE Documentation](https://dev.mysql.com/doc/refman/8.0/en/create-table.html)
-- [MySQL Data Types Documentation](https://dev.mysql.com/doc/refman/8.0/en/data-types.html)
 
-<!-- ---
+-   [MySQL CREATE TABLE Documentation](https://dev.mysql.com/doc/refman/8.0/en/create-table.html)
+-   [MySQL Data Types Documentation](https://dev.mysql.com/doc/refman/8.0/en/data-types.html)
+
+### 22. `CREATE TABLE` rewards
+
+Create a new table: `rewards`. Add the following fields:
+
+-   `rewards_id SMALLINT`
+-   `customer_id SMALLINT`
+-   `status VARCHAR(20) DEFAULT 'MEMBER'`
+-   `discount_percent DOUBLE DEFAULT 0.0`
+-   `year_joined YEAR DEFAULT CURRENT_YEAR`
+
+All fields need to be `NOT NULL` or use the `DEFAULT` keyword
+Add the following `PRIMARY` and `FOREIGN KEY`s:
+
+-   `PRIMARY KEY (rewards_id)`
+-   `FOREIGN KEY (customer_id) REFERENCES customer(customer_id)`
+-   `FOREIGN KEY (status) REFERENCES reward_status (status)`
+
+Test the creation by doing a retrieval of all data from this table — which will show the column names.
+
+`SELECT * FROM rewards;` will retrieve all of the data from this table (or in this case, show the column names).
+
+#### Sample Test Case #1:
+
+`CREATE`  
+`SELECT`
+
+#### Expected output:
+
+`rewards_id customer_id status discount_percent year_joined`
 
 <details><summary><em>My Solution:</em></summary>
 
 ```sql
+CREATE TABLE rewards (
+    rewards_id SMALLINT AUTO_INCREMENT NOT NULL,
+    customer_id SMALLINT AUTO_INCREMENT NOT NULL,
+    status VARCHAR(20) DEFAULT 'MEMBER',
+    discount_percent DOUBLE DEFAULT 0.0,
+    year_joined YEAR DEFAULT CURRENT_YEAR,
+    PRIMARY KEY (rewards_id),
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+    FOREIGN KEY (status) REFERENCES reward_status(status)
+);
+
+SELECT * FROM rewards;
+```
+
+</details>
+
+### `status` Table
+
+This table has been created in your database, and the table is called `status`. This is one way to store information in the database, and restrict values for a particular field.
+
+There is a new table added into this database called `status`, which has the following columns and values:
+
+| Table Name | Column Names | Allowed Values                                 |
+| ---------- | ------------ | ---------------------------------------------- |
+| status     | status       | `'MEMBER'`, `'SILVER'`, `'GOLD'`, `'PLATINUM'` |
+
+### 23. `INSERT INTO` rewards table
+
+Add the following four rows into the `rewards` table:
+
+-   (1,1, 'PLATINUM', 0.20, '2000')
+-   (2,2, 'GOLD', 0.15, '2010')
+-   (3,3, 'SILVER', 0.10, '2015')
+-   (4,4, 'MEMBER', 0.05, '2020')
+
+Test those inserts by retrieving all information from the `rewards` table.
+
+#### Sample Test Case #1:
+
+`INSERT` `SELECT`
+
+#### Expected Output:
+
+| rewards_id | customer_id |  status  | discount_percent | year_joined |
+| :--------: | :---------: | :------: | :--------------: | :---------: |
+|     1      |      1      | PLATINUM |       0.20       |    2000     |
+|     2      |      2      |   GOLD   |       0.15       |    2010     |
+|     3      |      3      |  SILVER  |       0.10       |    2015     |
+|     4      |      4      |  MEMBER  |       0.05       |    2020     |
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+INSERT INTO rewards (rewards_id, customer_id, status, discount_percent, year_joined) VALUES
+    (1,1, 'PLATINUM', 0.20, '2000'),
+    (2,2, 'GOLD', 0.15, '2010'),
+    (3,3, 'SILVER', 0.10, '2015'),
+    (4,4 'MEMBER', 0.05, '2020')
+;
+
+SELECT * FROM rewards;
 ```
 
 </details>
@@ -264,6 +353,444 @@ CREATE TABLE employee (
 <details><summary><em>Instructor Solution:</em></summary>
 
 ```sql
+INSERT INTO rewards (rewards_id, customer_id, status, discount_percent, year_joined)
+VALUES (1, 1, 'PLATINUM', 0.20, '2000'),
+(2, 2, 'GOLD', 0.15, '2010'),
+(3, 3, 'SILVER', 0.10, '2015'),
+(4, 4, 'MEMBER', 0.05, '2020');
+
+SELECT * from rewards;
+```
+
+</details>
+
+### Sakila `customer` table with columns
+
+| Table Name | Column Names                                                                                                                  |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| customer   | customer_id, store_id (FK), first_name, last_name, email, <br />&emsp;&emsp;address_id (FK), active, create_date, last_update |
+| rewards    | rewards_id, customer_id, status, discount_percent, year_joined                                                                |
+
+### `INSERT` a new customer in the `customer` table
+
+Insert customer `Mary Mallows` with the following data:
+
+-   `customer_id`: 1000
+-   `store_id`: 1
+-   `first_name`: "Mary"
+-   `last_name`: "Mallows"
+-   `email`: "mm@gmail.com"
+-   `address_id`: 1
+-   `active`: 1
+-   `create_date`: "2023-05-31 14:26:19"
+-   `last_update`: "2023-05-31 14:26:19"
+
+Add the following row into the `rewards` table: `(1000, 1000, 'PLATINUM', 0.20, '2023')`.
+Test those inserts by retrieving this `customer_id` from `customer` and `rewards`.
+Use a `JOIN` in your `SELECT` statement.
+
+#### Sample Test Case #1:
+
+`INSERT` `INSERT` `SELECT`
+
+#### Expected output:
+
+| customer_id | store_id | first_name | last_name |      email      | address_id | active |     create_date     |     last_update     |
+| :---------: | :------: | :--------: | :-------: | :-------------: | :--------: | :----: | :-----------------: | :-----------------: |
+|    1000     |    1     |    Mary    |  Mallows  | ` mm@gmail.com` |     1      |   1    | 2023-05-31 14:26:19 | 2023-05-31 14:26:19 |
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+INSERT INTO customer (customer_id, store_id, first_name, last_name, email, address_id, active, create_date, last_update)
+VALUES
+    (1000, 1, "Mary", "Mallows", "mm@gmail.com", 1, 1, "2023-05-31 14:26:19", "2023-05-31 14:26:19");
+
+INSERT INTO rewards (rewards_id, customer_id, status, discount_percent, year_joined)
+VALUES
+    (1000, 1000, 'PLATINUM', 0.20, '2023');
+
+SELECT * FROM customer JOIN rewards USING (customer_id) WHERE customer_id = 1000;
+```
+
+</details>
+
+<details><summary><em>Instructor Solution:</em></summary>
+
+```sql
+INSERT INTO customer
+(customer_id, store_id, first_name, last_name, email, address_id, active, create_date, last_update)
+VALUES
+(1000, 1, "Mary", "Mallows", "mm@gmail.com", 1, 1, "2023-05-31 14:26:19", "2023-05-31 14:26:19");
+
+INSERT INTO rewards (rewards_id, customer_id, status, discount_percent, year_joined)
+VALUES (1000, 1000, 'PLATINUM', 0.20, '2023');
+
+SELECT * FROM customer
+JOIN rewards USING (customer_id)
+WHERE customer_id = 1000;
+```
+
+</details>
+
+### 25. `SELECT` customer "Mary Mallows" with `rewards` data
+
+Retrieve the first name & last name from the customer with the name "Mary Mallows" along with her `rewards` information.
+
+`SELECT first_name, last_name, rewards.* FROM customer`  
+Then use a `JOIN` in your `SELECT` statement to get the rest of the information.
+
+#### Sample Test Case #1:
+
+`SELECT`
+
+#### Expected output:
+
+| first_name | last_name | rewards_id | customer_id | status   | discount_percent | year_joined |
+| ---------- | --------- | ---------- | ----------- | -------- | ---------------- | ----------- |
+| Mary       | Mallows   | 1000       | 1000        | PLATINUM | 0.2              | 2023        |
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+SELECT first_name, last_name, rewards.* FROM customer JOIN rewards USING (customer_id) WHERE customer_id = 1000;
+-- was supposed to use first and last name as WHERE conditions...
+```
+
+</details>
+
+<details><summary><em>Instructor Solution:</em></summary>
+
+```sql
+SELECT customer.first_name, customer.last_name, rewards.* from customer
+INNER JOIN rewards USING (customer_id)
+WHERE first_name = "Mary" AND last_name = "Mallows";
+```
+
+</details>
+
+### 26. `UPDATE` customer "Mary Mallows"
+
+"Mary Mallows" got married this week. You need to change the following:
+
+-   Her last name to "Smith"
+-   Her e-mail address to `ms@gmail.com`
+-   Don't forget to update the `last_update` column to "2023-06-19 23:00:00".
+    The `customer_id` of "Mary Mallows" is 1000.  
+    `SELECT` the customer record showing the updated information.
+
+_**Note:** In real life, we would set_ `last_update` _to_ `CURRENT_TIMESTAMP`_, but for testing purposes, we will set it to the same value as the comparison!_
+
+#### Sample Test Case #1:
+
+`UPDATE` `SELECT`
+
+#### Expected output:
+
+| customer_id | store_id | first_name | last_name | email        | address_id | active | create_date         | last_update         |
+| ----------- | -------- | ---------- | --------- | ------------ | ---------- | ------ | ------------------- | ------------------- |
+| 1000        | 1        | Mary       | Smith     | ms@gmail.com | 1          | 1      | 2023-05-31 14:26:19 | 2023-06-19 23:00:00 |
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+UPDATE customer
+SET
+last_name = "Smith",
+email = "ms@gmail.com",
+last_update = "2023-06-19 23:00:00"
+
+WHERE customer_id = 1000
+;
+
+SELECT * FROM customer WHERE customer_id = 1000;
+```
+
+</details>
+
+<details><summary><em>Instructor Solution:</em></summary>
+
+```sql
+UPDATE customer
+SET last_name ="Smith", email = "ms@gmail.com", last_update = "2023-06-19 23:00:00"
+WHERE customer_id = 1000;
+
+SELECT * FROM customer WHERE customer_id = 1000;
+```
+
+</details>
+
+### 27. `DELETE` customer "Mary Smith"
+
+**_Do not forget_** the `WHERE` clause in an SQL `DELETE` statement!  
+`SELECT` the customer record from `customer` showing that it has been deleted.
+
+#### Sample Test Case #1:
+
+`DELETE` `SELECT`
+
+#### Expected output:
+
+`customer_id	store_id	first_name	last_name	email	address_id	active	create_date	last_update`
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+DELETE FROM customer WHERE customer_id = 1000;
+
+SELECT * FROM customer WHERE customer_id = 1000;
+```
+
+</details>
+
+<details><summary><em>Instructor Solution:</em></summary>
+
+```sql
+DELETE FROM customer WHERE customer_id = 1000;
+
+SELECT * FROM customer WHERE customer_id = 1000;
+
+-- Another way to do this would be to do
+-- DELETE FROM customer WHERE first_name = "Mary" AND last_name = "Smith";
+-- SELECT * FROM customer WHERE first_name = "Mary" AND last_name = "Smith";
+```
+
+</details>
+
+### `ORDER BY` Clause
+
+When retrieving data from a relational database system, it is sometimes important to order that data in a particular way. The `ORDER BY` clause allows the data to be displayed in a particular order. The `ORDER BY` clause is an optional part in a `SELECT` statement, and is used to sort the result set in _ascending_ (`ASC`) or _descending_ (`DESC`) order by whatever `column_name`, expression or position is chosen. If omitted, the data will be displayed in the order that it is retrieved.
+
+The `ORDER BY` keyword sorts the records in **ascending order by default**. To sort the records in descending order, use the `DESC` keyword. The `ASC` keyword is also used for clarity, even though records are sorted in ascending order by default.
+
+### `ORDER BY` Syntax:
+
+```sql
+[ORDER BY { column_name | expression | position } [DESC | ASC] ... ]
+```
+
+### 28. `SELECT` from `film`
+
+List the bottom 5 films with the lowest rental count, retrieving the `title`, and the `rental` count AS "`rental_count`". Order the results from lowest to highest rental count, and Limit the result to 5.
+
+_This query requires information from three (3) tables:_ `film`_,_ `inventory`_,_ _and_ `rental`_._  
+_Additionally, use the_ `GROUP BY title`_, because of the aggregate function to achieve the_ `COUNT`_, and an_ `ORDER BY` _to correctly order your results._
+
+#### Sample Test Case #1:
+
+`SELECT`
+
+#### Expected output:
+
+| title            | rental_count |
+| ---------------- | :----------: |
+| HARDLY ROBBERS   |      4       |
+| MIXED DOORS      |      4       |
+| TRAIN BUNCH      |      4       |
+| BRAVEHEART HUMAN |      5       |
+| BUNCH MINDS      |      5       |
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+SELECT title, COUNT(rental_id) "rental_count" FROM film
+JOIN inventory USING (film_id)
+JOIN rental USING (inventory_id)
+GROUP BY title
+ORDER BY rental_count ASC
+LIMIT 5;
+```
+
+</details>
+
+<details><summary><em>Instructor Solution:</em></summary>
+
+```sql
+SELECT film.title, COUNT(rental.rental_id) AS rental_count
+FROM film
+JOIN inventory ON film.film_id = inventory.film_id
+JOIN rental ON inventory.inventory_id = rental.inventory_id
+GROUP BY film.title
+ORDER BY rental_count ASC
+LIMIT 5;
+```
+
+</details>
+
+### `JOIN` Clause
+
+A `JOIN` clause is part of the `SELECT` statement in SQL, and is used to combine rows from two (2) or more tables, based on a related column between the tables. The concept used here connects a `FOREIGN KEY (FK)` in one table to a `PRIMARY KEY (PK)` in another table.
+
+When joining tables in a relational database management system, there are four distinct types of joins:
+
+-   `(INNER) JOIN`: An **inner join** returns records that have matching values in **ß** tables.
+-   `RIGHT (OUTER) JOIN`: A **right (outer) join** returns **all records** from the **right** table, and the **matched records** from the **left** table.
+-   `LEFT (OUTER) JOIN`: A **left (outer) join** returns **all records** from the **left** table, and the **matched records** from the **right** table.
+-   `FULL (OUTER) JOIN`: A **full (outer) join** returns all records from **both** tables when there is a match in _either_ the left or right table.
+
+In most cases, a `SELECT` is looking for the rows that have matching values in both tables, so a `INNER JOIN` is used.
+
+### `USING` vs. `ON`
+
+When joining tables, there are two types of syntax that can be used. If the **PK/FK** pair of columns have **exactly the same name in each table**, then the keyword `USING` can be used. If the **PK/FK** pair has a **different name in each table**, then the `ON` clause can be used. Imagine joining these two tables from the **Sakila** database:
+
+| Table Name | Column Names                                                                                                                                                                                                                        |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| film       | film_id, title, description, release_year, language_id **(FK)**, original_language_id **(FK)**, <br /> &emsp;&emsp;rental_duration, rental_rate, length, replacement_cost, rating, special_features, <br /> &emsp;&emsp;last_update |
+| language   | language_id **(PK)**, name, last_update                                                                                                                                                                                             |
+
+There are two Examples below, both joining the `film` table with the `language` table on the `language.language_id` **PK** column.
+
+#### Example 1: Join `film` and `language` using `film.language_id` to `language.language_id`
+
+Notice that in this example, the column names are exactly the same in each table, so the `USING` keyword can be used:
+
+```sql
+SELECT * from film
+INNER JOIN language USING (language_id);
+```
+
+The `ON` keyword can also be used, and the following example will do the exact same thing as the above version:
+
+```sql
+SELECT * from film
+INNER JOIN language ON language.language_id = film.language_id;
+```
+
+#### Example 2: Join `film` and `language` using `film.original_language_id` to `language.language_id`
+
+Notice that in this example, the column names are **different** in each table, so the `ON` keyword must be used:
+
+```sql
+SELECT * from film
+INNER JOIN language ON film.original_language_id = language.language_id;
+```
+
+This query can also be written using **table aliases**:
+
+```sql
+SELECT * from film f
+INNER JOIN language l ON f.original_language_id = l.language_id;
+```
+
+### 29. `SELECT` from `film`
+
+-   List the top 5 film titles with the highest rental count
+-   Retrieve the rental count AS "rental_count"
+-   Remember that `COUNT()` is an aggregate.
+-   Order the results from highest to lowest rental count
+-   Limit the result to 5.
+
+_This query requires information from three (3) tables:_ `film`_,_ `inventory`_, and_ `rental`_._  
+Don't forget the `GROUP BY title`, because of the aggregate function to achieve the `COUNT`, and an `ORDER BY` to correctly order your results.
+
+#### Sample Test Case #1:
+
+`SELECT`
+
+#### Expected output:
+
+| title               | rental_count |
+| ------------------- | :----------: |
+| BUCKET BROTHERHOOD  |      34      |
+| ROCKETEER MOTHER    |      33      |
+| SCALAWAG DUCK       |      32      |
+| RIDGEMONT SUBMARINE |      32      |
+| JUGGLER HARDLY      |      32      |
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+SELECT film.title, COUNT(rental_id) "rental_count" FROM film
+JOIN inventory USING (film_id)
+JOIN rental USING (inventory_id)
+GROUP BY title
+ORDER BY rental_count DESC
+LIMIT 5;
+```
+
+</details>
+
+<details><summary><em>Instructor Solution:</em></summary>
+
+```sql
+SELECT film.title, COUNT(rental.rental_id) AS rental_count
+FROM film
+JOIN inventory ON film.film_id = inventory.film_id
+JOIN rental ON inventory.inventory_id = rental.inventory_id
+GROUP BY film.title
+ORDER BY rental_count DESC
+LIMIT 5;
+```
+
+</details>
+
+### 30. `SELECT` from `film`
+
+Given the top 5 films with the highest rental count, ordered from highest to lowest by "rental*count" *(See question 29 solution)\_:
+
+-   Retrieve the amount of money that these 5 top films have made `AS` "rental_amount"  
+    **NOTE:** The `JOIN` in question 29. will give you all of the information that you need.
+
+_This query requires information from three (3) tables:_ `film`_,_ `inventory`_, and_ `rental`_._  
+_Use_ `SUM()` _to calculate the amount of money made, which is found by multiplying_ `rental_duration` _by_ `rental_rate`_._
+
+#### Sample Test Case #1:
+
+`SELECT`
+
+#### Expected output:
+
+| title               | rental_count |      rental_amount |
+| ------------------- | :----------: | -----------------: |
+| BUCKET BROTHERHOOD  |      34      | 1187.6199999999997 |
+| ROCKETEER MOTHER    |      33      |  98.00999999999998 |
+| SCALAWAG DUCK       |      32      |  958.0800000000008 |
+| RIDGEMONT SUBMARINE |      32      |  95.03999999999998 |
+| JUGGLER HARDLY      |      32      | 126.71999999999991 |
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+SELECT title, COUNT(rental_id) "rental_count", SUM(rental_duration * rental_rate) "rental_amount" FROM film
+JOIN inventory USING (film_id)
+JOIN rental USING (inventory_id)
+GROUP BY title
+ORDER BY rental_count DESC
+LIMIT 5;
+```
+
+</details>
+
+<details><summary><em>Instructor Solution:</em></summary>
+
+```sql
+SELECT film.title, COUNT(rental.rental_id) AS rental_count, 
+       SUM(film.rental_duration*film.rental_rate) AS rental_amount
+FROM film
+JOIN inventory ON film.film_id = inventory.film_id
+JOIN rental ON inventory.inventory_id = rental.inventory_id
+GROUP BY film.title
+ORDER BY rental_count DESC
+LIMIT 5;
+```
+
+</details>
+
+<!-- ---
+
+<details><summary><em>My Solution:</em></summary>
+
+```sql
+
+```
+
+</details>
+
+<details><summary><em>Instructor Solution:</em></summary>
+
+```sql
+
 ```
 
 </details> -->
