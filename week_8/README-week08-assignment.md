@@ -122,18 +122,18 @@ Creating the tables is the first step to having the application read from and wr
 5. Paste the SQL into the DBeaver SQL editor. Run all `DROP TABLE` and `CREATE TABLE` statements. Include your created tables as shown in DBeaver's connection explorer (leftmost panel) in your video. :camera: It should look like this:
 
     ```
-    ├─ projects
-    ├── Tables
-    ├──├─ category
-    ├──├─ material
-    ├──├─ project
-    ├──├─ project_category
-    ├──└─ step
-    ├── Views
-    ├── Indexes
-    ├── Procedures
-    ├── Triggers
-    └── Events
+    └─ projects
+        ├── Tables
+        │   ├─ category
+        │   ├─ material
+        │   ├─ project
+        │   ├─ project_category
+        │   └─ step
+        ├── Views
+        ├── Indexes
+        ├── Procedures
+        ├── Triggers
+        └── Events
     ```
 
 6. Push your project to GitHub.
