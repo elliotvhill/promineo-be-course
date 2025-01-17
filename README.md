@@ -9,10 +9,11 @@ _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/w
 ### Questions
 
 -   DBeaver error "Public Key Retrieval is not allowed" — I set `allowPublicKeyRetrieval=True` which fixed it, but what does this mean? Why did it happen all of a sudden?
-    - _Happens sometimes; just have to check this setting in_ `Edit connection`
 
-- Same issue with concatenating strings in MySQL as last week using `||` vs. `CONCAT()` — is this just a MySQL version issue?
-    - _`||` syntax was actually deprecated but the Open Class curriculum hasn't been updated to reflect the change_
+    -   _Happens sometimes; just have to check this setting in_ `Edit connection`
+
+-   Same issue with concatenating strings in MySQL as last week using `||` vs. `CONCAT()` — is this just a MySQL version issue?
+    -   _`||` syntax was actually deprecated but the Open Class curriculum hasn't been updated to reflect the change_
 
 ## Week 7
 
