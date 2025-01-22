@@ -34,6 +34,11 @@ public class RecipeService {
 		return extractLinesFromContent(content);
 	}
 
+	private String replaceWhitespaceSequencesWithSingleSpace(String content) {
+		// Use regex to find whitespace sequences; replace with single space
+		return content.replaceAll("\\S+", " ");
+	}
+
 	private String removeComments(String content) {
 		StringBuilder builder = new StringBuilder(content);
 		// Counter to keep track of comment position
