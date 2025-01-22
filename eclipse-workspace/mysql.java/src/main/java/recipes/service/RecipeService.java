@@ -107,7 +107,4 @@ public class RecipeService {
 		}
 	}
 
-	public static void main(String[] args) {
-		new RecipeService().createAndPopulateTables();
-	}
 }
