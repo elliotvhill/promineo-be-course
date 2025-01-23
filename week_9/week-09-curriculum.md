@@ -252,7 +252,24 @@ catch (SQLException e) {
 }
 ```
 
-<!-- ## Create the Tables -->
+## Create the Tables
+
+### The approach:
+
+1. Read the contents of a file (`recipe_schema.sql`) into a Java String
+2. Remove comments from the file content
+3. Replace all whitespace sequences with single spaces
+4. Convert the SQL statement lines to a list
+5. Add all lines to a SQL Statement object to be executed as a batch
+
+#### A caveat — We will need to add some Java files to the project:
+
+| File              | Purpose                                      |
+| ----------------- | -------------------------------------------- |
+| `DaoBase.java`    | Provides common code used in the `DAO` class |
+| `EntityBase.java` | Provides common code used in entity classes  |
+
+_**Note:** For the homework you will just need `DaoBase.java`._
 
 <!-- ## Create Menu Applications -->
 
