@@ -23,7 +23,7 @@ public class RecipeService {
 		List<String> sqlStatements = convertContentToSqlStatements(content);
 
 		// Print each statement on its own line
-		sqlStatements.forEach(line -> System.out.println(line));
+//		sqlStatements.forEach(line -> System.out.println(line));
 
 		recipeDao.executeBatch(sqlStatements);
 	}
