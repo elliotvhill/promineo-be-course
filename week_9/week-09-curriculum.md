@@ -271,7 +271,14 @@ catch (SQLException e) {
 
 _**Note:** For the homework you will just need `DaoBase.java`._
 
-<!-- ## Create Menu Applications -->
+## Create Menu Applications
+
+### The approach:
+
+1. In the class with the `main` method, create a method to print the available operations (i.e. the menu)
+2. Write the user input methods using `Scanner`
+3. Add a loop with the `exitMenu` and `createTables` method calls
+4. Call the service method to create the tables
 
 <!-- ## Inserting Data and SQL Injection -->
 
