@@ -445,9 +445,18 @@ try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 -   Use `PreparedStatement` with **parameters** if there _is_ user input
 -   **Always** validate user input
 
-## Add a Recipe
+## Add a recipe from a data file
 
 ### The approach:
 
 1. Add code to perform the bulk import of the recipe data in the DAO class
 2. Modify the service method to load `recipe_data.sql`
+
+## Adding a new Recipe from user input
+
+### The approach:
+
+1. Collect user data for a _new_ recipe
+2. Create `recipe.java` to store recipe information
+3. Write the DAO method to insert the recipe
+4. Call a method to obtain the inserted primary key value
