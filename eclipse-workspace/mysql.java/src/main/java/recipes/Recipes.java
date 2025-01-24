@@ -66,19 +66,28 @@ public class Recipes {
 		Integer numServings = getIntInput("Enter number of servings");
 		Integer prepMinutes = getIntInput("Enter prep time in minutes");
 		Integer cookMinutes = getIntInput("Enter cook time in minutes");
-		
+
 		// Convert prep and cook times to local time objects:
 		LocalTime prepTime = minutesToLocalTime(prepMinutes);
 		LocalTime cookTime = minutesToLocalTime(cookMinutes);
-		
+
 		Recipe recipe = new Recipe();
+
+		recipe.setRecipeName(name);
+		recipe.setNotes(notes);
+		recipe.setNumServings(numServings);
+		recipe.setPrepTime(prepTime);
+		recipe.setCookTime(cookTime);
+
+		Recipe dbRecipe = recipeService.addRecipe(recipe);
+		System.out.println("You added this recipe:\n" + dbRecipe);
 	}
 
 	private LocalTime minutesToLocalTime(Integer numMinutes) {
 		int min = Objects.isNull(numMinutes) ? 0 : numMinutes;
 		int hours = min / 60;
 		int minutes = min % 60;
-		
+
 		return LocalTime.of(hours, minutes);
 	}
 
