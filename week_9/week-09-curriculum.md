@@ -280,6 +280,173 @@ _**Note:** For the homework you will just need `DaoBase.java`._
 3. Add a loop with the `exitMenu` and `createTables` method calls
 4. Call the service method to create the tables
 
-<!-- ## Inserting Data and SQL Injection -->
+## Inserting Data and SQL Injection — Practicing safe data
 
-<!-- ## Add a Recipe -->
+### Inserting Data
+
+-   Data is inserted a row at a time using `INSERT INTO`
+
+    **Syntax:**
+
+    ```sql
+    INSERT INTO table_name
+    (col1, col2, col3)
+    VALUES (val1, val2, val3);
+    ```
+
+#### SQL Operations: CRUD
+
+| Operation  | SQL Keyword           |
+| ---------- | --------------------- |
+| **C**reate | `INSERT INTO <table>` |
+| **R**ead   | `SELECT`              |
+| **U**pdate | `UPDATE`              |
+| **D**elete | `DELETE`              |
+
+-   You don't want or need to specify a **primary key** column name or value — _MySQL does that automatically_ — if the column is marked as `AUTO_INCREMENT`.
+
+-   The column names and values _must_ **match** exactly.
+
+    ```sql
+    -- Using the `recipes` database example:
+    INSERT INTO unit
+    (unit_name_singular, unit_name_plural)
+    VALUES ('teaspoon', 'teaspoons');
+    ```
+
+#### Inserting null values
+
+-   Null values are inserted using the `null` keyword, or simply by leaving the column out
+-   **Note:** the column must **allow nulls** for this to work
+
+    ```sql
+    INSERT INTO ingredient
+    (recipe_id, unit_id, ingredient_name, instruction, ingredient_order, amount)
+    VALUES (2, null, 'green apple', 'cut in quarters', 1, 1);
+    ```
+
+#### Foreign key values
+
+-   While MySQL will increment primary key values automatically, you need to insert all **foreign key** values because they are _not_ generated automatically.
+
+    ```sql
+    INSERT INTO recipe_category
+    (recipe_id, category_id)
+    VALUES (1, 4);
+    ```
+
+#### Multiple inserts
+
+Multiple rows can be inserted into one statement by **repeating** the values (note: does **not** work in JDBC, including DBeaver):
+
+```sql
+INSERT INTO ingredient
+(recipe_id, unit_id, ingredient_name, instruction, ingredient_order, amount)
+VALUES
+(2, null, 'green apple', 'quartered', 1, 1),
+(2, 2, 'peanut butter', null, 2, 2),
+(2, null, 'strawberries', 'halved', 3, 2),
+(2, null, 'sunflower seeds', null, 4, null),
+(2, null, 'candy eyes', null, 5, 8);
+```
+
+## Preventing SQL Injection Attacks
+
+### SQL Injection
+
+SQL **Injection** works like this:
+
+1. An attacker enters **compromised** data
+2. The data is **not** validated
+3. The programmer **concatenates** the data into an SQL statement
+4. The database **executes** the statement and bad things happen
+
+### An example: list tables
+
+**User input:**
+
+```sql
+Enter recipe ID: 2; show tables;
+```
+
+**Java code:**
+
+```java
+String recipeId = "2; show tables;";
+String sql = "SELECT * FROM recipe "
+    + "WHERE recipe_id = " + recipeId;
+```
+
+**Constructed SQL:**
+
+```sql
+SELECT * FROM recipe WHERE recipe_id = 2;
+show tables;
+```
+
+**MySQL Result:**
+
+```sql
++-----------+----------------+
+| recipe_id | recipe_name    |
+|         2 | Apple Monsters |
++-----------+----------------+
+1 row in set (0.00 sec)
+
++-------------------+
+| Tables_in_recipes |
++-------------------+
+| category          |
+| ingredient        |
+| recipe            |
+| recipe_category   |
+| step              |
+| unit              |
++-------------------+
+6 rows in set (0.00 sec)
+```
+
+#### Caveat:
+
+-   This attack works in MySQL **CLI**
+-   It does **not** work in DBeaver _unless executed as a_ **batch**
+-   It most likely won't work in **Java**
+    -   JDBC throws an exception if you put **multiple** statements in a single query
+    -   You must handle multiple queries **intentioinally** — this is not the norm
+    -   Java is still subject to an SQL injection attack if a single table is accessed (like a `user` table)
+
+### How to mitigate
+
+1. **Validate** all input ("`2; show tables;`" does not look like an integer)
+2. Never build an SQL command by **concatenating** user input
+3. Use typed **parameters** with `PreparedStatement`
+
+### How to use `PreparedStatement`:
+
+```java
+String sql = "SELECT * "
+    + "FROM recipe "
+    + "WHERE recipe_id = ?";
+
+try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+    stmt.setInt(1, recipeId); // if recipeId is not an 'int', will have a problem
+
+    try (ResultSet rs = stmt.executeQuery()) {
+
+    }
+}
+```
+
+### Bottom line
+
+-   Use `Statement` if there is no user input
+-   Use `PreparedStatement` with **parameters** if there _is_ user input
+-   **Always** validate user input
+
+## Add a Recipe
+
+### The approach:
+
+1. Add code to perform the bulk import of the recipe data in the DAO class
+2. Modify the service method to load `recipe_data.sql`
