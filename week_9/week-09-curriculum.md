@@ -430,6 +430,7 @@ String sql = "SELECT * "
 
 try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+    // Set a parameter by passing in parameter number (1-based; '1' in this case) and recipeId (int)
     stmt.setInt(1, recipeId); // if recipeId is not an 'int', will have a problem
 
     try (ResultSet rs = stmt.executeQuery()) {
