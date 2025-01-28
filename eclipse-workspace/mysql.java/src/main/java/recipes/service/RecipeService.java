@@ -114,4 +114,8 @@ public class RecipeService {
 		return recipeDao.insertRecipe(recipe);
 	}
 
+	public List<Recipe> fetchRecipes() {
+		return recipeDao.fetchAllRecipes();
+	}
+
 }

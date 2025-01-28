@@ -18,7 +18,8 @@ public class Recipes {
 	// @formatter:off
 	private List<String> operations = List.of(
 		"1) Create and populate all tables",
-		"2) Add a recipe"
+		"2) Add a recipe",
+		"3) List recipes"
 	);
 	// @formatter:on
 
@@ -46,9 +47,15 @@ public class Recipes {
 				case 1:
 					createTables();
 					break;
+
 				case 2:
 					addRecipe();
 					break;
+
+				case 3:
+					listRecipes();
+					break;
+
 				default:
 					System.out.println("\n" + operation + " is not valid. Try again.");
 					break;
@@ -81,6 +88,14 @@ public class Recipes {
 
 		Recipe dbRecipe = recipeService.addRecipe(recipe);
 		System.out.println("You added this recipe:\n" + dbRecipe);
+	}
+
+	private void listRecipes() {
+		List<Recipe> recipes = recipeService.fetchRecipes();
+
+		System.out.println("\nRecipes:");
+
+		recipes.forEach(recipe -> System.out.println("    " + recipe.getRecipeId() + ": " + recipe.getRecipeName()));
 	}
 
 	private LocalTime minutesToLocalTime(Integer numMinutes) {
