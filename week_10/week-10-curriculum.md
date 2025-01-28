@@ -288,9 +288,191 @@ WHERE category_id NOT BETWEEN 3 AND 22;
 +-------------+----------------+
 ```
 
-<!-- ## Other clauses -->
+## Other clauses
 
-<!-- ### Sorting: `ORDER BY` -->
+### Sorting: `ORDER BY`
+
+```sql
+SELECT *
+FROM category
+ORDER BY category_name DESC;
+
++-------------+----------------+
+| category_id | category_name  |
++-------------+----------------+
+|         23  | Veggies        |
+|         22  | Vegetarian     |
+|         21  | Tex-Mex        |
+|         20  | Soup           |
+|          3  | Smoker         |
+|         19  | Slow Cooker    |
+|        ...  | ...            |
++-------------+----------------+
+```
+
+### `ORDER BY` details
+
+-   Can specify a **direction**:
+
+    -   `ORDER BY category_name ASC`
+    -   `ORDER BY category_name DESC`
+    -   `ORDER BY category_name` — _same as `ASC`_
+
+-   **More** than one column can be specified
+-   Separate columns by **comma**
+
+```sql
+SELECT prep_time, recipe_name
+FROM recipe
+ORDER BY prep_time, recipe_name;
+
++-----------+-------------------+
+| prep_time | recipe_name       |
++-----------+-------------------+
+|  00:05:00 | Ice Cubes         |
+|  00:20:00 | Apple Monsters    |
+|  00:20:00 | Kitty Litter Cake |
+|  23:59:00 | Chocolate Moose   |
++-----------+-------------------+
+```
+
+### `DISTINCT`
+
+Returns rows that are **unique** across all requested columns
+
+```sql
+SELECT prep_time
+FROM recipe
+ORDER BY prep_time;
+
++-----------+
+| prep_time |
++-----------+
+|  00:05:00 |
+|  00:20:00 |
+|  00:20:00 |
+|  23:59:00 |
++-----------+
+
+SELECT DISTINCT prep_time
+FROM recipe
+ORDER BY prep_time;
+
++-----------+
+| prep_time |
++-----------+
+|  00:05:00 |
+|  00:20:00 |
+|  23:59:00 |
++-----------+
+```
+
+### `LIMIT`
+
+Specifies the **maximum** number of rows to return
+
+```sql
+SELECT recipe_name, prep_time
+FROM recipe
+ORDER BY prep_time
+LIMIT 2;
+
++-------------------+-----------+
+| recipe_name       | prep_time |
++-------------------+-----------+
+| Ice Cubes         |  00:05:00 |
+| Kitty Litter Cake |  00:20:00 |
++-------------------+-----------+
+```
+
+### `LIMIT` with `OFFSET`
+
+-   Specifies the **starting row** as well as the **maximum** number of rows returned
+-   `OFFSET` is **zero-based**
+
+```sql
+SELECT recipe_name, prep_time
+FROM recipe
+ORDER BY prep_time
+LIMIT 2 OFFSET 1;
+
++-------------------+-----------+
+| recipe_name       | prep_time |
++-------------------+-----------+
+| Kitty Litter Cake |  00:20:00 |
+| Apple Monsters    |  00:20:00 |
++-------------------+-----------+
+```
+
+### `GROUP BY`
+
+Groups like results together
+
+```sql
+SELECT count(*) AS 'Num Recipes', prep_time
+FROM recipe
+GROUP BY prep_time;
+
++-------------+-----------+
+| Num Recipes | prep_time |
++-------------+-----------+
+|           2 |  00:20:00 |
+|           1 |  00:05:00 |
+|           1 |  23:59:00 |
++-------------+-----------+
+```
+
+### `HAVING`
+
+Like a `WHERE` clause but with an **aggregate function** — like `count(*)`
+
+```sql
+SELECT count(*) AS 'Num Recipes', prep_time
+FROM recipe
+GROUP BY prep_time
+HAVING count(*) = 1;
+
++-------------+-----------+
+| Num Recipes | prep_time |
++-------------+-----------+
+|           1 |  00:05:00 |
+|           1 |  23:59:00 |
++-------------+-----------+
+```
+
+-   **Difference** between `WHERE` and `HAVING`:
+    -   `WHERE` puts constraint(s) on table **columns**
+    -   `HAVING` puts constraint(s) on **aggregate functions**
+-   Aggregate functions **combine** results — e.g. `SUM`, `COUNT`, `AVG`
+
+### `GROUP BY` vs. `HAVING`
+
+- `GROUP BY` does **not** need a `HAVING` clause
+- `HAVING` does not need a `GROUP BY` clause, but the results won't be anything that makes **sense**
+
+```sql
+SELECT count(*) AS 'Num Recipes', prep_time
+FROM recipe
+HAVING count(*) > 0;
+
++-------------+-----------+
+| Num Recipes | prep_time |
++-------------+-----------+
+|           4 |  00:20:00 |
++-------------+-----------+
+```
+
+### Recap of `SELECT` statement components:
+
+```sql
+SELECT [DISTINCT] <columns>
+FROM <table>
+WHERE <constraints>
+GROUP BY <column>
+HAVING <aggregate function>
+ORDER BY <columns>
+LIMIT <num_rows> [OFFSET row];
+```
 
 <!-- ## `JOIN`s and Subqueries -->
 
