@@ -762,4 +762,10 @@ private void displayMenu() {
 2. Add a **case** inside the `switch` statement
 3. Write methods in the `main` class, the service, and the DAO to **fetch** all recipes
 
-<!-- ## Select Current Recipe -->
+## Select Current Recipe
+
+**Goal:** list a recipe with steps or ingredients
+
+1. In the **DAO** class, write the method to fetch recipe details, ingredients, steps, and categories
+2. In the **Service** class, write the method to call the DAO method
+3. In the **main** class, write the method that gets data from the user and calls the service method
