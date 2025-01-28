@@ -754,6 +754,12 @@ private void displayMenu() {
     -   Accepts and displays data
     -   Handles exceptions
 
-<!-- ## List Recipes -->
+## Listing Recipes
+
+**Goal:** request a list recipes without steps or ingredients
+
+1. Add the **selection** to the menu operation list
+2. Add a **case** inside the `switch` statement
+3. Write methods in the `main` class, the service, and the DAO to **fetch** all recipes
 
 <!-- ## Select Current Recipe -->
