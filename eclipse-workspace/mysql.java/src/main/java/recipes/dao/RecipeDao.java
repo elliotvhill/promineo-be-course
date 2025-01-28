@@ -15,6 +15,7 @@ import java.util.Optional;
 import provided.util.DaoBase;
 import recipes.entity.Ingredient;
 import recipes.entity.Recipe;
+import recipes.entity.Step;
 import recipes.entity.Unit;
 import recipes.exception.DbException;
 
@@ -133,6 +134,26 @@ public class RecipeDao extends DaoBase {
 		}
 	}
 
+	private List<Step> fetchRecipeSteps(Connection conn, Integer recipeId) throws SQLException {
+		String sql = "SELECT * FROM " + STEP_TABLE + " s WHERE s.recipe_id = ?";
+		
+		// Don't need another connection because still using the same connection and transaction created earlier
+		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+			setParameter(stmt, 1, recipeId, Integer.class);
+			
+			try (ResultSet rs = stmt.executeQuery()) {
+				List<Step> steps = new LinkedList<>();
+				
+				// While there is a row, fetch all steps
+				while (rs.next()) {
+					steps.add(extract(rs, Step.class));
+				}
+				
+				return steps;
+			}
+		}
+	}
+
 	private List<Ingredient> fetchRecipeIngredients(Connection conn, Integer recipeId) throws SQLException {
 		// @formatter:off
 		String sql = ""
@@ -143,6 +164,7 @@ public class RecipeDao extends DaoBase {
 				+ "ORDER BY i.ingredient_order";
 		// @formatter:on
 
+		// Don't need another connection because still using the same connection created earlier
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 			setParameter(stmt, 1, recipeId, Integer.class);
 
