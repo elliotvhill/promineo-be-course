@@ -45,15 +45,15 @@ public class Ingredient extends EntityBase {
 	/**
 	 * @return the unitId
 	 */
-	public Unit getUnitId() {
+	public Unit getUnit() {
 		return unit;
 	}
 
 	/**
 	 * @param unitId the unitId to set
 	 */
-	public void setUnitId(Unit unitId) {
-		this.unit = unitId;
+	public void setUnit(Unit unit) {
+		this.unit = unit;
 	}
 
 	/**
