@@ -447,8 +447,8 @@ HAVING count(*) = 1;
 
 ### `GROUP BY` vs. `HAVING`
 
-- `GROUP BY` does **not** need a `HAVING` clause
-- `HAVING` does not need a `GROUP BY` clause, but the results won't be anything that makes **sense**
+-   `GROUP BY` does **not** need a `HAVING` clause
+-   `HAVING` does not need a `GROUP BY` clause, but the results won't be anything that makes **sense**
 
 ```sql
 SELECT count(*) AS 'Num Recipes', prep_time
@@ -474,7 +474,67 @@ ORDER BY <columns>
 LIMIT <num_rows> [OFFSET row];
 ```
 
-<!-- ## `JOIN`s and Subqueries -->
+## `JOIN`s and Subqueries — reading from multiple tables
+
+### Table aliases
+
+```sql
+SELECT i.ingredient_name
+FROM ingredient i -- Alias 'i'
+WHERE i.recipe_id = 4;
+
++---------------------+
+| ingredient_name     |
++---------------------+
+| moose               |
+| Hersheys chocolate  |
+| Cool Whip           |
+| cherry              |
++---------------------+
+```
+
+### Working with multiple tables
+
+-   Tables can be "joined" together to form a **single** result set with data from more than one table.
+-   Tables are **joined** on primary key/foreign key columns.
+-   If the value in the primary key **matches** a value in the foreign key column, the rows are **joined**.
+
+### Join Types
+
+MySQL recognizes these join types:
+
+-   **Inner** join
+    - Returns only the rows that have matching values in **both** tables
+-   **Outer** join (left and right)
+    - Returns all the rows from one table (left or right) and all rows from the second table regardless of whether they hold null values
+-   **Cross** join _(rarely used)_
+
+### Subqueries
+
+- A **subquery** is a query **within** another query, insert, delete, or update statement.
+- It is used to get an ID or other value that is used by the **surrounding** query.
+- Subqueries are used to **transform** a value you _have_ ("name") into a value you _need_ ("ID").
+
+**Example:**
+
+```sql
+SELECT b.breed_name, c.category_name
+FROM breed b
+JOIN breed_category bc USING (breed_id)
+JOIN category c USING (category_id)
+WHERE b.breed_id = 1;
+
+DELETE FROM breed_category WHERE breed_id = 1;
+
+-- Add row back to table, using subqueries to retrieve the breed and category IDs:
+INSERT INTO breed_category
+(breed_id, category_id)
+VALUES
+(
+    (SELECT breed_id FROM breed WHERE breed_name = 'American Rabbit'),
+    (SELECT category_id FROM category WHERE category_name = 'smooth')
+)
+```
 
 <!-- ## Returning Data -->
 
