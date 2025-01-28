@@ -13,13 +13,15 @@ public class Recipes {
 
 	private Scanner scanner = new Scanner(System.in);
 	private RecipeService recipeService = new RecipeService();
+	private Recipe currRecipe;
 
 	// List of menu options
 	// @formatter:off
 	private List<String> operations = List.of(
 		"1) Create and populate all tables",
 		"2) Add a recipe",
-		"3) List recipes"
+		"3) List recipes",
+		"4) Select working recipe"
 	);
 	// @formatter:on
 
@@ -56,6 +58,10 @@ public class Recipes {
 					listRecipes();
 					break;
 
+				case 4:
+					setCurrentRecipe();
+					break;
+
 				default:
 					System.out.println("\n" + operation + " is not valid. Try again.");
 					break;
@@ -64,6 +70,30 @@ public class Recipes {
 				System.out.println("\nError: " + e.toString() + " Try again.");
 			}
 
+		}
+	}
+
+	private void setCurrentRecipe() {
+		// List recipes so user can select a recipe ID
+		List<Recipe> recipes = listRecipes();
+
+		// Get user input
+		Integer recipeId = getIntInput("Select a recipe ID");
+
+		// Un-select any current recipe
+		currRecipe = null;
+
+		// Loop through list to find matching recipe
+		for (Recipe recipe : recipes) {
+			if (recipe.getRecipeId().equals(recipeId)) {
+				currRecipe = recipeService.fetchRecipeById(recipeId);
+				break;
+			}
+		}
+
+		// If no match is found
+		if (Objects.isNull(currRecipe)) {
+			System.out.println("\nInvalid recipe selected.");
 		}
 	}
 
@@ -88,14 +118,18 @@ public class Recipes {
 
 		Recipe dbRecipe = recipeService.addRecipe(recipe);
 		System.out.println("You added this recipe:\n" + dbRecipe);
+
+		currRecipe = recipeService.fetchRecipeById(dbRecipe.getRecipeId());
 	}
 
-	private void listRecipes() {
+	private List<Recipe> listRecipes() {
 		List<Recipe> recipes = recipeService.fetchRecipes();
 
 		System.out.println("\nRecipes:");
 
 		recipes.forEach(recipe -> System.out.println("    " + recipe.getRecipeId() + ": " + recipe.getRecipeName()));
+
+		return recipes;
 	}
 
 	private LocalTime minutesToLocalTime(Integer numMinutes) {
@@ -128,6 +162,12 @@ public class Recipes {
 		System.out.println("Here's what you can do:");
 
 		operations.forEach(operation -> System.out.println("\t" + operation));
+		
+		if (Objects.isNull(currRecipe)) {
+			System.out.println("\nYou are not working with a recipe.");
+		} else {
+			System.out.println("\nYou are working with recipe " + currRecipe);
+		}
 	}
 
 	private Integer getIntInput(String prompt) {
