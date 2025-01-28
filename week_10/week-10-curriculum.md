@@ -45,7 +45,7 @@ Notes from the week 10 MySQL video lessons.
 
 ## Reading Data
 
-### Reading from a single table: `SELECT`
+### Reading from a Single Table: `SELECT`
 
 `SELECT` statement syntax:
 
@@ -140,7 +140,7 @@ FROM category;
 +-------------+----------------+
 ```
 
-## `WHERE` clause
+## `WHERE` Clause
 
 `WHERE` clause syntax:
 
@@ -288,7 +288,7 @@ WHERE category_id NOT BETWEEN 3 AND 22;
 +-------------+----------------+
 ```
 
-## Other clauses
+## Other Clauses
 
 ### Sorting: `ORDER BY`
 
@@ -474,7 +474,7 @@ ORDER BY <columns>
 LIMIT <num_rows> [OFFSET row];
 ```
 
-## `JOIN`s and Subqueries — reading from multiple tables
+## `JOIN`s and Subqueries — Reading from Multiple Tables
 
 ### Table aliases
 
@@ -504,16 +504,16 @@ WHERE i.recipe_id = 4;
 MySQL recognizes these join types:
 
 -   **Inner** join
-    - Returns only the rows that have matching values in **both** tables
+    -   Returns only the rows that have matching values in **both** tables
 -   **Outer** join (left and right)
-    - Returns all the rows from one table (left or right) and all rows from the second table regardless of whether they hold null values
+    -   Returns all the rows from one table (left or right) and all rows from the second table regardless of whether they hold null values
 -   **Cross** join _(rarely used)_
 
 ### Subqueries
 
-- A **subquery** is a query **within** another query, insert, delete, or update statement.
-- It is used to get an ID or other value that is used by the **surrounding** query.
-- Subqueries are used to **transform** a value you _have_ ("name") into a value you _need_ ("ID").
+-   A **subquery** is a query **within** another query, insert, delete, or update statement.
+-   It is used to get an ID or other value that is used by the **surrounding** query.
+-   Subqueries are used to **transform** a value you _have_ ("name") into a value you _need_ ("ID").
 
 **Example:**
 
@@ -536,7 +536,223 @@ VALUES
 )
 ```
 
-<!-- ## Returning Data -->
+## Returning Data — Moving and Modifying Data
+
+#### Java Application — 3 tiers:
+
+-   I/O layer
+-   Service layer
+-   Data Access Object (DAO) layer
+
+## DAO Layer
+
+-   Reads and writes data to **tables**
+-   Does not _create_ **exceptions** (but rather, passes on exceptions from the driver)
+-   Data is generally **not** transformed
+-   Data is put into DAO classes that **model** the tables
+-   The DAO **returns** multiple rows (`fetchAll`) or single rows (`fetchById`)
+
+### Multiple Rows
+
+-   Returns a **list** of objects in which each element in the list represents a single row of data
+-   If no rows are found, an **empty** list is returned
+-   `NULL` is **never** returned
+
+**Code Example:**
+
+```java
+public List<Recipe> fetchRecipe(Integer recipeId) {
+    try (Connection conn = getConnection()) { // Get connection with try-with-resource block
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) { // Get PreparedStatement with another try-with-resource block
+            stmt.setInt(recipeId); // Set parameters on the statement
+
+            try (ResultSet rs = stmt.executeQuery() { // Perform the query
+                List<Recipe> recipes = new LinkedList<>(); // Return result set
+
+                while (rs.next()) { // Work through result set one at a time
+                    recipes.add(extract(rs, Recipe.class));
+                }
+
+                return recipes;
+            })
+        }
+    }
+}
+```
+
+### Single Row: return `NULL` _(not optimal)_
+
+-   The "old" way of returning a single row is to return data if the row exists and return `NULL` if the row does _not_ exist
+-   The problem is that a **programmer** may not know (or may _ignore_ the fact) that a `NULL` may be returned
+
+**Return `NULL` Code:**
+
+```java
+public Recipe fetchRecipe(Integer recipeId) {
+    try (Connection conn = getConnection()) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            try (ResultSet rs = stmt.executeQuery() {
+                if (rs.next()) { // Use 'if' because only expecting one row (vs 'while' above)
+                    return extract(rs, Recipe.class);
+                }
+
+                return null;
+            })
+        }
+    }
+}
+```
+
+### Single Row: return `Optional` _(better)_
+
+-   An `Optional` is a Java class that replaces `NULL` as a return value.
+-   The `Optional` either contains an Object _or_ it is empty — it is **never** `NULL` _(could_ contain `NULL`_, though)_
+-   A programmer can ignore a `NULL` return value — leading to a `NullPointerException`...
+-   ...whereas `Optional`s **cannot** be ignored.
+-   i.e. an "in your **face**" approach
+
+**Return `Optional` Code:**
+
+```java
+public Optional<Recipe> fetchRecipe(Integer recipeId) {
+    try (Connection conn = getConnection()) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            try (ResultSet rs = stmt.executeQuery() {
+                Recipe recipe = null;
+
+                if (rs.next()) {
+                    recipe = extract(rs, Recipe.class);
+                }
+
+                return Optional.ofNullable(recipe); // '.ofNullable()' allows null whereas using '.of' could return a NullPointerException
+            })
+        }
+    }
+}
+```
+
+## Service Layer
+
+-   **Transforms** data
+-   **Applies** business rules — _e.g. changing a sort order, pulling output from different tables together to combine into a single Object, etc._
+-   **Validates** data
+-   **Throws** appropriate Exceptions
+-   Works well with `Optional` to throw application-specific exceptions
+
+### Service Layer: Multiple Rows
+
+-   No need for `NULL` check — the **list** returned from the Data layer will never be `NULL`
+-   If there are no rows, the list will be **empty**
+
+### Service Layer: Single Row with `NULL`
+
+```java
+Recipe recipe = dao.fetchRecipe(recipeId);
+
+if ("Ice".equals(recipe.getRecipeName())) {
+    // something
+}
+```
+
+-   This throws a `NullPointerException` if the recipe is `NULL`
+-   The **programmer** did _not_ consider that `recipe` may be null
+-   It probably wasn't **documented**...
+
+### Service Layer: Single Row with `Optional`
+
+-   Expresses the programmer's **intent**
+-   Specifically says: the returned value _may be_ `NULL` _(i.e. is self-documenting)_ — deal with it!
+
+```java
+Optional<Recipe> opRecipe = dao.fetchRecipe(...);
+
+if (opRecipe.isPresent()) {
+    Recipe recipe = opRecipe.get();
+
+    // Do something here
+}
+```
+
+### `Optional` with default Exception
+
+```java
+public Recipe getRecipe(Integer recipeId) {
+    Optional<Recipe> opRecipe = dao.fetchRecipe(recipeId);
+
+    return opRecipe.orElseThrow(); // Throws a 'NoSuchElementException'
+}
+```
+
+### `Optional` with custom Exception
+
+```java
+public Recipe getRecipe(Integer recipeId) {
+    Optional<Recipe> opRecipe = dao.fetchRecipe(recipeId);
+
+    return opRecipe.orElseThrow(
+        () -> new NotFoundException("Not found"); // Lambda expression with no parameters
+    );
+}
+```
+
+#### Or, without assigning a variable:
+
+```java
+public Recipe getRecipe(Integer recipeId) {
+    return dao.getRecipe(recipeId)
+        .orElseThrow();
+}
+
+// or with a custom exception...
+
+public Recipe getRecipe(Integer recipeId) {
+    return dao.getRecipe(recipeId)
+        .orElseThrow(() ->
+            new NotFoundException(
+                "Not found");
+    );
+}
+```
+
+## Input/Output Layer
+
+-   **Gathers** data from the user
+-   **Handles** exceptions
+-   **Processes** menu operations
+-   **Interacts** with the Service layer
+
+```java
+private void displayMenu() {
+    boolean done = false;
+
+    while (!done) {
+        try {
+            int operation = getOperation();
+
+            switch (operation) {
+                // ...
+            }
+        }
+        catch (Exception e) {
+            System.out.println("\nError: " +
+                e.getMessage() + " Try again.");
+        }
+    }
+}
+```
+
+### Recap
+
+-   **Data** layer:
+    -   Returns data (`List` or `Optional`)
+    -   Passes on exceptions; does not _create_ them
+-   **Service** layer:
+    -   Formats/transforms data
+    -   Applies business rules
+    -   Throws exceptions
+-   **I/O** layer:
+    -   Accepts and displays data
+    -   Handles exceptions
 
 <!-- ## List Recipes -->
 
