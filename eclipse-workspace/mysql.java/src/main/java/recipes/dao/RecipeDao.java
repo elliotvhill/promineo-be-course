@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import provided.util.DaoBase;
+import recipes.entity.Category;
 import recipes.entity.Ingredient;
 import recipes.entity.Recipe;
 import recipes.entity.Step;
@@ -124,6 +125,8 @@ public class RecipeDao extends DaoBase {
 					// Get categories
 					recipe.getCategories().addAll(fetchRecipeCategories(conn, recipeId));
 				}
+
+				return Optional.ofNullable(recipe);
 			} catch (Exception e) {
 				rollbackTransaction(conn);
 				throw new DbException(e);
@@ -134,21 +137,47 @@ public class RecipeDao extends DaoBase {
 		}
 	}
 
-	private List<Step> fetchRecipeSteps(Connection conn, Integer recipeId) throws SQLException {
-		String sql = "SELECT * FROM " + STEP_TABLE + " s WHERE s.recipe_id = ?";
-		
-		// Don't need another connection because still using the same connection and transaction created earlier
+	private List<Category> fetchRecipeCategories(Connection conn, Integer recipeId) throws SQLException {
+		// @formatter:off
+		String sql = ""
+				+ "SELECT c.* "
+				+ "FROM " + RECIPE_CATEGORY_TABLE + " rc "
+				+ "JOIN " + CATEGORY_TABLE + " c USING (category_id) "
+				+ "WHERE recipe_id = ? "
+				+ "ORDER BY c.category_name";
+		// @formatter:on
+
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 			setParameter(stmt, 1, recipeId, Integer.class);
-			
+
+			try (ResultSet rs = stmt.executeQuery()) {
+				List<Category> categories = new LinkedList<>();
+
+				while (rs.next()) {
+					categories.add(extract(rs, Category.class));
+				}
+
+				return categories;
+			}
+		}
+	}
+
+	private List<Step> fetchRecipeSteps(Connection conn, Integer recipeId) throws SQLException {
+		String sql = "SELECT * FROM " + STEP_TABLE + " s WHERE s.recipe_id = ?";
+
+		// Don't need another connection because still using the same connection and
+		// transaction created earlier
+		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+			setParameter(stmt, 1, recipeId, Integer.class);
+
 			try (ResultSet rs = stmt.executeQuery()) {
 				List<Step> steps = new LinkedList<>();
-				
+
 				// While there is a row, fetch all steps
 				while (rs.next()) {
 					steps.add(extract(rs, Step.class));
 				}
-				
+
 				return steps;
 			}
 		}
@@ -164,7 +193,8 @@ public class RecipeDao extends DaoBase {
 				+ "ORDER BY i.ingredient_order";
 		// @formatter:on
 
-		// Don't need another connection because still using the same connection created earlier
+		// Don't need another connection because still using the same connection created
+		// earlier
 		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 			setParameter(stmt, 1, recipeId, Integer.class);
 
