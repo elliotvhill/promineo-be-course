@@ -4,6 +4,14 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 
 _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/week_0/2023PTBESyllabus.pdf)_
 
+## Week 10
+
+### Questions
+
+#### Coding assignment:
+
+- We write the code to obtain a `PreparedStatement` and set the parameter three times for each of the methods `fetchMaterialsForProject`, `fetchStepsForProject`, and `fetchCategoriessForProject` — is there a way to optimize? i.e. write a method for doing just this portion?
+
 ## Week 8
 
 ### Questions
