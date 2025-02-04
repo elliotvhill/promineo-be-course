@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+import recipes.entity.Category;
 import recipes.entity.Ingredient;
 import recipes.entity.Recipe;
 import recipes.entity.Step;
@@ -27,7 +28,8 @@ public class Recipes {
 		"3) List recipes",
 		"4) Select working recipe",
 		"5) Add ingredient to current recipe",
-		"6) Add step to current recipe"
+		"6) Add step to current recipe",
+		"7) Add category to current recipe"
 	);
 	// @formatter:on
 
@@ -75,7 +77,11 @@ public class Recipes {
 				case 6:
 					addStepToCurrentRecipe();
 					break;
-					
+
+				case 7:
+					addCategoryToCurrentRecipe();
+					break;
+
 				default:
 					System.out.println("\n" + operation + " is not valid. Try again.");
 					break;
@@ -87,6 +93,25 @@ public class Recipes {
 		}
 	}
 
+	private void addCategoryToCurrentRecipe() {
+		// Check if there is current recipe
+		if (Objects.isNull(currRecipe)) {
+			System.out.println("\nPlease select a recipe first.");
+			return;
+		}
+
+		// List the existing categories
+		List<Category> categories = recipeService.fetchCategories();
+		categories.forEach(category -> System.out.println("  " + category.getCategoryName()));
+
+		String category = getStringInput("Enter the category to add");
+
+		if (Objects.nonNull(category)) {
+			recipeService.addCategoryToRecipe(currRecipe.getRecipeId(), category);
+			currRecipe = recipeService.fetchRecipeById(currRecipe.getRecipeId());
+		}
+	}
+
 	private void addStepToCurrentRecipe() {
 		// Check if there is current recipe
 		if (Objects.isNull(currRecipe)) {
@@ -95,13 +120,13 @@ public class Recipes {
 		}
 
 		String stepText = getStringInput("Enter the step text");
-		
+
 		if (Objects.nonNull(stepText)) {
 			Step step = new Step();
-			
+
 			step.setRecipeId(currRecipe.getRecipeId());
 			step.setStepText(stepText);
-			
+
 			recipeService.addStep(step);
 			currRecipe = recipeService.fetchRecipeById(step.getRecipeId());
 		}
@@ -128,22 +153,22 @@ public class Recipes {
 		System.out.println("Units:");
 		units.forEach(unit -> System.out.println(
 				"   " + unit.getUnitId() + ": " + unit.getUnitNameSingular() + " (" + unit.getUnitNamePlural() + ")"));
-		
+
 		// Get user input for unit ID
 		Integer unitId = getIntInput("Enter a unit ID (press Enter for none)");
-		
+
 		// Set ingredient fields
 		Unit unit = new Unit();
 		unit.setUnitId(unitId);
-		
+
 		Ingredient ingredient = new Ingredient();
-		
+
 		ingredient.setRecipeId(currRecipe.getRecipeId());
 		ingredient.setUnit(unit);
 		ingredient.setIngredientName(name);
 		ingredient.setInstruction(instruction);
 		ingredient.setAmount(amount);
-		
+
 		// Call recipeService to add ingredient
 		recipeService.addIngredient(ingredient);
 		currRecipe = recipeService.fetchRecipeById(ingredient.getRecipeId());
