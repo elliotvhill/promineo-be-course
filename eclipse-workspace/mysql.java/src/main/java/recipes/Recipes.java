@@ -30,7 +30,8 @@ public class Recipes {
 		"5) Add ingredient to current recipe",
 		"6) Add step to current recipe",
 		"7) Add category to current recipe",
-		"8) Modify step in current recipe"
+		"8) Modify step in current recipe",
+		"9) Delete a recipe"
 	);
 	// @formatter:on
 
@@ -82,9 +83,13 @@ public class Recipes {
 				case 7:
 					addCategoryToCurrentRecipe();
 					break;
-					
+
 				case 8:
 					modifyStepInCurrentRecipe();
+					break;
+
+				case 9:
+					deleteRecipe();
 					break;
 
 				default:
@@ -98,31 +103,49 @@ public class Recipes {
 		}
 	}
 
+	private void deleteRecipe() {
+		// List the recipes for user and get input
+		listRecipes();
+		Integer recipeId = getIntInput("Enter the ID of the recipe to delete");
+
+		if (Objects.nonNull(recipeId)) {
+			recipeService.deleteRecipe(recipeId);
+			
+			System.out.println("You have deleted recipe ID=" + recipeId);
+
+			// If currRecipe is not null AND the recipe ID is the ID we just deleted,
+			// de-select the currRecipe
+			if (Objects.nonNull(currRecipe) && currRecipe.getRecipeId().equals(recipeId)) {
+				currRecipe = null;
+			}
+		}
+	}
+
 	private void modifyStepInCurrentRecipe() {
 		// Check if there is current recipe
 		if (Objects.isNull(currRecipe)) {
 			System.out.println("\nPlease select a recipe first.");
 			return;
 		}
-		
+
 		// Create list of Step to hold steps from db
 		List<Step> steps = recipeService.fetchSteps(currRecipe.getRecipeId());
 		// Print list of steps for user to choose from
 		System.out.println("\nSteps for current recipe:");
 		steps.forEach(step -> System.out.println("   " + step));
-		
+
 		// Get user input
 		Integer stepId = getIntInput("Enter step ID of step to modify");
-		
+
 		if (Objects.nonNull(stepId)) {
 			String stepText = getStringInput("Enter new step text");
-			
+
 			if (Objects.nonNull(stepText)) {
 				Step step = new Step();
-				
+
 				step.setStepId(stepId);
 				step.setStepText(stepText);
-				
+
 				recipeService.modifyStep(step);
 				// Set currRecipe back to re-load the step
 				currRecipe = recipeService.fetchRecipeById(currRecipe.getRecipeId());

@@ -419,13 +419,13 @@ public class RecipeDao extends DaoBase {
 				setParameter(stmt, 2, step.getStepId(), Integer.class);
 
 				// Note: executeUpdate() returns a value: the number of rows effected
-				// So in a scenario where we expect to update _one_ row, we expect 
+				// So in a scenario where we expect to update _one_ row, we expect
 				// executeUpdate to return '1'
 
 				// Check for executeUpdate returning 1 row updated
 				boolean updated = stmt.executeUpdate() == 1;
 				commitTransaction(conn);
-				
+
 				return updated;
 
 			} catch (Exception e) {
@@ -437,18 +437,27 @@ public class RecipeDao extends DaoBase {
 			throw new DbException(e);
 		}
 	}
+
+	public boolean deleteRecipe(Integer recipeId) {
+		String sql = "DELETE FROM " + RECIPE_TABLE + " WHERE recipe_id = ?";
+
+		try (Connection conn = DbConnection.getConnection()) {
+			startTransaction(conn);
+
+			try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+				setParameter(stmt, 1, recipeId, Integer.class);
+
+				boolean deleted = stmt.executeUpdate() == 1;
+
+				commitTransaction(conn);
+				return deleted;
+
+			} catch (Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
+		} catch (SQLException e) {
+			throw new DbException(e);
+		}
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
