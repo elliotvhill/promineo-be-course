@@ -1,5 +1,6 @@
 package recipes.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -282,11 +283,11 @@ public class RecipeDao extends DaoBase {
 				
 				try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 					setParameter(stmt, 1, ingredient.getRecipeId(), Integer.class);
-					setParameter(stmt, 2, ingredient.getUnit(), Integer.class);
+					setParameter(stmt, 2, ingredient.getUnit().getUnitId(), Integer.class);
 					setParameter(stmt, 3, ingredient.getIngredientName(), String.class);
 					setParameter(stmt, 4, ingredient.getInstruction(), String.class);
-					setParameter(stmt, 5, ingredient.getIngredientOrder(), Integer.class);
-					setParameter(stmt, 6, ingredient.getAmount(), Double.class);
+					setParameter(stmt, 5, order, Integer.class);
+					setParameter(stmt, 6, ingredient.getAmount(), BigDecimal.class);
 					
 					stmt.executeUpdate();
 					commitTransaction(conn);
