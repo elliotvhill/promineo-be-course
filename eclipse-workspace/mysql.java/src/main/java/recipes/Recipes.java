@@ -94,7 +94,7 @@ public class Recipes {
 			return;
 		}
 
-		String stepText = getStringInput("Enter the step text:");
+		String stepText = getStringInput("Enter the step text");
 		
 		if (Objects.nonNull(stepText)) {
 			Step step = new Step();
