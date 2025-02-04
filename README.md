@@ -4,13 +4,42 @@ A repository to store any questions, discussion topics, tips, or other notes fro
 
 _[Course Syllabus](https://github.com/elliotvhill/promineo-be-course/blob/main/week_0/2023PTBESyllabus.pdf)_
 
+## Week 11
+
+### Questions
+
+#### Recipes projects video
+
+-   Is writing the _second_ `fetchRecipeSteps` method (in `RecipeDao.java`, where it calls the first `fetchRecipeSteps` method with connection and integer parameters) an example of method overloading?
+
+    ```java
+    public List<Step> fetchRecipeSteps(Integer recipeId) {
+    	// Create a new connection object to be passed to
+        // the existing fetchRecipeSteps method
+    	try (Connection conn = DbConnection.getConnection()) {
+    		startTransaction(conn);
+
+    		try {
+    			List<Step> steps = fetchRecipeSteps(conn, recipeId);
+    			commitTransaction(conn);
+
+    			return steps;
+
+                // ....
+            }
+        }
+    }
+    ```
+
+-   Could you use `StringBuilder` for the recipe steps (in the Java code)? Would this be better/easier for modifying steps, for example?
+
 ## Week 10
 
 ### Questions
 
 #### Coding assignment:
 
-- We write the code to obtain a `PreparedStatement` and set the parameter three times for each of the methods `fetchMaterialsForProject`, `fetchStepsForProject`, and `fetchCategoriessForProject` — is there a way to optimize? i.e. write a method for doing just this portion?
+-   We write the code to obtain a `PreparedStatement` and set the parameter three times for each of the methods `fetchMaterialsForProject`, `fetchStepsForProject`, and `fetchCategoriessForProject` — is there a way to optimize? i.e. write a method for doing just this portion?
 
 ## Week 8
 
