@@ -219,7 +219,70 @@ SELECT CURTIME() AS Now;
 2. Add the pass-through methods in the `Service` class
 3. Write the methods to add an ingredient and a step in the `DAO` class
 
-<!-- ## Coding the Many to Many Relationship -->
+## Coding the Many-to-Many Relationship
+
+### Many-to-many Recap
+
+-   A many-to-many relationship requires a **join table**. Each main table has a **primary key**. The join table has **two foreign keys**.
+
+#### `recipe_category` join table:
+
+The `recipe_category` table has foreign keys for the **recipe ID** and the **category ID**.
+
+#### Reminder: `CREATE TABLE` for many-to-many relationships:
+
+```sql
+CREATE TABLE recipe_category (
+    recipe_id INT NOT NULL,
+    category_id INT NOT NULL,
+    FOREIGN KEY (recipe_id)
+        REFERENCES recipe (recipe_id)
+        ON DELETE CASCADE,
+    FOREIGN KEY (category_id)
+        REFERENCES category (category_id)
+        ON DELETE CASCADE,
+    UNIQUE KEY (recipe_id, category_id)
+);
+```
+
+### The strategy
+
+-   MySQL won't fill in the **foreign key** values when we add a row to `recipe_category`
+-   The **user** will enter:
+    -   The recipe ID
+    -   The category name
+-   The **application** will look up the category ID based on the name
+-   We will use a **subquery** for this
+
+### The SQL
+
+```sql
+INSERT INTO recipe_category
+    (recipe_id, category_id)
+VALUES (
+    ?,
+    -- Subquery:
+    (
+        SELECT category_id
+        FROM categories,
+        WHERE category_name = ?
+    )
+)
+```
+
+In the (Java) `statement`, set these parameters _(based on the position of the "_`?`_"s)_:
+
+```java
+stmt.setInt(1, categoryId); // 1 = first '?'
+stmt.setString(2, categoryName); // 2 = second '?'
+```
+
+### The approach
+
+-   Add the "add category" selection to the application menu, along with the associated methods
+-   Add the service method
+-   Write the add category method in the DAO
+-   Test it!
 
 <!-- ## The Update Statement -->
 
