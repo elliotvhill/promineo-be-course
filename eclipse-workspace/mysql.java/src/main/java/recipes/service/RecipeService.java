@@ -144,4 +144,8 @@ public class RecipeService {
 		return recipeDao.fetchAllCategories();
 	}
 
+	public void addCategoryToRecipe(Integer recipeId, String category) {
+		recipeDao.addCategoryToRecipe(recipeId, category);
+	}
+
 }
