@@ -148,4 +148,8 @@ public class RecipeService {
 		recipeDao.addCategoryToRecipe(recipeId, category);
 	}
 
+	public List<Step> fetchSteps(Integer recipeId) {
+		return recipeDao.fetchRecipeSteps(recipeId);
+	}
+
 }

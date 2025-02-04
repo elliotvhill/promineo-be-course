@@ -385,4 +385,26 @@ public class RecipeDao extends DaoBase {
 			throw new DbException(e);
 		}
 	}
+
+	public List<Step> fetchRecipeSteps(Integer recipeId) {
+		// Create a new connection object to be passed to the existing fetchRecipeSteps
+		// method (that gets the steps when listing a recipe for a user) that we already
+		// created
+		try (Connection conn = DbConnection.getConnection()) {
+			startTransaction(conn);
+
+			try {
+				List<Step> steps = fetchRecipeSteps(conn, recipeId);
+				commitTransaction(conn);
+
+				return steps;
+			} catch (Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
+
+		} catch (SQLException e) {
+			throw new DbException(e);
+		}
+	}
 }
