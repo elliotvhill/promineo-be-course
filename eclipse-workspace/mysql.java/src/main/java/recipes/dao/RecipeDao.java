@@ -407,4 +407,48 @@ public class RecipeDao extends DaoBase {
 			throw new DbException(e);
 		}
 	}
+
+	public boolean modifyRecipeStep(Step step) {
+		String sql = "UPDATE " + STEP_TABLE + " SET step_text = ? WHERE step_id = ?";
+
+		try (Connection conn = DbConnection.getConnection()) {
+			startTransaction(conn);
+
+			try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+				setParameter(stmt, 1, step.getStepText(), String.class);
+				setParameter(stmt, 2, step.getStepId(), Integer.class);
+
+				// Note: executeUpdate() returns a value: the number of rows effected
+				// So in a scenario where we expect to update _one_ row, we expect 
+				// executeUpdate to return '1'
+
+				// Check for executeUpdate returning 1 row updated
+				boolean updated = stmt.executeUpdate() == 1;
+				commitTransaction(conn);
+				
+				return updated;
+
+			} catch (Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
+
+		} catch (SQLException e) {
+			throw new DbException(e);
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
