@@ -280,7 +280,7 @@ public class RecipeDao extends DaoBase {
 			try {
 				// Convenience method from base class to get next insertion order position
 				Integer order = getNextSequenceNumber(conn, ingredient.getRecipeId(), INGREDIENT_TABLE, "recipe_id");
-				
+
 				try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 					setParameter(stmt, 1, ingredient.getRecipeId(), Integer.class);
 					setParameter(stmt, 2, ingredient.getUnit().getUnitId(), Integer.class);
@@ -288,7 +288,7 @@ public class RecipeDao extends DaoBase {
 					setParameter(stmt, 4, ingredient.getInstruction(), String.class);
 					setParameter(stmt, 5, order, Integer.class);
 					setParameter(stmt, 6, ingredient.getAmount(), BigDecimal.class);
-					
+
 					stmt.executeUpdate();
 					commitTransaction(conn);
 				}
@@ -296,6 +296,33 @@ public class RecipeDao extends DaoBase {
 				rollbackTransaction(conn);
 				throw new DbException(e);
 			}
+		} catch (SQLException e) {
+			throw new DbException(e);
+		}
+	}
+
+	public void addStepToRecipe(Step step) {
+		String sql = "INSERT INTO " + STEP_TABLE + " (recipe_id, step_order, step_text)" + " VALUES (?, ?, ?)";
+
+		try (Connection conn = DbConnection.getConnection()) {
+			startTransaction(conn);
+
+			try {
+				Integer order = getNextSequenceNumber(conn, step.getRecipeId(), STEP_TABLE, "recipe_id");
+
+				try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+					setParameter(stmt, 1, step.getRecipeId(), Integer.class);
+					setParameter(stmt, 2, order, Integer.class);
+					setParameter(stmt, 3, step.getStepText(), String.class);
+
+					stmt.executeUpdate();
+					commitTransaction(conn);
+				}
+			} catch (Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
+
 		} catch (SQLException e) {
 			throw new DbException(e);
 		}
