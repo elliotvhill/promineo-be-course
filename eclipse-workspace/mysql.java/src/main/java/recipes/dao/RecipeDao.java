@@ -237,4 +237,30 @@ public class RecipeDao extends DaoBase {
 			throw new DbException(e);
 		}
 	}
+
+	public List<Unit> fetchAllUnits() {
+		String sql = "SELECT * FROM " + UNIT_TABLE + " ORDER BY unit_name_singular";
+
+		try (Connection conn = DbConnection.getConnection()) {
+			startTransaction(conn);
+
+			try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+				try (ResultSet rs = stmt.executeQuery()) {
+					List<Unit> units = new LinkedList<>();
+
+					while (rs.next()) {
+						units.add(extract(rs, Unit.class));
+					}
+					return units;
+				}
+			} catch (Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
+
+		} catch (SQLException e) {
+			throw new DbException(e);
+		}
+	}
 }
