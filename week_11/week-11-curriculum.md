@@ -302,7 +302,7 @@ WHERE <constraint>;
 | Operation  | SQL Keyword             |
 | ---------- | ----------------------- |
 | **C**reate | `INSERT INTO <table>`   |
-| **S**slect | `SELECT * FROM <table>` |
+| **R**ead   | `SELECT * FROM <table>` |
 | **U**pdate | `UPDATE <table> SET...` |
 | **D**elete |                         |
 
@@ -326,6 +326,46 @@ WHERE step_id = 25;
 2. Add `modifyStep` method to service class
 3. Write the `modifyRecipeStep` method in the DAO
 
-<!-- ## The Delete Statement -->
+## The Delete Statement
+
+### Delete syntax
+
+```sql
+DELETE FROM <table_name>
+WHERE <constraint>;
+```
+
+**Note: Do not forget the `WHERE` clause — otherwise _all_ rows in the table will be deleted!!**
+
+### Deleting child rows
+
+-   When a recipe is deleted, all the **child rows** are deleted as well:
+    -   ingredient
+    -   step
+    -   recipe_category
+-   This is because the foreign key constraints used `ON DELETE CASCADE` _(i.e. in the schema)_
+
+#### CRUD Recap:
+
+| Operation  | SQL Keyword             |
+| ---------- | ----------------------- |
+| **C**reate | `INSERT INTO <table>`   |
+| **R**ead   | `SELECT * FROM <table>` |
+| **U**pdate | `UPDATE <table> SET...` |
+| **D**elete | `DELETE FROM <table>`   |
+
+#### Delete example:
+
+```sql
+DELETE FROM recipe
+WHERE recipe_id = 5;
+```
+
+### Recipes project approach
+
+1. Add "delete recipe" operation and gather user input
+2. Add `deleteRecipe` method in the service class
+    - Throw an exception if the recipe doesn't exist
+3. Write `deleteRecipe` method in the DAO
 
 <!-- ## Changing Sort Order with Streams -->
