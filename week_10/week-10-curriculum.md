@@ -60,7 +60,7 @@ WHERE <constraints>;
 | Operation  | SQL Keyword             |
 | ---------- | ----------------------- |
 | **C**reate | `INSERT INTO <table>`   |
-| **S**slect | `SELECT * FROM <table>` |
+| **R**ead   | `SELECT * FROM <table>` |
 | **U**pdate |                         |
 | **D**elete |                         |
 
