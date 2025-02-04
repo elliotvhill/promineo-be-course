@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import recipes.entity.Ingredient;
 import recipes.entity.Recipe;
+import recipes.entity.Step;
 import recipes.entity.Unit;
 import recipes.exception.DbException;
 import recipes.service.RecipeService;
@@ -25,7 +26,8 @@ public class Recipes {
 		"2) Add a recipe",
 		"3) List recipes",
 		"4) Select working recipe",
-		"5) Add ingredient to current recipe"
+		"5) Add ingredient to current recipe",
+		"6) Add step to current recipe"
 	);
 	// @formatter:on
 
@@ -70,6 +72,10 @@ public class Recipes {
 					addIngredientToCurrentRecipe();
 					break;
 
+				case 6:
+					addStepToCurrentRecipe();
+					break;
+					
 				default:
 					System.out.println("\n" + operation + " is not valid. Try again.");
 					break;
@@ -78,6 +84,26 @@ public class Recipes {
 				System.out.println("\nError: " + e.toString() + " Try again.");
 			}
 
+		}
+	}
+
+	private void addStepToCurrentRecipe() {
+		// Check if there is current recipe
+		if (Objects.isNull(currRecipe)) {
+			System.out.println("\nPlease select a recipe first.");
+			return;
+		}
+
+		String stepText = getStringInput("Enter the step text:");
+		
+		if (Objects.nonNull(stepText)) {
+			Step step = new Step();
+			
+			step.setRecipeId(currRecipe.getRecipeId());
+			step.setStepText(stepText);
+			
+			recipeService.addStep(step);
+			currRecipe = recipeService.fetchRecipeById(step.getRecipeId());
 		}
 	}
 
