@@ -112,7 +112,7 @@ public class Recipes {
 		
 		Ingredient ingredient = new Ingredient();
 		
-		ingredient.setIngredientId(currRecipe.getRecipeId());
+		ingredient.setRecipeId(currRecipe.getRecipeId());
 		ingredient.setUnit(unit);
 		ingredient.setIngredientName(name);
 		ingredient.setInstruction(instruction);
