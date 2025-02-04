@@ -211,7 +211,7 @@ SELECT CURTIME() AS Now;
 
 ### 'Recipes' project work
 
-#### The approach:
+#### Recipes project approach:
 
 1. Add the menu items with methods:
     - Add ingredient to current recipe
@@ -277,14 +277,54 @@ stmt.setInt(1, categoryId); // 1 = first '?'
 stmt.setString(2, categoryName); // 2 = second '?'
 ```
 
-### The approach
+### Recipes project approach
 
 -   Add the "add category" selection to the application menu, along with the associated methods
 -   Add the service method
 -   Write the add category method in the DAO
 -   Test it!
 
-<!-- ## The Update Statement -->
+## The Update Statement
+
+#### Update syntax:
+
+```sql
+UPDATE <table_name> SET
+<column_name_1> = <value_1>,
+<column_name_2> = <value_2>,
+-- ...
+<column_name_n> = <value_n>
+WHERE <constraint>;
+```
+
+#### CRUD Recap:
+
+| Operation  | SQL Keyword             |
+| ---------- | ----------------------- |
+| **C**reate | `INSERT INTO <table>`   |
+| **S**slect | `SELECT * FROM <table>` |
+| **U**pdate | `UPDATE <table> SET...` |
+| **D**elete |                         |
+
+#### `UPDATE` example:
+
+```sql
+INSERT INTO step
+    (recipe_id, step_order, step_text)
+VALUES
+    (5, 1, 'Mix water and dirt with fingers');
+
+UPDATE step
+SET step_text =
+    'Squish water and dirt together with fingers'
+WHERE step_id = 25;
+```
+
+### Recipes project approach
+
+1. Add "modify step" to menu and get input from user
+2. Add `modifyStep` method to service class
+3. Write the `modifyRecipeStep` method in the DAO
 
 <!-- ## The Delete Statement -->
 
