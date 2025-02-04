@@ -263,4 +263,40 @@ public class RecipeDao extends DaoBase {
 			throw new DbException(e);
 		}
 	}
+
+	public void addIngredientToRecipe(Ingredient ingredient) {
+
+		String sql = "INSERT INTO " + INGREDIENT_TABLE
+				+ " (recipe_id, unit_id, ingredient_name, instruction, ingredient_order, amount) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
+
+		try (Connection conn = DbConnection.getConnection()) {
+			startTransaction(conn);
+
+			// Count the number of child (ingredient) rows and return one
+			// If count is 0, return 1, indicating the ingredient should be in order
+			// position 1
+			try {
+				// Convenience method from base class to get next insertion order position
+				Integer order = getNextSequenceNumber(conn, ingredient.getRecipeId(), INGREDIENT_TABLE, "recipe_id");
+				
+				try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+					setParameter(stmt, 1, ingredient.getRecipeId(), Integer.class);
+					setParameter(stmt, 2, ingredient.getUnit(), Integer.class);
+					setParameter(stmt, 3, ingredient.getIngredientName(), String.class);
+					setParameter(stmt, 4, ingredient.getInstruction(), String.class);
+					setParameter(stmt, 5, ingredient.getIngredientOrder(), Integer.class);
+					setParameter(stmt, 6, ingredient.getAmount(), Double.class);
+					
+					stmt.executeUpdate();
+					commitTransaction(conn);
+				}
+			} catch (Exception e) {
+				rollbackTransaction(conn);
+				throw new DbException(e);
+			}
+		} catch (SQLException e) {
+			throw new DbException(e);
+		}
+	}
 }
