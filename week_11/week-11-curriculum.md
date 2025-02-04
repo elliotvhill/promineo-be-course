@@ -368,4 +368,184 @@ WHERE recipe_id = 5;
     - Throw an exception if the recipe doesn't exist
 3. Write `deleteRecipe` method in the DAO
 
-<!-- ## Changing Sort Order with Streams -->
+## Changing Sort Order with Streams — Sorting numerically
+
+## Background
+
+#### A caveat...
+
+-   You may find this topic **confusing**
+-   This goes through **a lot** of Java that you haven't been exposed to
+-   Well...after this you will have been **exposed** to it!
+-   Don't worry if you don't **grasp** everything that's taught in this video
+
+### The sort situation
+
+-   Recipe lists are sorted alphabetically
+-   This is because the DAO _explicitly_ sorts them alphabetically
+
+    ```sql
+    SELECT *
+    FROM recipe
+    ORDER BY recipe_name;
+    ```
+
+-   The business unit in charge of your project thinks that it's confusing that the recipes are sorted **alphabetically**
+-   The user must pick a recipe **ID** — therefore it is less confusing if the recipes are sorted in ID order
+-   **Change**: we need to sort by ID and _not_ by name
+
+#### From this:
+
+```
+2: Apple Monsters
+4: Chocolate Moose
+3: Ice Cubes
+1: Kitty Litter Cake
+```
+
+#### To this:
+
+```
+1: Kitty Litter Cake
+2: Apple Monsters
+3: Ice Cubes
+4: Chocolate Moose
+```
+
+### Change the service layer
+
+-   The request is a **change** in _business rules_
+-   Business rules are _(should be)_ applied in the **service** layer
+-   Making a single change in the recipe service affects **all calls** to retrieve the recipe list
+
+#### How does this work?
+
+-   If Java "knows" that an object has a certain **method**, Java can call the method
+-   Java "knows" that an object has a method if the object _inherits_ from a specified **interface**
+-   The compiler determines whether an object is the right type by looking at the **inheritance chain**
+
+#### Inheritance review:
+
+-   You can declare an abstract method _without a body_ in an **interface**
+-   Java uses the **Comparator** interface when sorting
+-   `Comparator` has a single abstract method: **compare**
+-   To sort a `List`, create a class that implements `Comparator` and pass an **instance** to Java
+
+### Implementing `Comparator`
+
+-   If you implement the `Comparator` interface, you **must** define a **body** for the compare method
+-   You then pass an instance of that class to a method that **expects** an instance of `Comparator`
+-   Java will then **call** the compare method on that object _over and over_ until each element is in the correct position
+
+### Designing a compare method
+
+```java
+public int compare(Recipe r1, Recipe r2) {
+}
+```
+
+-   `compare` must **return** the following:
+    -   `< 0` if `r1` is less than `r2`
+    -   `= 0` if `r1` is equal to `r2`
+    -   `> 0` if `r1` is greater than `r2`
+-   To sort by ID, **subtract** `r2`'s ID from `r1`'s ID
+
+#### Solving the problem:
+
+-   Sort the list using `Collections.sort` or `List.sort`
+    -   Sort the list directly using an **anonymous inner class**
+    -   Sort the list directly using a **Lambda expression**
+-   Sort the list using a `Stream`
+
+## Sorting with `List.sort`
+
+### Solution 1: Anonymous Inner Class
+
+-   Remember the rule in which you can't **instantiate** an interface?
+-   ...it turns out you **can**
+-   You provide a body for the interface and add bodies for _all **abstract** methods_
+-   This is called an **anonymouse inner class**
+-   The class has _no name_ and must be referenced **immediately** when it is created _(i.e. assign it to a variable or use it in a method call)_
+
+#### Anonymous inner class: creation
+
+-   Use the `new` operator on the interface to create the object
+-   Provide an **implementation** of all interface methods
+
+    ```java
+    new Comparator<Recipe>() {
+        public int compare(Recipe r1, Recipe r2) {
+            // ...
+        }
+    }
+    ```
+
+#### Anonymous inner class: sorting
+
+```java
+List<Recipe> recipes = recipeDao.fetchAllRecipes();
+
+recipes.sort(new Comparator<Recipe>() {
+    public int compare(Recipe r1, Recipe r2) {
+        return r1.getRecipeId() - r2.getRecipeId();
+        }
+    });
+
+return recipes;◊
+```
+
+### Anonymous analysis
+
+-   Anonymous inner classes are a **heavyweight** solution
+-   The compiler creates a separate `.class` file
+-   The `.class` file is separately **loaded** and parsed
+-   Plus, they're kind of **ugly**
+
+### Solution 2: Lambda expression
+
+```java
+List<Recipe> recipes = recipeDao.fetchAllRecipes();
+
+recipes.sort(
+    (Recipe r1, Recipe r2) -> {
+        return
+            r1.getRecipeId() - r2.getRecipeId();
+    }
+);
+
+return recipes;
+
+// Can be shortened to...
+recipes.sort(
+    (r1, r2) -> r1.getRecipeId() - r2.getRecipeId();
+);
+```
+
+## Sorting with Streams
+
+### Solution 3: Streams
+
+-   Streams are functional **pipelines** that have...
+    -   A **creation** method
+    -   Zero or more **intermediate** methods
+    -   A **termination** method
+-   The advantage of a Stream is that you can retrieve, sort, and return in a **single** statement
+
+### Stream implementation
+
+```java
+return recipeDao.fetchAllRecipes()
+    .stream()
+    .sorted((r1, r2) -> r1.getRecipeId() - r2.getRecipeId())
+    .collect(Collectors.toList());
+```
+
+| Method      | Comment             |
+| ----------- | ------------------- |
+| `stream()`  | Creation method     |
+| `sorted()`  | Intermediate method |
+| `collect()` | Termination method  |
+
+## Recipes project work
+
+-   Modify `fetchRecipes()` in `RecipeService.java` to sort the result using a Stream
