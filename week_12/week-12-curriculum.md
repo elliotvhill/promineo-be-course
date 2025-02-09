@@ -57,9 +57,39 @@ _For example: testing a (REST) server — does the server return the expected an
 -   **Architecture**
     -   "Given", "When", "Then" _(Martin Fowler)_
 
-<!-- ## Test Driven Development (TDD) -->
+## Test Driven Development (TDD)
 
-<!-- ## Behavior Driven Development (BDD) -->
+### What is Test-Driven Development (TDD)?
+
+-   It's simply **unit testing** but the test is written _first_
+-   Typically done with **two people** _("eXtreme Programming" — XP)_
+-   Also known as **Red**-**Green**-**Refactor**:
+    -   **Red** — write some test code
+    -   **Green** — write some app code
+    -   **Refactor** the test until complete
+
+### Advantages of TDD
+
+-   Avoids code bloat — you _only_ write enough application code to satisfy the test, i.e. no extra code
+-   Generally faster development
+-   Saves cost over the entire project
+
+## Behavior Driven Development (BDD)
+
+### Advantages over TDD
+
+-   **Results-based** testing
+-   Tests **configuration**
+-   Tests **SQL** statements
+-   Write **fewer unit tests**
+-   **Red-Green-Refactor** for _functionality_
+
+### Combine with TDD
+
+-   TDD/BDD is the best of both worlds!
+-   **TDD** for complex methods
+-   **BDD** for overall functionality
+-   Instills **confidence** that the app will perform as designed
 
 <!-- ## Functional Test for Menu Application -->
 
