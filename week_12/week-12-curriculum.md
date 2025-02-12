@@ -91,6 +91,16 @@ _For example: testing a (REST) server — does the server return the expected an
 -   **BDD** for overall functionality
 -   Instills **confidence** that the app will perform as designed
 
-<!-- ## Functional Test for Menu Application -->
+## What To Do When
 
-<!-- ## What To Do When -->
+### What to do
+
+-   If testing the return value from a method or a REST service = **assertion** statement
+-   If, testing a **method call** = **mock** a method _(using a mocking library like Mockito)_
+
+#### Rules of testing:
+
+-   Test as _high-level_ as you can
+-   Test as _soon_ ass you can
+
+_**Remember:** Your code isn't complete until it is tested!_
