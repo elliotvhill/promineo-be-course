@@ -32,6 +32,30 @@ public class PetParkApplication {
 }
 ```
 
+#### `@SpringBootApplication`:
+
+-   Enables **Component Scan** — Spring will load classes and libraries, starting at the package in which the annotation is found
+-   Enables **Auto-configuration**
+
+### Component Scan
+
+-   Boot looks at every class in the **main package** and all sub-packages
+-   Determines if Spring should manage the class:
+    -   Called a "managed Bean" or **Bean**
+    -   Spring creates a **single** instance
+    -   Stashes it in an object **repository**
+    -   We can request an instance using `@Autowired`
+-   We will then write a **controller** class
+-   Spring's component scan will **map** HTTP requests to Java methods that we write
+-   We use annotations to tell Spring which HTTP **verb** (internet requests) to map the method
+
+### Auto-configuration
+
+-   Spring Boot examines the **classpath** and the application configuration
+-   It sets up **functionality** _(i.e. Web application)_ based on what it finds
+-   Spring creates a Web application if it finds the **Tomcat** dependency
+-   Tomcat is loaded by `spring-boot-starter-web`
+
 <!-- ## Create Maven Project -->
 
 <!-- ## Create Database Schema -->
