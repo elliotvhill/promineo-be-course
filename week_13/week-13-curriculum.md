@@ -56,9 +56,18 @@ public class PetParkApplication {
 -   Spring creates a Web application if it finds the **Tomcat** dependency
 -   Tomcat is loaded by `spring-boot-starter-web`
 
-<!-- ## Create Maven Project -->
+## Create Database Schema
 
-<!-- ## Create Database Schema -->
+Use MySQL **Workbench** to create:
+
+-   Schema
+-   User with permissions
+
+In **Eclipse**:
+
+-   Create `application.yaml`
+-   (Possibly install YAML — *"YAML Ain't Markup Language"* — editor)
+-   Add database configuration
 
 <!-- ## Create Table Entities -->
 
