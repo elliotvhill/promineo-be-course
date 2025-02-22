@@ -116,8 +116,36 @@ public class GeoLocation {
 }
 ```
 
-<!-- ## Create Table Data -->
+## Create Table Data
 
-<!-- ## Create JPA Configuration -->
+-   In Eclipse, we will create **data** for the `amenity` table
+-   Spring Boot will automatically **execute** a file with SQL `INSERT` statements: `src/main/resources/data.sql`
+
+## Create JPA Configuration
+
+-   Add the JPA and Spring Boot **configuration** into `application.yaml`
+-   Start the application and show that the tables are **created** by JPA and **populated** by Spring Boot
+
+### Configuration — `application.yaml`
+
+#### Three configuration sections:
+
+1. `spring.datasource`: database **connection** instructions
+2. `spring.jpa`: **JPA** setup instructions
+3. `spring.sql`: Spring data **instructions**
+
+#### Adding JPA config to `application.yaml`:
+
+-   `hibernate:` — an **Object Relational Mapper (ORM)** library which takes the entities and converts them into SQL statements (to create tables and relationships)
+    -   `ddl-auto: create` — have Hibernate create the tables _(initially; after will use "update")_
+-   `show-sql: true` — shows the SQL statements
+-   `defer-datasource-initialization: true` — tells Spring Boot to wait until Hibernate has finished creating tables before inserting data
+
+### Verify table creation
+
+-   We will use **DBeaver** to verify that the tables have been created and populated.
+-   Here are the rules:
+    -   Use **MySQL Workbench** to create the schema, user, and password — and to give privileges to the user
+    -   Use **DBeaver** for everything else — queries, inserts, etc.
 
 <!-- ## Create Contributor Operation -->
