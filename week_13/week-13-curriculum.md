@@ -69,7 +69,52 @@ In **Eclipse**:
 -   (Possibly install YAML — *"YAML Ain't Markup Language"* — editor)
 -   Add database configuration
 
-<!-- ## Create Table Entities -->
+## Create Table Entities
+
+### Video Content
+
+-   A look at the Pet Park Locations Entity Relationship Diagram (ERD)
+-   Create the **entities** that Spring Java Persistence API (Spring JPA) will use to create the schema tables
+-   JPA will **create** the tables for us
+
+### Pet Park ERD
+
+<img src="./pet-park-erd.png" alt="A screenshot of the pet park entity relationship diagram." />
+
+### Create the JPA table entities
+
+```java
+@Entity // can specify the table name here
+@Data
+public class Contributor {
+    @Id // primary key
+    @GeneratedValue(strategy = ...)
+    private Long contributorId;
+
+    @Column(unique = true) // unique index
+    private String contributorEmail;
+
+    @OneToMany(mappedBy = ...)
+    private Set<PetPark> petParks;
+}
+```
+
+### Embed an object in an entity
+
+-   Need to use the `@Embedded` annotation and then `@Embeddable` in the class that gets embedded
+
+```java
+@Entity
+public class PetPark {
+    @Embedded
+    private GeoLocation geolocation;
+}
+
+@Embeddable
+public class GeoLocation {
+    // ...
+}
+```
 
 <!-- ## Create Table Data -->
 
