@@ -148,4 +148,126 @@ public class GeoLocation {
     -   Use **MySQL Workbench** to create the schema, user, and password — and to give privileges to the user
     -   Use **DBeaver** for everything else — queries, inserts, etc.
 
-<!-- ## Create Contributor Operation -->
+## Create Contributor Operation
+
+-   Explain the **parts** of a Spring Boot application
+-   Code the classes needed to **perform** the "Create Contributor" operation
+-   Develop **JSON** that will be used to create a `contributor`
+-   Explain the HTTP **POST** method
+-   Add **transaction** management
+
+### The anatomy of a Spring Boot application
+
+1. **Controller** (class) — handles HTTP requests — `ParkController.java`
+2. **Service** (class) — manages business logic — `ParkService.java`
+3. **DAO** (interface) — interacts with database — `ContributorDao.java`
+
+### Once the Java is created...
+
+-   Use a **REST** client to send JSON to the running application
+-   We will use Advaced REST Client (**ARC**) from MuleSoft
+
+### JSON vs. Java
+
+-   Must look **exactly** like the receiving class
+
+#### JSON:
+
+```json
+{
+    "contributorName": "Sandy Blotts",
+    "contributorEmail": "sandy@blotts.r.us"
+}
+```
+
+#### Java:
+
+```java
+class ContributorData {
+    Long contributorId;
+    String contributorName;
+    String contributorEmail;
+}
+```
+
+### A look at HTTP
+
+-   HTTP is an **abbreviation** for **H**yper**t**ext **T**ransfer **P**rotocol
+-   HTTP is just **text** sent over the internet
+-   HTTP consists of a **request** and a **response**
+
+### HTTP Request
+
+-   Request Line:
+
+    -   HTTP verb + URI + HTTP version
+
+        ```
+        GET /pet_park HTTP/2.0
+        POST /pet_park HTTP/2.0
+        ```
+
+    -   Common HTTP verbs (CRUD):
+        -   `POST` (Create)
+        -   `GET` (Read)
+        -   `PUT` (Update)
+        -   `DELETE` (Delete)
+
+-   Request Headers:
+
+    -   Describe the request and allowed response format(s)
+
+        ```
+        Accept: application/json
+        Content-Type: application/json
+        ```
+
+-   Request Body (JSON):
+    -   Used for `POST` (Create) and `PUT` (Update)
+    -   Written as valid **JSON**
+    -   Also called the request **payload**
+
+### HTTP Response
+
+-   Status Line:
+
+    -   HTTP version + status code + reason
+
+        ```
+        HTTP/2.0 200 OK
+        HTTP/2.0 404 Not Found
+        HTTP/2.0 409 Conflict
+        ```
+
+-   Response Headers:
+    -   Very **similar** to request headers and body
+    -   Response headers may be different than the request headers, but they are still **key: value** pairs
+-   Response Body (JSON)
+    -   Body (payload) is **JSON**
+
+### Setting up
+
+-   We will create **Data Transfer Objects** (**DTO**s) for the request and response instead of entities
+-   This is because Jackson (JSON generator) freaks out with the recursive nature of entities:
+
+    ```java
+    class Contributor {
+        List<PetStore> petStores;
+    }
+
+    class PetStore {
+        Contributor contributor;
+    }
+    ```
+
+### The `POST` request
+
+-   Use Advanced Rest Client (ARC) to send a `POST` request with JSON payload to the service running in Eclipse: `http://localhost:8080/pet_park`
+-   A `POST` request returns status `201` (Created) if successfull
+
+### Transaction management
+
+-   In a transaction, a **group** of SQL statements will either _all_ succeed or _all_ fail — there is no partial success
+-   In Spring Boot, transactions are started by adding _`@Transactional`_ to a public method in the service class
+-   If an exception is thrown, the transaction "**rolls back**"
+-   If an exception is not thrown, the transaction is "**committed**"
