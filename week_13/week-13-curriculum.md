@@ -271,3 +271,185 @@ class ContributorData {
 -   In Spring Boot, transactions are started by adding _`@Transactional`_ to a public method in the service class
 -   If an exception is thrown, the transaction "**rolls back**"
 -   If an exception is not thrown, the transaction is "**committed**"
+
+## Additional content
+
+Notes from the "break out" videos.
+
+## Spring vs. Spring Boot
+
+-   What is **Spring**?
+-   What is **Spring Boot**?
+-   How do they work together?
+
+### What is Spring?
+
+-   Spring is a development and runtime **framework** for Java
+-   Spring provides the following **features**:
+    -   Component **Scan**
+    -   Object lifecycle **management**
+    -   Inversion of Control (**IoC**)
+    -   Dependency Injection (**DI**)
+    -   Common **logging** framework
+    -   **Tools** for common solutions
+
+### Component Scan
+
+-   When Spring starts up, it loads and **scans** all classes looking for objects to manage
+    -   _`@Service`_
+    -   _`@Controller`_
+    -   _`@Component`_
+    -   etc.
+-   Spring stores managed objects in a **registry** and makes them available for the application
+
+### Object lifecycle management
+
+-   A Spring-managed object is called a "**Managed Bean**" or "**Bean**"
+-   Spring creates Beans and allows the application to **hoook** into lifecycle events
+-   Applications can hook into post-create methods for **initialization** purposes
+-   Applications can hook into pre-destroy methods for **cleanup**
+
+#### For example:
+
+```java
+@Component
+public class MyClass {
+    @PostConstruct // Spring automatically calls the method after all the Beans have been created
+    public void setup() {
+        // Initialize class here
+    }
+}
+```
+
+### Inversion of Control (IoC)
+
+#### "Normal" application:
+
+-   In a "normal" Java application **you** write code in the main method
+-   **You** make method calls and create objects
+-   When finished, the application **exits** from the main method
+
+```java
+public static void main(String[] args) {
+    // Call stuff
+    // Do stuff
+    // Exit now
+}
+```
+
+#### Inversion of Control (IoC):
+
+-   Spring **manages** object lifecycles
+    -   Creation
+    -   Initialization
+    -   Destruction
+-   You write code that "**hooks**" into object lifecycle events
+-   Spring **calls** that code when a lifecycle event is triggered
+-   To an observer, code execution appears **non-linear**
+
+#### IoC Example:
+
+```java
+@Component // makes the class eligible for Spring management
+@ComponentScan // begins the component scan
+public class MyClass {
+    public static void main(Stringp[] args) {
+        try (AbstractApplicationContext ctx =
+            new AnnotationConfigApplicationContext(MyClass.class)) {
+                // code
+            }
+    }
+
+    @PostConstruct
+    public void run() {
+        System.out.println("I am running!");
+    }
+}
+```
+
+### Dependency Injection (DI)
+
+-   Beans can **request** other Beans
+-   This is called Dependency Injection (DI) or just **Injection** — Spring is able to populate instance variables based on Beans it has created
+-   Use the `@Autowired` annotaion for this
+
+#### Example:
+
+```java
+@Service
+public class MyService {
+    public void doTheThing() {
+        // Do something
+    }
+}
+
+@Component
+public class MyClass {
+    @Autowired
+    private MyService myService;
+
+    @PostConstruct
+    public void init() {
+        myService.doTheThing();
+    }
+}
+```
+
+### Common logging framework
+
+-   Spring provides a **custom implementation** of Apache Commons Logging
+-   When the app is deployed, almost any logging **framework** can be used:
+    -   Logback
+    -   Log4j
+    -   Java Util Logging
+    -   etc.
+-   Common logging across the enterprise allows for **automation**
+-   But — you must set up all the logging **dependencies** and the initialization yourself
+
+#### Example:
+
+```java
+@Component
+public class MyClass {
+    private static final Logger log = LogFactory(MyClass.class);
+
+    @PostConstruct
+    public void init() {
+        log.info("In the init method!");
+    }
+}
+```
+
+### Tools for common solutions
+
+-   Spring provides tools for **common** solutions:
+    -   `DispatcherServlet` for Web (REST) applications — set up to call methods in a Controller class and maps HTTP requests to methods
+    -   Java **configuration** support for Web applications
+    -   Framework for **SOAP (Simple Object Access Protocol)** Web applications
+    -   **APIs** for JDBC, JPA, messaging (queue, SMS)
+
+### If Spring does all this, why Spring Boot?
+
+-   Whereas you _can_ create complex and wonderful applications with Spring, it is often **HARD**
+-   Once you figure out a solution, you **reuse** it over and over again
+-   This leads to brittle, **archaic** code
+    -   Spring adds **features** but you don't know about or utilize them
+    -   You don't want to make the **effort** to stay current
+
+<!-- ### What is Spring Boot? -->
+
+<!-- ## Spring JPA vs. Spring JDBC -->
+
+<!-- ### Coding the One-to-Many Relationship in JPA -->
+
+<!-- ### Coding the Many-to-Many Relationship in JPA -->
+
+<!-- ## Dependency Injection -->
+
+<!-- ## Lombok Explained -->
+
+<!-- ## Spring Boot Test Framework -->
+
+<!-- ## Porting the Recipe App (from MySQL videos Weeks 7-11) -->
+
+<!-- ## Building the Final Project -->
