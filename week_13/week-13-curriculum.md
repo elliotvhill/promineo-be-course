@@ -433,10 +433,56 @@ public class MyClass {
 -   Whereas you _can_ create complex and wonderful applications with Spring, it is often **HARD**
 -   Once you figure out a solution, you **reuse** it over and over again
 -   This leads to brittle, **archaic** code
-    -   Spring adds **features** but you don't know about or utilize them
-    -   You don't want to make the **effort** to stay current
+    -   Spring adds **features** but you don't know about or utilize them if you don't make the **effort** to stay current
 
-<!-- ### What is Spring Boot? -->
+### What is Spring Boot?
+
+### Spring Boot offers opinionated oversight
+
+-   Through **auto-configuration**, Boot determines what you are trying to do
+-   Spring Boot examines the **classpath** to see what's there
+-   Spring Boot then **configures** the application for the most common usage
+
+#### Web example:
+
+-   If Boot finds `spring-boot-starter-web` on the classpath, it:
+    -   Automatically creates a **dispatcher servlet** (i.e. routes Web requests to controller methods)
+    -   Configures an embedded **Tomcat** Web application server to work with the application
+    -   **Maps** HTTP requests to specific controller methods
+
+#### JPA example:
+
+-   If Boot finds `spring-boot-starter-jpa` on the classpath, Boot:
+    -   Creates a **transaction** manager
+    -   Creates a **data source** to manage connections
+    -   Creates a **connection pool** to reuse connections
+    -   Scans for JPA **entities**
+    -   Automatically **connects** to the database
+
+### Spring Boot configuration
+
+-   Spring Boot has automatic configuration for **dozens** and dozens (perhaps hundreds) of application types
+-   Check out the dependency list at https://start.spring.io
+
+### Spring Boot logging
+
+-   Spring Boot **automatically** configures the **Simple Logging Façade for Java (SLF4J)** and adds required dependencies
+-   Spring Boot automatically provides support for the **Logback** logging framework
+-   With no developer support, logging is **enabled** out of the box
+
+### Spring Boot Actuator
+
+-   Spring Boot supports application metrics collection with **Micrometer**
+-   Metrics are automatically collected at **boundary** points such as:
+    -   HTTP requests (count and timing)
+    -   Database requests (count and timing)
+    -   Scheduler requests (e.g. Quartz)
+-   Out-of-the-box support for metrics aggregators like **Prometheus**
+
+### So what's the difference between Spring and Spring Boot?
+
+-   Spring provides the **framework**
+-   Spring Boot provides the **access**
 
 <!-- ## Spring JPA vs. Spring JDBC -->
 
