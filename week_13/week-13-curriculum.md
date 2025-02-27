@@ -484,7 +484,126 @@ public class MyClass {
 -   Spring provides the **framework**
 -   Spring Boot provides the **access**
 
-<!-- ## Spring JPA vs. Spring JDBC -->
+## Spring JPA vs. Spring JDBC
+
+A look at Spring JPA and Spring JDBC:
+
+-   What's the difference?
+-   Pros and cons of **each**
+-   Where is the **industry** going?
+-   What is Promineo teaching and **why**?
+-   How does **Java** JDBC fit in?
+-   **Coding** Spring JPA vs. Spring JDBC
+
+### Spring JPA vs. Spring JDBC — what's the difference?
+
+-   **JPA**: Java Persistence API
+-   **JDBC**: Java Database Connectivity
+-   Spring **JPA**:
+    -   Built on the Hibernate Object/Relational Mapping (ORM) tool
+    -   Not "true" JPA (like Hibernate) but built _on top_ of Hibernate
+-   Spring **JDBC**:
+    -   Templated approach built on Java JDBC
+    -   Not Java JDBC, but built _on top_ of Java JDBC
+
+### Spring JPA
+
+-   Relational databases (**RDBMS**) define relationships as:
+    -   One-to-one
+    -   One-to-many
+    -   Many-to-many
+-   Java _(and other OOP models)_ relationships are:
+    -   **Is A**... (inheritance)
+    -   **Has A**... (instance variable)
+    -   **Uses A**... (local variable)
+
+Java knows about objects, **inheritance**, and embedded objects. Relational databases **don't** know about any of those things.
+
+An **ORM** (in this case, Hibernate) attempts to **bridge** the gap between Java and relational databases.
+
+#### Hibernate:
+
+-   automatically **populates** (i.e. `INSERT` statements, etc. — but not initializations) tables and Java classes
+-   automatically **maintains** the database relationships
+-   will **create** tables, but not _initialize_ them
+
+#### Spring JPA:
+
+-   _will_ populate/initialize tables with **data**
+-   provides many **common** methods in the Data (DAO) layer
+-   creates DAO-layer methods based on programmer-supplied method **names** (via an interface)
+
+#### Spring JDBC:
+
+-   provides **templates** that sit _on top of_ Java JDBC
+-   saves the programmer from (mostly) having to **interact** with Java JDBC directly
+-   takes the **drudgery** out of Java JDBC by writing boilerplate code
+-   handles transactions correctly by **managing** exceptions
+-   makes all exceptions **unchecked**
+
+### Spring JPA pros and cons
+
+#### Pros:
+
+-   Loads Java **objects** from table data
+-   Loads **tables** from Java object data
+-   Can **create** tables
+-   Maintains table **relationships**
+-   Programmer can write custome **queries** using special naming of methods in an interface _(Spring JPA provides the implementation)_
+-   Isolates/**protects** programmers from themselves
+
+#### Cons:
+
+-   Can **create** tables
+-   Oftentimes _very_ **inefficient**
+-   Relationships are modeled with **recursive** variables, which means:
+    -   Can't print entities
+    -   Can't compare entities
+    -   Can't easily transform a Java entity to JSON using the Jackson library
+-   Hard to **debug** issues
+-   Isolates/**protects** programmers from themselves
+
+### Spring JDBC pros and cons
+
+#### Pros:
+
+-   JDBC **templates** mean:
+    -   No more exception handling
+    -   No more closing resources
+    -   Transactions are handled with a single annotation
+-   All **boilerplate** code is already written
+-   The programmer just **writes**:
+    -   The queries
+    -   The code to populate Java objects from a `ResultSet`
+-   With good SQL, JDBC is very **efficient**
+
+#### Cons:
+
+-   Java objects are **not** populated automatically
+-   The programmer writes **more** code than with JPA
+-   The programmer must know **SQL** in order to write the queries
+
+### Where is the industry going?
+
+-   A quick perusal of Internet **documentation** shows most newer tutorials/how to documents favor JPA.
+-   There is a kind of **_mythos_** that programmers must be protected from themselves _(this is not entirely without merit...)_
+-   JPA is a high-level abstraction that **bridges** object-oriented languages with relational databases
+
+It appears, then, that the industry is moving towards adopting **JPA** vs. JDBC. Spring Boot shops appear to favor Spring **JPA** over Spring JDBC.
+
+#### What is Promineo teaching and why?
+
+Based on the perceived industry direction (always **risky** when analyzed from the _before_ perspective), Promineo is teaching Spring JPA as part of the Spring Boot course.
+
+### How does Java JDBC fit in?
+
+-   In the MySQL part of the course, you learned **Java** JDBC
+-   Java JDBC is a **low-level** API that is:
+    -   Hard to use
+    -   Easy to miss closing resources
+    -   Extremely verbose, requiring _lots_ of supporting code
+-   But both Spring JPA and Spring JDBC are built on **top** of Java JDBC
+-   Both are **high-level** abstractions _(i.e. simplifications)_ of the low-level API
 
 <!-- ### Coding the One-to-Many Relationship in JPA -->
 
