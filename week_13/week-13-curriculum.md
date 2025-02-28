@@ -693,7 +693,84 @@ The join table name and column names can be specified with an `@JoinTable` annot
 
 If you don't specify the `@JoinTable` annotation, JPA will create one with default names.
 
-<!-- ### Coding the Many-to-Many Relationship in JPA -->
+### Coding the Many-to-Many Relationship in JPA
+
+-   The difference between a **unidirectional** many-to-many relationship and a **bidirectional** many-to-many relationship
+-   Coding a **unidirectional** many-to-many relationship
+-   Coding a **bidirectional** many-to-many relationship
+
+### Bidirectional many-to-many
+
+-   In a bidirectional many-to-many relationship, there is a relationship "**owner**"
+-   The "owner" defines the join table using the `@JoinTable` annotation
+-   The "**owned**" entity must use the `mappedBy` attribute to point to the instance variable (`Set`, `List`) in the owner
+-   For a bidirectional relationship, each entity "knows" about the other
+
+```java
+@Entity
+class Owner {
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(...)
+    Set<Owned> owned = new HashSet<>();
+}
+
+@Entity
+class Owned {
+    @ManyToMany(mappedBy = "owned")
+    Set<Owner> owners = new HashSet<>();
+}
+```
+
+In both bi- and uni-directional many-to-many relationships, Spring JPA creates a **join table** to map from owner to owned:
+
+| owner_id | owned_id |
+| :------: | :------: |
+|    1     |    1     |
+|    1     |    2     |
+|    2     |    3     |
+
+#### `@JoinTable` annotation:
+
+-   Used by both uni- and bi-directional many-to-many relationships
+
+```java
+@JoinTable(
+    name = "join_table_name",
+    joinColumns = @JoinColumn("owner_column"),
+    inverseJoinColumns = @JoinColumn("owned_column")
+)
+```
+
+**Note:** If you don't specify the `@JoinTable` annotation, JPA will create one with default names.
+
+### Getting the join table to work
+
+When inserting a parent with child rows:
+
+-   **Bidirectional**:
+    -   The child objects must be set in the parent, and the parent must be set in _all_ the child objects
+-   **Unidirectional**:
+    -   The child objects must be set in the parent
+
+### Unidirectional many-to-many
+
+-   In a unidirectional many-to-many relationship, there is a relationship "**owner**", which knows about the "owned" entity
+-   The "owner" defines the join table using the `@JoinTable` annotation
+-   The "**owned**" entity does _not_ know about the "owner"
+
+```java
+@Entity
+class Owner {
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(...)
+    Set<Owned> owned = new HashSet<>();
+}
+
+@Entity
+class Owned {
+    // No reference to "Owner"
+}
+```
 
 <!-- ## Dependency Injection -->
 
