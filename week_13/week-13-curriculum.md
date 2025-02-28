@@ -605,7 +605,93 @@ Based on the perceived industry direction (always **risky** when analyzed from t
 -   But both Spring JPA and Spring JDBC are built on **top** of Java JDBC
 -   Both are **high-level** abstractions _(i.e. simplifications)_ of the low-level API
 
-<!-- ### Coding the One-to-Many Relationship in JPA -->
+### Coding the One-to-Many Relationship in JPA
+
+-   Relational ownership
+-   The **difference** between a **unidirectional** one-to-many relationship and a **bidirectional** one-to-many relationship
+-   Coding a **unidirectional** one-to-many relationship
+-   Coding a **bidirectional** one-to-many relationship
+
+### Relational Ownership
+
+-   This is a **JPA** concept, not a RDBMS concept
+-   This is how **JPA** keeps the various field definitions straight and how to populate things
+-   In a **one-to-many** relationship, the parent typically "owns" the relationship
+-   In a **many-to-many** relationship, pick the one that makes the most sense to you (i.e. a recipe "owns" a category)
+-   Ownership becomes important when we look at the `@JoinTable` annotation:
+
+    ```java
+    @JoinTable(
+        joinColumns = owner_column,
+        inverseJoinColumns = owned_column
+    )
+    ```
+
+-   The `joinColumns` attribute **must name the table _column_** (NOT the Java field name!) in the owning table
+-   The `inverseJoinColumns` attribute must name the table column in the owned table
+
+### Unidirectional vs. Bidirectional One-to-Many
+
+-   **Unidirectional** — the parent knows about the child; child does _not_ know about the parent
+-   **Bidirectional** — the parent knows about the child; child knows about the parent
+-   This is indicated by:
+    -   the **presence** or **absence** of the **parent** entity in the child
+    -   the **presence** or **absence** of the `mappedBy` attribute in the `@OneToMany` annotation
+
+#### Bidirectional one-to-many:
+
+```java
+@Entity
+class Parent {
+    @OneToMany(mappedBy = "parent")
+    Set<Child> children = new HashSet<>();
+}
+
+@Entity
+class Child {
+    @ManyToOne
+    Parent parent;
+}
+```
+
+#### Unidirectional one-to-many:
+
+```java
+@Entity
+class Parent {
+    @OneToMany // no mappedBy because it's uni-directional
+    Set<Child> children = new HashSet<>();
+}
+
+@Entity
+class Child {
+    // No variable of type Parent
+}
+```
+
+### Unidirectional one-to-many
+
+Spring JPA creates a **join table** to map from parent to child:
+
+| parent_id | child_id |
+| :-------: | :------: |
+|     1     |    1     |
+|     1     |    2     |
+|     2     |    3     |
+
+The join table name and column names can be specified with an `@JoinTable` annotation:
+
+```java
+@JoinTable(
+    name = "join_table_name",
+    joinColumns =
+        @JoinColumn("owner_column"),
+    inverseJoinColumns =
+        @JoinColumn("owned_column")
+)
+```
+
+If you don't specify the `@JoinTable` annotation, JPA will create one with default names.
 
 <!-- ### Coding the Many-to-Many Relationship in JPA -->
 
