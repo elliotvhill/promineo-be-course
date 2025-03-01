@@ -772,7 +772,35 @@ class Owned {
 }
 ```
 
-<!-- ## Dependency Injection -->
+## Dependency Injection
+
+### Dependency Injection starts with the Component Scan
+
+-   Part of the functionality of `@SpringBootApplication`
+-   Starts in the **current package** and all subpackages
+-   Spring loads classes that it can **manage**
+    -   `@Component`
+    -   `@Service`
+    -   etc.
+
+#### Bean lifecycle management and injection:
+
+-   Component Scan
+    -   Spring finds Bean to manage -> places Bean into Bean Registry ->
+-   Application
+    -   `@Autowired` — requests DI
+    -   Variable
+
+### How injection works
+
+-   Interface Animal -> Abstract class FarmAnimal -> Class Pig
+-   The application requests a variable of type Animal using the `@Autowired` annotation
+-   If there is another class that extends FarmAnimal, e.g. Cow, Spring doesn't know which class to inject into the variable and so doesn't start up the application
+
+### Fixing injection issues
+
+-   `@Primary`
+-   `@Qualifier`— better to use than `@Primary` because it's easier to avoid conflicts with having multiple `@Primary`s
 
 <!-- ## Lombok Explained -->
 
