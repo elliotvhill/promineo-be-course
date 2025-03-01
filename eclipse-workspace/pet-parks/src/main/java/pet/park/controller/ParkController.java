@@ -10,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +43,13 @@ public class ParkController {
 
 		log.info("Creating contributor ()", contributorData); // () is the parameter placeholder syntax
 		return parkService.saveContributor(contributorData);
-
+	}
+	
+	@PutMapping("/contributor/{contributorId}")
+	public ContributorData updateContributor(@PathVariable Long contributorId, @RequestBody ContributorData contributorData) {
+		contributorData.setContributorId(contributorId);
+		log.info("Updating contributor {}", contributorData);
+		return parkService.saveContributor(contributorData);
 	}
 	
 	@GetMapping("/contributor")
