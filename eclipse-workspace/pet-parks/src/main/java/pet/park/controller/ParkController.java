@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import pet.park.controller.model.ContributorData;
+import pet.park.controller.model.PetParkData;
 import pet.park.service.ParkService;
 
 @RestController
@@ -80,6 +81,28 @@ public class ParkController {
 		parkService.deleteContributorById(contributorId);
 		
 		return Map.of("message", "Deletion of contributor with ID=" + contributorId + " was successful.");
+	}
+	
+	@PostMapping("/contributor/{contributorId}/park")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public PetParkData insertPetPark(@PathVariable Long contributorId, 
+			@RequestBody PetParkData petParkData) {
+		
+		log.info("Creating park {} for contributor with ID={}", petParkData, contributorId);
+		
+		return parkService.savePetPark(contributorId, petParkData);
+	}
+	
+	@PutMapping("/contributor/{contributorId}/park/{parkId}")
+	public PetParkData updatePetPark(@PathVariable Long contributorId, 
+			@PathVariable Long parkId,
+			@RequestBody PetParkData petParkData) {
+		
+		petParkData.setPetParkId(parkId);
+		
+		log.info("Updating park {} for contributor with ID={}", petParkData, contributorId);
+		
+		return parkService.savePetPark(contributorId, petParkData);
 	}
 	
 }
