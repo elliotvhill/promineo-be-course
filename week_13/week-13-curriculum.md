@@ -802,7 +802,96 @@ class Owned {
 -   `@Primary`
 -   `@Qualifier`— better to use than `@Primary` because it's easier to avoid conflicts with having multiple `@Primary`s
 
-<!-- ## Lombok Explained -->
+## Lombok Explained
+
+-   What is project **Lombok**?
+-   **Coding** with Lombok
+
+### What is project Lombok?
+
+-   Project Lombok is a developer **productivity** tool
+-   Lombok uses **annotations** to modify class files
+-   It's technically a **hack** using a back door to modify class files
+-   The Java community keeps threatening to **close** that back door
+
+### Lombok annotations
+
+_Note: full list of annotations at https://projectlombok.org_
+
+-   `@Data` — all getters, setters, `toString`, `hashCode`, `equals`
+-   `@Value` — all getters, `toString`, `hashCode`, equals; creates immutable objects
+-   `@Builder` — implements **Builder Design Pattern**
+-   `@Slf4j` — sets up **Slf4j (Simple Logging For Java)** logging tool
+
+### Installing Lombok into Eclipse
+
+-   You must install Lombok into the IDE before you can use any Lombok features
+-   What do you do if Lombok **won't** install?
+    -   Ensure that there are **no spaces** in the Eclipse installation path
+    -   Write getters, setters, and other methods **manually**
+-   Even though you install Lombok into your IDE, you still need to add `lombok.jar` into your `pom.xml` file — _the annotations come from POM.xml and the getters and setters come from the Lombok install_
+
+    ```xml
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <optional>true</optional>
+    </dependency>
+    ```
+
+### `@Builder`
+
+-   Builder object allows methods to be chained together
+
+```java
+@Builder
+@Value
+public class AtBuilder {
+
+    private String firstName;
+    private String lastName;
+    private int age;
+
+    public static void main(String[] args) {
+        AtBuilder builder = AtBuilder
+            .builder()
+            .firstName("Ralph")
+            .lastName("Gency")
+            .age(32)
+            .build();
+
+        System.out.println(builder);
+
+        // Output:
+        // AtBuilder(firstName=Ralph, lastName=Gency, age=32)
+    }
+}
+```
+
+### `@Slf4j`
+
+```java
+@Value
+@Slf4j // logger - creates an object "log" of type Logger
+public class AtSlf4j {
+
+    private String firstName;
+    private String lastName;
+    private int age;
+
+    public static void main(String[] args) {
+        AtSlf4j slf = new AtSlf4j("Geralt", "of Rivia", 106);
+        log.info("Name={}, age={}",  // takes a String with a replaceable value "{}"
+            slf.getFirstName + " " + slf.getLastName(), slf.getAge());
+        // Output:
+        // 14:02:04.781 [main] INFO <package_name>.AtSlf4j - Name=Geralt of Rivia, age=106
+
+        log.info("{}", slf);
+        // Output:
+        // 14:02:04.781 [main] INFO <package_name>.AtSlf4j - AtSlf4j(firstName=Geralt, lastName="of Rivia", age=106) // i.e. the output of the toString method
+    }
+}
+```
 
 <!-- ## Spring Boot Test Framework -->
 
