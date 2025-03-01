@@ -88,7 +88,26 @@ class GlobalErrorHandler {
 -   Throw `NoSuchElementException` if contributo is not found
 -   Create global error handler to **manage** the exceptions
 
-<!-- ## Pet Park — Update Contributor -->
+## Pet Park — Update Contributor
+
+#### Overview:
+
+-   We'll add a **method** to modify an existing contributor
+-   This is basically the same as the "Create Contributor" operation but `PUT` is used instead of `POST`
+-   We only need to modify the controller because the service (save method) and DAO methods are already written
+
+### The REST way...
+
+-   We have to tell Spring which contributor we want to modify
+-   This is done using the `@PutMapping` and `@PathVariable` annotations
+
+```java
+@PutMapping("/contributor/{id}")
+ContributorData updateContributor(
+    @PathVariable Long id) {
+        // ...
+    }
+```
 
 <!-- ## Pet Park — Delete Contributor -->
 
