@@ -173,4 +173,27 @@ public void deleteContributor(
 -   Create an **amenity** DAO to retrieve amenities
 -   Create a pet park DAO to **save** the pet park
 
-<!-- ## Pet Park — Retrieve Pet Park -->
+## Pet Park — Retrieve Pet Park
+
+#### Overview:
+
+-   A RESTful **discussion**
+-   Add the **controller** method to retrieve a pet park by ID
+-   Add the **service** method
+-   **Test** it!
+
+### A RESTful discussion
+
+-   Contributor is the **primary** resource
+-   A park location is a **sub-resource** of Contributor
+-   In REST parlance: `/contributor/{contributorId}/park/{parkId}` — where `{contributorId}` is the **primary key** value of the contributor row, and `{parkId}` is the **primary key** value of the pet park row
+
+### Add the controller method
+
+-   Use the `@GetMapping` annotation
+-   Use `@PathVariable` for contributor ID and park ID
+
+### Add the service method
+
+-   Create a `findPetParkById` method that throws a `NoSuchElementException` if the park isn't found
+-   **Verify** that the contributor ID in the database is the same as the one requested
