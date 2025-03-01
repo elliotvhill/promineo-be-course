@@ -204,4 +204,22 @@ public class ParkService {
 						"Pet park with ID=" + petParkId + " does not exist."));
 	}
 
+	/**
+	 * @param contributorId
+	 * @param parkId
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public PetParkData retrievePetParkById(Long contributorId, Long parkId) {
+		// validate that contributor ID exists
+		findContributorById(contributorId);
+		PetPark petPark = findPetParkById(parkId);
+		
+		if (petPark.getContributor().getContributorId() != contributorId) {
+			throw new IllegalStateException("Pet park with ID=" + parkId + " is not owned by contributor with ID=" + contributorId);
+		}
+		
+		return new PetParkData(petPark);
+	}
+
 }
