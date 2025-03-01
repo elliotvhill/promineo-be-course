@@ -893,7 +893,174 @@ public class AtSlf4j {
 }
 ```
 
-<!-- ## Spring Boot Test Framework -->
+## Spring Boot Test Framework
+
+#### Overview:
+
+-   A **look** at the Spring Boot Test Framework
+-   **Four** types of testing
+
+### The Spring Boot Test Framework
+
+-   Sits **on top** of JUnit
+-   Modifies JUnittests to add an **application context** — i.e. **everything** an application needs to know about itself and its environment:
+    -   Contains Bean **registry**
+    -   Manages Bean **lifecycle**
+    -   Manages Dependency **Injection** (DI)
+    -   Resolves **messages**
+    -   Supports **internationalization**
+    -   Supports **event** publication
+
+#### Importance of application context in testing:
+
+-   With an application context, all the Spring **magic** is available to the **test**:
+    -   Dependency **Injection**
+    -   Inversion of Control (IoC):
+        -   Spring manages Bean lifecycles
+        -   "Hook" methods tap into lifecycle events
+    -   Web testing using **HTTP** requests
+
+### Types of testing
+
+-   Full Web testing under a Web container (i.e. **Tomcat**)
+-   Full **application** testing _without_ Web container
+-   **Partial** application testing with application context
+-   **Unit** testing
+
+### Full Web testing under a Web container
+
+The Spring Boot framework supports two types of testing in this manner:
+
+-   Supports **TestRestTemplate**, which allows you to send HTTP requests to a running application and the request gets routed to Tomcat, Tomcat routes the request to the dispatcher servlet in the application (which Spring writes for us), the dispatcher servlet calls methods on our controller where it can process the request
+    -   Blocking I/O — the request goes out, and everything just sits there until the request comes back
+    -   This makes it **Synchronous**
+-   Supports **WebTestClient** — sort of similar to Node.js
+    -   Non-blocking I/O
+    -   Asynchronous — requests go out and then it returns immediately, and processes do what they do, and then when the response comes back the test will pick it up
+    -   Requires a non-blocking database driver (like R2DBC)
+-   Running under a Web container (Tomcat) is just the same as **running** the application and sending the HTTP requests
+-   Tests **all parts** of the application:
+    -   Marshalling and unmarshalling from Java to JSON and vice versa
+    -   Controller parameter validation (AKA Bean Validation)
+    -   Result status and error handling
+
+### Full application testing _without_ Web container
+
+-   Uses **MockMvc**
+-   Same as full Web testing but **without** an embedded Web container
+-   Test **all parts** of the application:
+    -   Marshalling and unmarshalling from Java to JSON and vice versa (Spring does this directly under its application context)
+    -   Controller parameter validation (AKA Bean Validation)
+    -   Result status and error handling
+-   A little faster to start up the tests because don't have to start up the embedded Tomcat container
+
+### Partial application testing with an application context
+
+-   Call container or service-layer methods **directly**
+-   Does **not** support:
+    -   Marshalling and unmarshalling
+    -   Bean Validation
+    -   Error handling
+    -   Setting result status
+
+### Unit testing
+
+-   Tests a **single** method
+-   Does not need an **application context**
+-   Does not need the Spring Boot Test Framework (just **JUnit**)
+
+### Testing in Dog Rescue REST API
+
+-   We use **partial** application testing with an application context
+-   In the tests we call **controller** methods directly and make assertions on the results
+-   Tests run **faster** than under an embedded Web container
+-   Tests are **easier** to write and understand than when using MockMvc
+
+### Annotations set up the tests
+
+-   `@SpringBootTest`
+-   `@ActiveProfiles`
+-   `@Sql`
+-   `@SqlConfig`
+
+_Note: these are all **class-level** annotations, so they are applied to the test_ classes, _not individual tests_
+
+### `@SpringBootTest`
+
+-   Allows Spring Boot Test Framework to **control** the test
+-   Sets up the **application context**
+-   Specifies the main application **configuration** class — typically the main class that starts Spring Boot, but doesn't _have_ to be
+
+    ```java
+    @SpringBootTest(
+        webEnvironment =
+            WebEnvironment.NONE, // i.e. not running under Tomcat container
+        classes = DogRescue.class // main application class
+    )
+    ```
+
+### `@ActiveProfiles`
+
+-   Specifies an **alternate** settings file that is merged with the main applications settings file
+-   `application-test.yaml` is **merged** with `application.yaml`
+-   Spring Boot will look for `application.test` properties or `application.test.yaml` in the class path; any keys and values that are duplicated or specified in the test yaml file will **override** those of the main application
+
+    ```java
+    @ActiveProfiles("test")
+    ```
+
+#### `@ActiveProfiles("test")`:
+
+-   Allows the developer to use an **in-memory** database for the test (and the real database for the application)
+-   **All tables** are dropped, created, and populated before each test so that each test _always_ has a known set of data, and if a test fails it's not going to pollute the database/schema for other tests (which would cause them to fail as well)
+
+Set up `application-test.yaml` to go for the in-memory data source:
+
+```yaml
+spring:
+    datasource:
+        url: jdbc:h2:mem:rescue;MODE=MYSQL
+```
+
+This overrides the uri to use the H2 in-memory database for the test
+
+### `@Sql`
+
+-   **Drop and create** all tables before each test (`schema.sql`)
+-   **Populate** all tables with new data before each test (`data.sql`)
+-   Both have to be in the classpath, which is _typically_ `/src/test/resources`
+
+    ```java
+    @Sql(scripts = {
+        "classpath:schema.sql",
+        "classpath:data.sql"
+    })
+    ```
+
+### `@SqlConfig`
+
+-   Specifies any (extra) **configuration** needed for loading and executing the SQL files
+-   We will use it to specify UTF-8 as the **encoding** to use so that special characters are interpreted correctly — `@SqlConfig(encoding = "utf-8")`
+
+### How to write a good test
+
+Use Martin Fowler's "given/when/then" format:
+
+```java
+@Test
+void aVeryDescriptiveTestName() {
+    // Given: some precondition
+
+    // When: the test is executed
+
+    // Then: make assertions
+}
+```
+
+### Coding the tests
+
+-   To see this in **action**, refer to the Spring Boot weeks 3 and 4 (backend weeks 15 and 16) videos
+-   The tests are developed for code in the **Dog Rescue** REST API
 
 <!-- ## Porting the Recipe App (from MySQL videos Weeks 7-11) -->
 
