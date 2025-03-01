@@ -109,7 +109,25 @@ ContributorData updateContributor(
     }
 ```
 
-<!-- ## Pet Park — Delete Contributor -->
+## Pet Park — Delete Contributor
+
+#### Overview:
+
+-   Learn how to delete a contributor
+-   Use the HTTP `DELETE` method (verb)
+
+### In the controller
+
+-   Very similar to `GET` with ID
+-   A `DELETE` with no ID means delete **all** contributors
+    -   This is not allowed
+
+```java
+@DeleteMapping("/contributor/{id}")
+public void deleteContributor(
+    @PathVariable Long id) {
+    }
+```
 
 <!-- ## Pet Park — Create Location -->
 
