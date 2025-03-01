@@ -111,9 +111,19 @@ public class ParkService {
 	 * @param contributorId
 	 * @return
 	 */
+	@Transactional(readOnly = true)
 	public ContributorData retrieveContributorById(Long contributorId) {
 		Contributor contributor = findContributorById(contributorId);
 		return new ContributorData(contributor);
+	}
+
+	/**
+	 * @param contributorId
+	 */
+	@Transactional(readOnly = false)
+	public void deleteContributorById(Long contributorId) {
+		Contributor contributor = findContributorById(contributorId);
+		contributorDao.delete(contributor);
 	}
 
 }
