@@ -129,6 +129,48 @@ public void deleteContributor(
     }
 ```
 
-<!-- ## Pet Park — Create Location -->
+## Pet Park — Create Location
+
+#### Overview:
+
+-   Create a Data Transfer Object (**DTO**) for pet parks _(similar to the ContributorData object)_
+-   Write the controller `POST` method
+-   Write the service method
+-   Test it
+-   Repeat for modify (`PUT`) method
+
+### Pet Park DTO
+
+-   `PetParkData` — similar to `ContributorData` but the focus is on the **park**, not the contributor
+-   Contains an **inner class** for the contributor that does not have pet park as a recursive variable
+
+### Controller `POST` method (Create)
+
+-   The **REST** call looks like: `/pet_park/contributor/{ID}/park`
+-   The `@PostMapping` is used for a create operation
+
+### Controller `PUT` method (Update)
+
+-   Basically the same as `POST`, but...
+    -   Uses `@PutMapping`
+    -   Must pass the park ID _(as well as the contributor ID)_ as a path variable
+-   `@PutMapping` means "Update the park data"
+
+### The service method
+
+-   **Retrieve** the contributor by contributor ID
+-   Retrieve all **amenities**
+-   Create/retrieve the pet park object
+-   **Set** the contributor in the pet park
+-   **Set** the pet park in the contributor
+-   **Set** the pet park in all amenities
+-   **Set** the amenities in the pet park
+-   Save the pet park
+-   Hope it works!
+
+### New DAOs
+
+-   Create an **amenity** DAO to retrieve amenities
+-   Create a pet park DAO to **save** the pet park
 
 <!-- ## Pet Park — Retrieve Pet Park -->
