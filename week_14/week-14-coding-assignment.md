@@ -54,97 +54,93 @@ You will also create the DTO that will accept and return the pet store data supp
 
 Follow these instructions to save pet store data:
 
-1. In this step you will create the DTO class that Jackson will use to transform the object to and from JSON.
+1. In this step you will create the **DTO class** that Jackson will use to transform the object to and from JSON.
 
-    - a. Create a new package named pet.store.controller.model
+    - a. Create a new package named `pet.store.controller.model`
 
-    - b. Create a new class in this package named PetStoreData. Copy the fields in the PetStore entity into this class. Do not copy any JPA annotations. Add the @Data and @NoArgsConstructor as class-level annotations. Both are found in the lombok package.
+    - b. Create a new class in this package named `PetStoreData`. Copy the fields in the `PetStore` entity into this class. Do not copy any JPA annotations. Add the `@Data` and `@NoArgsConstructor` as class-level annotations. Both are found in the `lombok` package.
 
-    - c. Create the DTO class PetStoreCustomer as either (1) an inner class inside PetStoreData or (2) as a separate class in the pet.store.controller.model package.
+    - c. Create the DTO class `PetStoreCustomer` as either (1) an inner class inside `PetStoreData` **or** (2) as a separate class in the `pet.store.controller.model` package.
 
-    - i. Note: If you create the class as an inner class, be sure to make the class public and static so that the class can be used as a separate DTO.
+        - i. _**Note**: If you create the class as an inner class, be sure to make the class public and static so that the class can be used as a separate DTO._
 
-    - ii. Copy the fields from the Customer entity into this class. Do not copy the petStores field, which will remove the recursion required by JPA.
+        - ii. Copy the fields from the `Customer` entity into this class. Do **not** copy the `petStores` field, **_which will remove the recursion_** required by JPA.
 
-    - iii. Add the @Data and @NoArgsConstructor as class-level annotations.
+        - iii. Add the `@Data` and `@NoArgsConstructor` as class-level annotations.
 
-    - d. Create the DTO class PetStoreEmployee as either (1) an inner class inside PetStoreData or (2) as a separate class in the pet.store.controller.model package.
+    - d. Create the DTO class `PetStoreEmployee` as either (1) an inner class inside `PetStoreData` **or** (2) as a separate class in the `pet.store.controller.model` package.
 
-    - i. Note: If you create the class as an inner class, be sure to make the class public and static so that the class can be used as a separate DTO.
+        - i. _**Note**: If you create the class as an inner class, be sure to make the class public and static so that the class can be used as a separate DTO._
 
-    - ii. Copy the fields from the Employee entity into this class. Do not copy the petStore field to avoid recursion.
+        - ii. Copy the fields from the `Employee` entity into this class. Do **not** copy the `petStore` field **_to avoid recursion_**.
 
-    - iii. Add the @Data and @NoArgsConstructor as class-level annotations.
+        - iii. Add the `@Data` and `@NoArgsConstructor` as class-level annotations.
 
-    - e. In the PetStoreData class, change the data type of the customers field to PetStoreCustomer. Change the data type of the employees field to PetStoreEmployee.
+    - e. In the `PetStoreData` class, change the data type of the `customers` field to `PetStoreCustomer`. Change the data type of the `employees` field to `PetStoreEmployee`.
 
-    - f. In the PetStoreData class add a constructor that takes a PetStore as a parameter. Set all matching fields in the PetStoreData class to the data in the PetStore class. Also set the employees and customers fields to the respective PetStoreCustomer and PetStoreEmployee objects. These are Sets so use loops for this.
+    - f. In the `PetStoreData` class add a **constructor** that takes a `PetStore` as a parameter. Set all matching fields in the `PetStoreData` class to the data in the `PetStore` class. Also set the `employees` and `customers` fields to the respective `PetStoreCustomer` and `PetStoreEmployee` objects. _These are `Set`s so use loops for this._
 
-    - g. Add the PetStoreCustomer and PetStoreEmployee classes as inner or external classes.
+    - g. Add the `PetStoreCustomer` and `PetStoreEmployee` classes as inner or external classes.
 
-    - i. For PetStoreCustomer, add a constructor that takes a Customer object.
+        - i. For `PetStoreCustomer`, add a constructor that takes a `Customer` object.
 
-    - ii. For PetStoreEmployee, add a constructor that takes an Employee object.
+        - ii. For `PetStoreEmployee`, add a constructor that takes an `Employee` object.
 
-2. In this step you will create the data layer interface. This interface extends JpaRepository, which is a Spring JPA-provided interface. JpaRepository is in the org.springframework.data.jpa.repository package.
+2. In this step you will create the **data layer interface**. This interface extends `JpaRepository`, which is a Spring JPA-provided interface. JpaRepository is in the `org.springframework.data.jpa.repository` package.
 
-    - a. Create a new package named pet.store.dao
+    - a. Create a new package named `pet.store.dao`
 
-    - b. In this package, create a new interface named PetStoreDao. The interface should extend JpaRepository<PetStore, Long>.
+    - b. In this package, create a new interface named `PetStoreDao`. The interface should extend `JpaRepository<PetStore, Long>`.
 
-    - c. Add the import statement for PetStore.
+    - c. Add the import statement for `PetStore`.
 
-3. In this step, you will create the service class. You will add methods to this class in a later step.
+3. In this step, you will create the **service class**. You will add methods to this class in a later step.
 
-    - a. Create a new package named pet.store.service
+    - a. Create a new package named `pet.store.service`
 
-    - b. In this package, create a new class named PetStoreService.
+    - b. In this package, create a new class named `PetStoreService`.
 
-    - c. Add the class-level annotation @Service from the org.springframework.stereotype package.
+    - c. Add the class-level annotation `@Service` from the org.springframework.stereotype package.
 
-    - d. Add a PetStoreDao object named petStoreDao as a private instance variable. Annotate the instance variable with @Autowired so that Spring can inject the DAO object into the variable.
+    - d. Add a `PetStoreDao` object named `PetStoreDao` as a private instance variable. Annotate the instance variable with `@Autowired` so that Spring can inject the DAO object into the variable.
 
-4. In this step you will create the pet store controller class in a new package. This will allow Spring to map HTTP requests to specific methods. The URI for every request that is mapped to the controller must start with "/pet_store". You can control the class-level mapping by specifying "/pet_store" as the value inside the @RequestMapping annotation.
+4. In this step you will create the **pet store controller class** in a new package. This will allow Spring to map HTTP requests to specific methods. The URI for every request that is mapped to the controller must start with `"/pet_store"`. You can control the class-level mapping by specifying `"/pet_store"` as the value inside the `@RequestMapping` annotation.
 
-    - a. Create a controller class named PetStoreController in the pet.store.controller package. This class should have the following class-level annotations:
+    - a. Create a controller class named `PetStoreController` in the `pet.store.controller` package. This class should have the following class-level annotations:
 
-    - i. @RestController – This tells Spring that this class is a REST controller. As such it expects and returns JSON in the request/response bodies. The default response status code is 200 (OK) if you don't specify something different. And finally, this annotation tells Spring to map HTTP requests to class methods. The annotation is in the org.springframework.web.bind.annotation package.
+        - i. `@RestController` — This tells Spring that this class is a REST controller. As such it expects and returns JSON in the request/response bodies. The default response status code is `200` (OK) if you don't specify something different. And finally, this annotation tells Spring to map HTTP requests to class methods. The annotation is in the `org.springframework.web.bind.annotation` package.
 
-    - ii. @RequestMapping("/pet_store") – This tells Spring that the URI for every HTTP request that is mapped to a method in this controller class must start with "/pet_store". This annotation is in the org.springframework.web.bind.annotation package.
+        - ii. `@RequestMapping("/pet_store")` — This tells Spring that the URI for every HTTP request that is mapped to a method in this controller class must start with `"/pet_store"`. This annotation is in the `org.springframework.web.bind.annotation` package.
 
-    - iii. `@Slf4j` – This is a Lombok annotation that creates an SLF4J logger. It adds the logger as an instance variable named log. Use it like this:
+        - iii. `@Slf4j` — This is a Lombok annotation that creates an SLF4J logger. It adds the logger as an instance variable named `log`. Use it like this: `log.info("This is a log line");`. This annotation is in the `lombok.extern.slf4j` package.
 
-    log.info("This is a log line"):
+    - b. Autowire (inject) the `PetStoreService` as an instance variable.
 
-    This annotation is in the lombok.extern.slf4j package.
+    - c. Create a public method that maps an HTTP `POST` request to `"/pet_store"`. The response status should be `201` (Created). Pass the contents of the request body as a parameter (type `PetStoreData`) to the method. (Use `@RequestBody`.) The method should return a `PetStoreData` object. Log the request. Call a method in the service class (`savePetStore`) that will insert or modify the pet store data.
 
-    - b. Autowire (inject) the PetStoreService as an instance variable.
+5. Now we will fill in the save method in the service class. In the service class, the `savePetStore` method should take a `PetStoreData` object as a parameter and return a `PetStoreData` object. The method should:
 
-    - c. Create a public method that maps an HTTP POST request to "/pet_store". The response status should be 201 (Created). Pass the contents of the request body as a parameter (type PetStoreData) to the method. (Use @RequestBody.) The method should return a PetStoreData object. Log the request. Call a method in the service class (savePetStore) that will insert or modify the pet store data.
+    - a. Call `findOrCreatePetStore(petStoreId)`. This method returns a new `PetStore` object if the pet store ID is `null`. If not `null`, the method should call `findPetStoreById`, which returns a `PetStore` object if a pet store with matching ID exists in the database. If no matching pet store is found, the method should throw a `NoSuchElementException` with an appropriate message.
 
-5. Now we will fill in the save method in the service class. In the service class, the savePetStore method should take a PetStoreData object as a parameter and return a PetStoreData object. The method should:
+    - b. Call `copyPetStoreFields()`. This method takes a `PetStore` object and a `PetStoreData` object as parameters. Matching fields are copied from the `PetStoreData` object to the `PetStore` object. Do **not** copy the `customers` or `employees` fields.
 
-    - a. Call findOrCreatePetStore(petStoreId). This method returns a new PetStore object if the pet store ID is null. If not null, the method should call findPetStoreById, which returns a PetStore object if a pet store with matching ID exists in the database. If no matching pet store is found, the method should throw a `NoSuchElementException` with an appropriate message.
+    - c. Call the `PetStoreDao` method `save(petStore)`. Return a new `PetStoreData` object created from the return value of the `save()` method.
 
-    - b. Call copyPetStoreFields(). This method takes a PetStore object and a PetStoreData object as parameters. Matching fields are copied from the PetStoreData object to the PetStore object. Do not copy the customers or employees fields.
+6. Test the insert operation using the **Advanced Rest Client (ARC)** or another REST client of your choosing. Send a `POST` request with pet store data to the application and verify the results using DBeaver. You can find sample JSON used to create a pet store in the **_student resources — which are downloadable from Week 13_**.
 
-    - c. Call the PetStoreDao method save(petStore). Return a new PetStoreData object created from the return value of the save() method.
-
-6. Test the insert operation using the Advanced Rest Client (ARC) or another REST client of your choosing. Send a POST request with pet store data to the application and verify the results using DBeaver. You can find sample JSON used to create a pet store in the student resources -- which are downloadable from Week 13.
-
-Add at least two pet stores to the database.
+**_Add at least two pet stores to the database._**
 
 **IMPORTANT:** Before starting the application, in `src/main/resources/application.yaml`, set the value of `spring.jpa.hibernate.ddl-auto` to `update`. This will prevent the data tables from being recreated each time the application starts.
 
 ## Modify a pet store
 
-In this section, you will modify one of the pet store objects added in the prior step. This involves sending an HTTP PUT request to the running application. Here are the steps needed to accomplish this:
+In this section, you will modify one of the pet store objects added in the prior step. This involves sending an HTTP `PUT` request to the running application. Here are the steps needed to accomplish this:
 
 1. In the pet store controller, add a public method to update the pet store data. This method should:
 
-    - a. Have an @PutMapping annotation to map PUT requests to this method. The annotation should specify that a pet store ID is present in the HTTP request URI.
+    - a. Have an `@PutMapping` annotation to map `PUT` requests to this method. The annotation should specify that a pet store ID is present in the HTTP request URI.
 
-    - b. Return a PetStoreData object.
+    - b. Return a `PetStoreData` object.
 
     - c. The method parameters are the pet store ID and the pet store data. Don't forget the appropriate annotations to read the store ID from the request URI and the store data from the request body.
 
@@ -152,15 +148,15 @@ In this section, you will modify one of the pet store objects added in the prior
 
     - e. Log the method call.
 
-    - f. Call the savePetStore method in the service class.
+    - f. Call the `savePetStore` method in the service class.
 
-2. Test that you can send a PUT request to the application and modify store data using a valid pet store ID. See the student resources for sample JSON to use to modify pet store data.
+2. Test that you can send a `PUT` request to the application and modify store data using a valid pet store ID. See the student resources for sample JSON to use to modify pet store data.
 
 ## Write a global error handler
 
-In the previous exercise, you modified an existing pet store using a valid pet store ID. What happens when you try to modify a pet store using an invalid pet store ID? (Try it.) You should see that a 500 (Internal Server Error) status is returned, and the exception is logged with the full stack trace. This is not enough information for the client to make an informed decision as to what action to take. If a 404 (Not Found) status was returned, the client could display an error message stating that the pet store with the given ID was not found.
+In the previous exercise, you modified an existing pet store using a valid pet store ID. What happens when you try to modify a pet store using an invalid pet store ID? (Try it.) You should see that a `500` (Internal Server Error) status is returned, and the exception is logged with the full stack trace. This is not enough information for the client to make an informed decision as to what action to take. If a `404` (Not Found) status was returned, the client could display an error message stating that the pet store with the given ID was not found.
 
-In Spring Boot, this task is handled by a **global error handler**. In this exercise, you will write the global error handler and verify that attempting to modify a pet store with an invalid ID results in the correct 404 (Not Found) status.
+In Spring Boot, this task is handled by a **global error handler**. In this exercise, you will write the global error handler and verify that attempting to modify a pet store with an invalid ID results in the correct `404` (Not Found) status.
 
 In the videos, a global error handler was created that returned a detailed error response. For this exercise, it is not necessary to write code that complex (but you can if you want to). This exercise will have you create a simple error handler. If you want to write one that is similar to the one shown in the videos, feel free!
 
@@ -182,6 +178,6 @@ Here are the instructions. You can ignore them if you are writing a more complex
 
 Follow the instructions for making a video submission for this coding assignment. Your video should, at a minimum, do the following:
 
--   Show that you can add a pet store to the data tables by sending an HTTP POST request to the running application.
--   Show that you can modify an existing pet store by sending an HTTP PUT request to the running application.
--   Demonstrate that an incorrect pet store ID supplied to a modify operation results in a 404 (Not Found) status.
+-   Show that you can add a pet store to the data tables by sending an HTTP `POST` request to the running application.
+-   Show that you can modify an existing pet store by sending an HTTP `PUT` request to the running application.
+-   Demonstrate that an incorrect pet store ID supplied to a modify operation results in a `404` (Not Found) status.
