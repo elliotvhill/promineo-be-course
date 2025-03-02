@@ -43,7 +43,7 @@ public class ParkController {
 	public ContributorData insertContributor(@RequestBody ContributorData contributorData) {
 		// @RequestBody tells Spring Boot the JSON will be in the request payload/body
 
-		log.info("Creating contributor ()", contributorData); // () is the parameter placeholder syntax
+		log.info("Creating contributor {}", contributorData); // () is the parameter placeholder syntax
 		return parkService.saveContributor(contributorData);
 	}
 	
