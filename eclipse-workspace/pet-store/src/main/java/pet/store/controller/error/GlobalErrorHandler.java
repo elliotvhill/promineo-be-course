@@ -41,7 +41,7 @@ public class GlobalErrorHandler {
 	public ExceptionMessage handleNoSuchElementException(NoSuchElementException ex, WebRequest webRequest) {
 		return buildExceptionMessage(ex, HttpStatus.NOT_FOUND, webRequest, LogStatus.MESSAGE_ONLY);
 	}
-	
+
 	// Previous, simple NoSuchElementException handler:
 //	@ExceptionHandler(NoSuchElementException.class)
 //	@ResponseStatus(code = HttpStatus.NOT_FOUND)
@@ -50,6 +50,22 @@ public class GlobalErrorHandler {
 //		log.error("Pet store not found.");
 //		return Map.of("message", ex.toString());
 //	}
+
+	// Unsupported operation handler
+	@ExceptionHandler(UnsupportedOperationException.class)
+	@ResponseStatus(code = HttpStatus.METHOD_NOT_ALLOWED)
+	public ExceptionMessage handleUnsupportedOperationException(UnsupportedOperationException ex,
+			WebRequest webRequest) {
+		return buildExceptionMessage(ex, HttpStatus.METHOD_NOT_ALLOWED, webRequest, LogStatus.MESSAGE_ONLY);
+	}
+
+	// General exception handler
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+	public ExceptionMessage handleException(Exception ex, WebRequest webRequest) {
+		// log exception including full stack trace
+		return buildExceptionMessage(ex, HttpStatus.INTERNAL_SERVER_ERROR, webRequest, LogStatus.STACK_TRACE);
+	}
 
 	// Handle bad request
 	@ExceptionHandler(IllegalStateException.class)
