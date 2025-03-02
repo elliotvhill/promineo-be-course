@@ -20,9 +20,9 @@ import pet.store.service.PetStoreService;
 @Slf4j
 public class PetStoreController {
 	@Autowired
-	PetStoreService petStoreService;
+	private PetStoreService petStoreService;
 	
-	@PostMapping("/pet_store")
+	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public PetStoreData insertPetStore(@RequestBody PetStoreData petStoreData) {
 		log.info("Creating a new pet store {}", petStoreData);
