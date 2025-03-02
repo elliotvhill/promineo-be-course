@@ -21,11 +21,12 @@ public class PetStoreService {
 
 	@Transactional(readOnly = false)
 	public PetStoreData savePetStore(PetStoreData petStoreData) {
-		PetStore petStore = findOrCreatePetStore(petStoreData.getPetStoreId());
-		copyPetStoreFields(petStore, petStoreData);
+		Long petStoreId = petStoreData.getPetStoreId();
+		PetStore petStore = findOrCreatePetStore(petStoreId);
 		
-		PetStore dbPetStore = petStoreDao.save(petStore);
-		return new PetStoreData(dbPetStore);
+		copyPetStoreFields(petStore, petStoreData);
+
+		return new PetStoreData(petStoreDao.save(petStore));
 	}
 
 	private void copyPetStoreFields(PetStore petStore, PetStoreData petStoreData) {
@@ -39,21 +40,17 @@ public class PetStoreService {
 	}
 
 	private PetStore findOrCreatePetStore(Long petStoreId) {
-		PetStore petStore;
-
-		// create a new PetStore object if petStoreId is null
 		if (Objects.isNull(petStoreId)) {
-			// create a new PetStore object
-			petStore = new PetStore();
+			// create a new PetStore object if petStoreId is null
+			return new PetStore();
 		} else {
-			// Find the existing pet store by ID
-			petStore = findPetStoreById(petStoreId);
+			// Find and return the existing pet store by ID
+			return findPetStoreById(petStoreId);
 		}
-
-		return petStore;
 	}
 
 	private PetStore findPetStoreById(Long petStoreId) {
-		return petStoreDao.findById(petStoreId).orElseThrow(() -> new NoSuchElementException("Pet store with ID=" + petStoreId + " does not exist."));
+		return petStoreDao.findById(petStoreId)
+				.orElseThrow(() -> new NoSuchElementException("Pet store with ID=" + petStoreId + " does not exist."));
 	}
 }
