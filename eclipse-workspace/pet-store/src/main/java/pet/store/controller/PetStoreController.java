@@ -5,6 +5,7 @@ package pet.store.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,8 +35,8 @@ public class PetStoreController {
 
 	@PutMapping("/{petStoreId}")
 	public PetStoreData updatePetStore(@PathVariable Long petStoreId, @RequestBody PetStoreData petStoreData) {
-		log.info("Attempting to update pet store with ID={}", petStoreId);
 		petStoreData.setPetStoreId(petStoreId);
+		log.info("Attempting to update pet store {}", petStoreData);
 		return petStoreService.savePetStore(petStoreData);
 	}
 }
