@@ -59,9 +59,57 @@ Notes from the week 15 video curriculum.
     -   Component Scan
 -   Start Spring **Boot** by calling `SpringApplication.run()` from the `main()` method
 
-<!-- ## Dog Rescue — Create Database Schema -->
+## Dog Rescue — Create Table Entities
 
-<!-- ## Dog Rescue — Create Table Entities -->
+### Review the table entities
+
+-   **Entities**: Dog, Location, Breed
+-   **Review**: Spring uses **Hibernate** as the Object-Relational Mapping (ORM) tool that powers JPA
+-   **Project**:
+    -   JPA will manage the CRUD operations
+    -   Spring will create and populate the tables
+    -   This will help us write tests
+
+### Recap: Entity
+
+-   Maps from data tables to objects
+-   JPA looks for `@Entity` to identify the class as an entity
+-   The identity field (primary key) is annotated with `@Id` and `@GeneratedValue`
+    -   `@Id` identifies the field as the identity field
+    -   `@GeneratedValue` tells JPA how MySQL manages the primary key value
+
+### Recap: One-to-many
+
+-   "Owning" class has the `@OneToMany` annotation
+    -   Specifies the cascade strategy
+    -   Defines orphan removal behavior
+-   "Owned" class has the `@ManyToOne` annotation
+    -   Can specify a join column (used if JPA doesn't create the tables but just manages them)
+
+### Recap: Many-to-many
+
+-   "Owning" class has the `@ManyToMany` and `@JoinTable` annotations
+    -   Defines a cascade strategy
+    -   Specifies a join table definition
+-   "Owned" class has `@ManyToMany`
+    -   Declares the `mappedBy` attribute (name of the Java field in the owning class)
+
+### Recap: Relationship essentials
+
+-   The "many" side of a relationship uses a Java **Set**
+-   You can also use a **List**, but using a Set makes managing the relationships easier
+    -   You can just add to a Set, and it will **add** or **replace** the appropriate child row
+    -   With a List, you would need to do a lookup on the list to find the correct child element
+
+### Recap: Child row update
+
+-   Use the **cascade** attribute of `@ManyToMany` and `@OneToMany` to tell JPA to automatically update or insert child rows when a parent row is saved
+
+    ```java
+    @OneToMany(
+        cascade = CascadeType.ALL
+    )
+    ```
 
 <!-- ## Dog Rescue — Create DDL and DML Files -->
 
