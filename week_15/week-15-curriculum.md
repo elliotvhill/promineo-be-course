@@ -129,6 +129,16 @@ Notes from the week 15 video curriculum.
 -   Spring JPA uses `data.sql` to automatically **populate** tables
 -   We won't let JPA (**Hibernate**) create the tables because we will use `schema.sql` and `data.sql` to manage data in tests
 
-<!-- ## Dog Rescue — JPA Configuration -->
+## Dog Rescue — JPA Configuration
+
+-   Create JPA and Spring **configuration** in `src/main/resources/application.yaml`
+-   Test to see that the tables are created and populated **successfully**
+
+### Recap: `application.yaml`
+
+-   Three sections:
+    -   `spring.datasource` contains **schema** name and credentials
+    -   `spring.jpa` contains configuration for Spring **JPA**
+    -   `spring.sql` contains **instructions** on how to load `schema.sql` and `data.sql`
 
 <!-- ## Dog Rescue — Create Location -->
