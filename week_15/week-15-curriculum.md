@@ -111,7 +111,23 @@ Notes from the week 15 video curriculum.
     )
     ```
 
-<!-- ## Dog Rescue — Create DDL and DML Files -->
+## Dog Rescue — Create DDL and DML Files
+
+### `schema.sql`
+
+-   Create in `src/main/resources` folder
+-   Contains `CREATE TABLE` statements
+
+### `data.sql`
+
+-   Create in `src/main/resources`
+-   Contains `INSERT` statements to add data to tables
+
+### Using `.sql` files
+
+-   Spring JPA uses `schema.sql` to automatically **create** tables
+-   Spring JPA uses `data.sql` to automatically **populate** tables
+-   We won't let JPA (**Hibernate**) create the tables because we will use `schema.sql` and `data.sql` to manage data in tests
 
 <!-- ## Dog Rescue — JPA Configuration -->
 
