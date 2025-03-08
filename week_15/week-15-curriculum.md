@@ -141,4 +141,38 @@ Notes from the week 15 video curriculum.
     -   `spring.jpa` contains configuration for Spring **JPA**
     -   `spring.sql` contains **instructions** on how to load `schema.sql` and `data.sql`
 
-<!-- ## Dog Rescue — Create Location -->
+## Dog Rescue — Create Location
+
+-   Create all the packages and classes for the "**Create Location**" operation
+-   Test the "Create Location" operation
+
+### Create location details:
+
+-   **Create** controller, service, and dao packages
+-   **Create** the controller and service classes
+-   **Add** controller and service methods
+-   **Create** DAO interface
+-   Test it
+
+### Recap: Create the controller
+
+-   **Controllers** have:
+    -   `@RestController`
+    -   `@RequestMapping("dog_rescue")`
+-   The `createLocation()` **method** has:
+    -   `@PostMapping("/location")`
+    -   `@ResponseStatus(CREATED)`
+-   The **service** instance variable is annotated with `@Autowired`
+-   Tell Spring to load JSON from the request body with `@RequestBody`
+
+### Recap: Create the service
+
+-   Annotate the service class with `@Service`
+-   The public `saveLocation()` method has the `@Transactional` annotation
+-   Add the location DAO by autowiring the **interface**
+
+### Recap: Create location DAO
+
+-   A Spring JPA DAO is an **interface**
+-   Spring provides the implementing class at **runtime**
+-   The interface extends `JpaRepository`
