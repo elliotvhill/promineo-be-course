@@ -11,9 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pet.store.controller.model.PetStoreData;
+import pet.store.controller.model.PetStoreData.PetStoreCustomer;
 import pet.store.controller.model.PetStoreData.PetStoreEmployee;
+import pet.store.dao.CustomerDao;
 import pet.store.dao.EmployeeDao;
 import pet.store.dao.PetStoreDao;
+import pet.store.entity.Customer;
 import pet.store.entity.Employee;
 import pet.store.entity.PetStore;
 
@@ -22,7 +25,9 @@ public class PetStoreService {
 	@Autowired
 	private PetStoreDao petStoreDao;
 	@Autowired
-	EmployeeDao employeeDao;
+	private EmployeeDao employeeDao;
+	@Autowired
+	private CustomerDao customerDao;
 
 	@Transactional(readOnly = false)
 	public PetStoreData savePetStore(PetStoreData petStoreData) {
@@ -69,7 +74,7 @@ public class PetStoreService {
 		Long employeeId = petStoreEmployee.getEmployeeId();
 		Employee employee = findOrCreateEmployee(employeeId, petStoreId);
 
-		// Convert PetStoreEmployee object from request body to an Employee object
+		// Copy the fields from the request body to an Employee object
 		copyEmployeeFields(employee, petStoreEmployee);
 
 		// Set the employee's store to petStore
@@ -110,8 +115,15 @@ public class PetStoreService {
 	 * @return
 	 */
 	public Employee findEmployeeById(Long petStoreId, Long employeeId) {
-		return employeeDao.findById(employeeId)
+		Employee employee = employeeDao.findById(employeeId)
 				.orElseThrow(() -> new NoSuchElementException("Employee with ID=" + employeeId + " not found."));
+
+		if (employee.getPetStore().getPetStoreId() != petStoreId) {
+			throw new IllegalArgumentException(
+					"Employee with ID=" + employeeId + " was not found at pet store ID=" + petStoreId + ".");
+		}
+
+		return employee;
 	}
 
 	/**
@@ -127,5 +139,73 @@ public class PetStoreService {
 		employee.setEmployeeLastName(petStoreEmployee.getEmployeeLastName());
 		employee.setEmployeePhone(petStoreEmployee.getEmployeePhone());
 		employee.setEmployeeJobTitle(petStoreEmployee.getEmployeeJobTitle());
+	}
+
+	/**
+	 * @param petStoreId
+	 * @param petStoreCustomer
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public PetStoreCustomer saveCustomer(Long petStoreId, PetStoreCustomer petStoreCustomer) {
+		PetStore petStore = findPetStoreById(petStoreId);
+		Long customerId = petStoreCustomer.getCustomerId();
+		Customer customer = findOrCreateCustomer(customerId, petStoreId);
+
+		// Copy the fields from the request body to a PetStoreCustomer object
+		copyCustomerFields(customer, petStoreCustomer);
+
+		return new PetStoreCustomer(customerDao.save(customer));
+	}
+
+	/**
+	 * Find an existing Customer using customer ID and pet store ID, otherwise
+	 * create a new Customer
+	 * 
+	 * @param customerId
+	 * @param petStoreId
+	 * @return
+	 */
+	public Customer findOrCreateCustomer(Long customerId, Long petStoreId) {
+		Customer customer;
+
+		if (Objects.isNull(customerId)) {
+			customer = new Customer();
+		} else {
+			customer = findCustomerById(customerId, petStoreId);
+		}
+		return customer;
+	}
+
+	/**
+	 * Find a customer using a customer ID and pet store ID
+	 * 
+	 * @param customerId
+	 * @param petStoreId
+	 * @return
+	 */
+	public Customer findCustomerById(Long customerId, Long petStoreId) {
+		Customer customer = customerDao.findById(customerId)
+				.orElseThrow(() -> new NoSuchElementException("Customer with ID=" + customerId + " does not exist."));
+
+		/**
+		 * Check if the customer is associated with any pet stores that match the
+		 * petStoreId that was passed as an argument
+		 */
+		for (PetStore petStore : customer.getPetStores()) {
+			if (petStore.getPetStoreId() != petStoreId) {
+				throw new IllegalArgumentException(
+						"Customer with ID=" + customerId + " is not associated with store ID=" + petStoreId + ".");
+			}
+		}
+
+		return customer;
+	}
+
+	private void copyCustomerFields(Customer customer, PetStoreCustomer petStoreCustomer) {
+		customer.setCustomerId(petStoreCustomer.getCustomerId());
+		customer.setCustomerFirstName(petStoreCustomer.getCustomerFirstName());
+		customer.setCustomerLastName(petStoreCustomer.getCustomerLastName());
+		customer.setCustomerEmail(petStoreCustomer.getCustomerEmail());
 	}
 }
