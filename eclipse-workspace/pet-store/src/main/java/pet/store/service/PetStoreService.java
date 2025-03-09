@@ -11,6 +11,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import pet.store.controller.model.PetStoreData;
 import pet.store.controller.model.PetStoreData.PetStoreCustomer;
@@ -156,6 +157,11 @@ public class PetStoreService {
 
 		// Copy the fields from the request body to a PetStoreCustomer object
 		copyCustomerFields(customer, petStoreCustomer);
+		
+		// Associate the customer with the store
+		customer.getPetStores().add(petStore);
+		// Associate the store with the customer
+		petStore.getCustomers().add(customer);
 
 		return new PetStoreCustomer(customerDao.save(customer));
 	}
@@ -251,4 +257,12 @@ public class PetStoreService {
 		
 		return petStoreData;
 	}
+
+	/**
+	 * @param petStoreId
+	 */
+	public void deletePetStoreById(Long petStoreId) {
+		petStoreDao.delete(findPetStoreById(petStoreId));
+	}
+	
 }
