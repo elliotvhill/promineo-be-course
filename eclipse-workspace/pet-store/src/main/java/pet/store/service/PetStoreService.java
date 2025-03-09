@@ -217,23 +217,38 @@ public class PetStoreService {
 	@Transactional(readOnly = true)
 	public List<PetStoreData> retrieveAllPetStores() {
 		List<PetStore> petStores = petStoreDao.findAll();
-		
+
 		List<PetStoreData> petStoreDataResults = new LinkedList<>();
 
 		// Loop through PetStore entities and add them to the List of PetStoreData
 		for (PetStore petStore : petStores) {
 			PetStoreData petStoreData = new PetStoreData(petStore);
-			
+
 			// Remove customers from List of Pet Store Data
 			petStoreData.getCustomers().clear();
 			// Remove employees from List of Pet Store Data
 			petStoreData.getEmployees().clear();
-			
+
 			// Add the store data to the List now that customer
 			// and employee data has been removed
 			petStoreDataResults.add(petStoreData);
 		}
 
 		return petStoreDataResults;
+	}
+
+	/**
+	 * @param petStoreId
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public PetStoreData retrievePetStoreById(Long petStoreId) {
+		PetStoreData petStoreData = new PetStoreData(findPetStoreById(petStoreId));
+		
+		// Remove customer and employee data from results
+		petStoreData.getCustomers().clear();
+		petStoreData.getEmployees().clear();
+		
+		return petStoreData;
 	}
 }
