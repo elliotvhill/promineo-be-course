@@ -3,8 +3,11 @@
  */
 package pet.store.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,6 +59,13 @@ public class PetStoreController {
 	public PetStoreCustomer addCustomer(@PathVariable Long petStoreId, @RequestBody PetStoreCustomer petStoreCustomer) {
 		log.info("Adding customer={} to pet store ID={}", petStoreCustomer, petStoreId);
 		return petStoreService.saveCustomer(petStoreId, petStoreCustomer);
+	}
+	
+	// Get all pet store data, without employee or customer data
+	@GetMapping
+	public List<PetStoreData> retrieveAllPetStores() {
+		log.info("Retrieving all pet stores");
+		return petStoreService.retrieveAllPetStores();
 	}
 
 }
