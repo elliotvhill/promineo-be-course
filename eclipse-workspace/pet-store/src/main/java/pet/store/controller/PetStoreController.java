@@ -60,12 +60,19 @@ public class PetStoreController {
 		log.info("Adding customer={} to pet store ID={}", petStoreCustomer, petStoreId);
 		return petStoreService.saveCustomer(petStoreId, petStoreCustomer);
 	}
-	
+
 	// Get all pet store data, without employee or customer data
 	@GetMapping
 	public List<PetStoreData> retrieveAllPetStores() {
 		log.info("Retrieving all pet stores");
 		return petStoreService.retrieveAllPetStores();
+	}
+
+	// Get a single pet store by ID
+	@GetMapping("/{petStoreId}")
+	public PetStoreData retrievePetStoreById(@PathVariable Long petStoreId) {
+		log.info("Getting pet store ID={}", petStoreId);
+		return petStoreService.retrievePetStoreById(petStoreId);
 	}
 
 }
