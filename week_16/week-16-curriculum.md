@@ -30,7 +30,68 @@ Notes from the week 16 video curriculum.
 -   Write **integration tests** for all operations
     -   _Next video:_ we will create an integration test for the "Create Location" operation. We will use the H2 **in-memory** database for the tests and set the data to a known state before each test.
 
-<!-- ## Dog Rescue — Insert Location Test -->
+## Dog Rescue — Insert Location Test
+
+### Overview
+
+-   Set up the Spring Boot **Test** Framework to write an integration test that tests the service method for the "Insert Location" operation
+    -   Difference between **integration** and **unit** test:
+        -   A **Unit test** tests a single method, generally doesn't allow any code to go out beyond that method without being mocked or stubbed
+        -   An **Integration test** tests the actual functionality of the entire application (or a large portion)
+-   Use the **H2** (in-memory database) to store data for the tests
+-   Investigate the `@SpringBootTest` annotation
+-   Create a test **profile**
+-   Run the test
+
+### Spring Boot Test Framework
+
+-   Tests are **managed** by JUnit 5 (AKA Jupiter)
+-   Individual tests are **run** by the Spring Boot Test Framework
+-   A test **profile** is set up for the tests, which allows us to write test configuration that overrides the main application configuration
+-   Specific test **configuration** is loaded
+-   An **in-memory** database is used for the tests (H2)
+    -   Advantage of using H@ is that **all** tables are dropped, created, and populated before each test
+-   An advantage of the Spring Boot Test Framework is that Spring creates an **application context** for the tests
+    -   This means that we can inject dependencies using `@Autowired`
+
+### Test format
+
+-   Use Martin Fowler's (ThoughtWorks) test method **organization**:
+    -   **Given:** (a precondition)
+    -   **When:** (the test is executed)
+    -   **Then:** (the results are evaluated)
+-   Tests are **clean** and organized
+
+### H2 database
+
+-   H2 is an **in-memory** database
+-   It is extremely **fast**
+-   The tables can be dropped, created, and populated before **each** test
+-   This is important for **automating** tests because:
+    -   If the data is not in a **known** state, the tests will be _non-deterministic_
+    -   If the tests are non-deterministic you **don't** know the reason for failure
+
+### `@SpringBootTest` is a combo annocation
+
+-   It sets `SpringExtension.class` as the **class** controlling the tests
+-   It sets a **configuration** class for the tests
+-   It creates an application **context** for the tests:
+    -   Application contexts contain a Bean **Registry** (Spring will manage Beans with lifecycle management)
+    -   This means we can use **Dependency Injection** for the tests (using `@Autowired`)
+    -   The test runs in a Spring Boot **environment**
+
+### Create a test profile
+
+-   Create `application-test.yaml` in `src/test/resources`
+-   This configuration file is merged with and overwrites `application.yaml`
+-   Configuration is created that applies to **tests** but _not_ the running application
+-   This means we can connect to MySQL in application mode and **H2** in test mode
+
+### Use AssertJ to manage test assertions
+
+-   An **assertion** in a test determines if something is true or false or is equal to some value
+-   For example, assert that a result is **equal** to some expected value
+-   AssertJ is a **natural language** assertion library — it allows assertions to be easily read and **understood**
 
 <!-- ## Dog Rescue — Retrieve Location by ID -->
 
