@@ -68,4 +68,7 @@ public class RescueServiceTestSupport {
 		return JdbcTestUtils.countRowsInTable(jdbcTemplate, LOCATION_TABLE);
 	}
 
+	protected LocationData retrieveLocation(Long locationId) {
+		return rescueController.retrieveLocation(locationId);
+	}
 }
