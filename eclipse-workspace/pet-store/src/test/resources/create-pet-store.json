@@ -6,3 +6,39 @@
   "petStoreZip" : "12345",
   "petStorePhone": "303-322-4995"
 }
+
+[
+  {
+    "petStoreId": 1,
+    "petStoreName": "Really Cool Pet Store",
+    "petStoreAddress": "8395 North Bladford Lane",
+    "petStoreCity": "Gangrene",
+    "petStoreState": "Georgia",
+    "petStoreZip": 12345,
+    "petStorePhone": "303-322-4995",
+    "customers": [],
+    "employees": []
+  },
+  {
+    "petStoreId": 2,
+    "petStoreName": "Geralt's Pets",
+    "petStoreAddress": "1 Continent Place",
+    "petStoreCity": "Novigrad",
+    "petStoreState": "Redania",
+    "petStoreZip": 10003,
+    "petStorePhone": "123-456-7890",
+    "customers": [],
+    "employees": []
+  },
+  {
+    "petStoreId": 5,
+    "petStoreName": "Yennefer's Familiars",
+    "petStoreAddress": "63 Aretuza Ave",
+    "petStoreCity": "Aretuza",
+    "petStoreState": "Continent",
+    "petStoreZip": 10003,
+    "petStorePhone": "222-222-2222",
+    "customers": [],
+    "employees": []
+  }
+]
