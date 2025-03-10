@@ -93,7 +93,35 @@ Notes from the week 16 video curriculum.
 -   For example, assert that a result is **equal** to some expected value
 -   AssertJ is a **natural language** assertion library — it allows assertions to be easily read and **understood**
 
-<!-- ## Dog Rescue — Retrieve Location by ID -->
+## Dog Rescue — Retrieve Location by ID
+
+### Overview
+
+-   Write the "Retrieve by Location ID" **operation** methods in:
+    -   Controller class
+    -   Service class
+-   Write the **test**
+
+### Write the controller method
+
+-   A retrieve operation uses the HTTP `GET` verb (method)
+-   It returns a `100` (OK) status if successful
+-   The location ID is passed in the REST resource request — `dog_rescue/location/{ID}` — where `{ID}` is the location ID
+-   We tell Spring about the REST resource ID using `@PathVariable` in the parameter list
+-   The method simply logs the request and calls the rescue **service**
+
+### Write the service method
+
+-   Service methods run within a **transaction**
+-   As such, they are _public_ and have the `@Transactional` annotation
+-   The service method calls the helper method `findLocationById`
+-   It returns a `LocationData` object
+-   There is **no need** to add a method declaration to the DAO interface
+
+### Write the test
+
+-   The test is simple: **insert** a location and retrieve it
+-   **Compare** the retrieved value to the expected value
 
 <!-- ## Dog Rescue — Retrieve All Locations -->
 
