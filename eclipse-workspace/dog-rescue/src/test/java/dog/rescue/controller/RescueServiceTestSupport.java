@@ -14,6 +14,26 @@ public class RescueServiceTestSupport {
 
 	private static final String LOCATION_TABLE = "location";
 
+	private static final String INSERT_DOG_1_SQL = """
+			INSERT INTO dog
+			(age, color, name, location_id)
+			VALUES (4, 'Brown and white', 'Ralphy', 1)
+			""";
+
+	private static final String INSERT_DOG_2_SQL = """
+			INSERT INTO dog 
+			(age, color, name, location_id)
+			VALUES (6, 'Gray and black', 'Murdock', 1)
+			""";
+
+	private static final String INSERT_BREEDS_1_SQL = """
+			INSERT INTO dog_breed (dog_id, breed_id) VALUES (1, 3), (1, 13)
+			""";
+
+	private static final String INSERT_BREEDS_2_SQL = """
+			INSERT INTO dog_breed (dog_id, breed_id) VALUES (2, 5), (2, 16)
+			""";
+
 	// @formatter:off
 	private LocationData insertAddress1 = new LocationData(
 			1L,
@@ -130,4 +150,29 @@ public class RescueServiceTestSupport {
 	protected LocationData buildUpdateLocation() {
 		return updateAddress1;
 	}
+	
+	/**
+	 * @param i
+	 */
+	protected void insertDog(int which) {
+		String dogSql = which == 1 ? INSERT_DOG_1_SQL : INSERT_DOG_2_SQL;
+		String breedSql = 
+				which == 1 ? INSERT_BREEDS_1_SQL : INSERT_BREEDS_2_SQL;
+		
+		jdbcTemplate.update(dogSql);
+		jdbcTemplate.update(breedSql);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
