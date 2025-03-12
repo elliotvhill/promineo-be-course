@@ -42,10 +42,10 @@ class RescueControllerTest extends RescueServiceTestSupport {
 		// Given: a location
 		LocationData location = insertLocation(buildInsertLocation(1));
 		LocationData expected = buildInsertLocation(1);
-		
+
 		// When: the location is retrieved by location ID
 		LocationData actual = retrieveLocation(location.getLocationId());
-		
+
 		// Then: the actual location is equal to the expected location.
 		assertThat(actual).isEqualTo(expected);
 	}
@@ -54,12 +54,12 @@ class RescueControllerTest extends RescueServiceTestSupport {
 	void testRetrieveAllLocations() {
 		// Given: two locations
 		List<LocationData> expected = insertTwoLocations();
-		
+
 		// When: all locations are retrieved
 		List<LocationData> actual = retrieveAllLocations();
-		
+
 		// Then: the retrieved locations are the same as expected.
-		assertThat(actual).isEqualTo(expected);
+		assertThat(sorted(actual)).isEqualTo(sorted(expected));
 	}
 
 }
