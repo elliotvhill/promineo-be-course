@@ -53,26 +53,30 @@ public class RescueService {
 	@Transactional(readOnly = true)
 	public List<LocationData> retrieveAllLocations() {
 		// One approach: use enhanced for loop
-//		List<Location> locationEntities = locationDao.findAll();
-//		List<LocationData> locationDtos = new LinkedList<>();
-//		
-//		// loop to convert Location entities into LocationData objects
-//		for (Location location : locationEntities) {
-//			LocationData locationData = new LocationData(location);
-//			locationDtos.add(locationData);
-//		}
-//		
-//		return locationDtos;
+		List<Location> locationEntities = locationDao.findAll();
+		List<LocationData> locationDtos = new LinkedList<>();
+
+		locationEntities.sort((loc1, loc2) -> loc1.getBusinessName().compareTo(loc2.getBusinessName()));
+
+		// loop to convert Location entities into LocationData objects
+		for (Location location : locationEntities) {
+			LocationData locationData = new LocationData(location);
+			locationDtos.add(locationData);
+		}
+
+		return locationDtos;
 
 		// Alternate approach: Use Streams and Lambda expression
 		// @formatter:off
-		return locationDao.findAll()
-				// turn into a Stream of Location entities
-				.stream()
-				// use map to turn it into a Stream of LocationData objects
-				.map(loc -> new LocationData(loc)) // can be further simplified using a method reference operator ("::") to just .map(LocationData::new)
-				// return it as a List
-				.toList();
+//		return locationDao.findAll()
+//				// turn into a Stream of Location entities
+//				.stream()
+//				.sorted((loc1, loc2) -> 
+//					loc1.getBusinessName().compareTo(loc2.getBusinessName())); // sort by business name
+//				// use map to turn it into a Stream of LocationData objects
+//				.map(loc -> new LocationData(loc)) // can be further simplified using a method reference operator ("::") to just .map(LocationData::new)
+//				// return it as a List
+//				.toList();
 		// @formatter:on
 	}
 
