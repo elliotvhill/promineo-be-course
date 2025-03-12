@@ -181,4 +181,36 @@ Notes from the week 16 video curriculum.
 -   Call the controller method to **update** the same location
 -   **Verify** the results
 
-<!-- ## Dog Rescue — Delete Location -->
+## Dog Rescue — Delete Location
+
+-   Write the "Delete Location" **operation**
+    -   `Controller`
+    -   `Service`
+-   **Add** some dog rows to the tables
+-   Write the **test**
+-   **Verify** that deleting a location deletes all child rows (dogs)
+
+### Write the controller method
+
+-   Create method `deleteLocation()` in the controller
+    -   Add `@DeleteMapping`
+    -   Add the path **variable** (location ID)
+    -   **Log** the operation
+    -   Create/call the **service** method
+
+### Write the service method
+
+-   Create the method `deleteLocation()` in the service class
+    -   Find the location
+    -   Delete the location
+-   Because `orphanRemoval = true` is set in the `@OneToMany` annotation in the `Location` object, all child `Dog` rows for that location are deleted as well
+-   Because `cascade = PERSIST` (and not `ALL`) in the `Dog` many-to-many, `breed` rows are _not_ removed but `dog_breed` rows _are_
+
+### Write the test
+
+-   Create the test **method**
+-   **Insert** one location and two dogs
+-   **Verify** the row counts for the `location` and `dog` tables
+-   **Delete** the location
+-   **Verify** that row counts for the `location`, `dog`, and `dog_breed` tables are zero
+-   **Verify** that the row count for `breed` does not change
