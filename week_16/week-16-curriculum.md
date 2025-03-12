@@ -123,7 +123,42 @@ Notes from the week 16 video curriculum.
 -   The test is simple: **insert** a location and retrieve it
 -   **Compare** the retrieved value to the expected value
 
-<!-- ## Dog Rescue — Retrieve All Locations -->
+## Dog Rescue — Retrieve All Locations
+
+-   Write the "Retrieve All Locations" methods in:
+    -   `Controller`
+    -   `Service`
+-   Write and run the test
+
+### Write the controller method
+
+-   Add method `retrieveAllLocations()`
+-   Add the `@GetMapping` annotation
+-   The REST request will be sent to `dog_rescue/location`
+-   We don't need to pass an ID as a parameter as we are returning **all** resources
+-   Log the request
+-   Call the service
+
+### Write the service method
+
+-   Add public method `retrieveAllLocations()`
+-   Add the `@Transactional` annotation
+-   Call the `findAll()` method in the DAO
+-   Convert the `List` of `Location` to a `List` of `LocationData`
+
+### Write the test
+
+-   Create the test method `testRetrieveAllLocations()`
+-   Add the `@Test` annotation
+-   Create two locations
+-   Call the controller **receive** method
+-   **Assert** that the actual Objects returned are what we expect
+-   Run the test and demonstrate the **green** bar
+
+### Easier than JDBC?
+
+-   If this seems simpler than JDBC, it's because Spring and Spring Boot are doing most of the work for us
+-   **Someone** wrote all the supporting code, but it wasn't us
 
 <!-- ## Dog Rescue — Update Location -->
 
