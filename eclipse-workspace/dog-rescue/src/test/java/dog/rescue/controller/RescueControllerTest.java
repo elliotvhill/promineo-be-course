@@ -61,5 +61,21 @@ class RescueControllerTest extends RescueServiceTestSupport {
 		// Then: the retrieved locations are the same as expected.
 		assertThat(sorted(actual)).isEqualTo(sorted(expected));
 	}
+	
+	@Test
+	void testUpdateLocation() {
+		// Given: a location and an update request 
+		insertLocation(buildInsertLocation(1)); // Create a location to test
+		LocationData expected = buildUpdateLocation();
+		
+		// When: the location is updated
+		LocationData actual = updateLocation(expected);
+		
+		// Then: the location is returned as expected
+		assertThat(actual).isEqualTo(expected);
+		
+		// And: there is one row in the location table (the table has no rows when the test starts).
+		assertThat(rowsInLocationTable()).isOne();
+	}
 
 }
