@@ -12,6 +12,9 @@ import dog.rescue.entity.Location;
 
 public class RescueServiceTestSupport {
 
+	private static final String DOG_TABLE = "dog";
+	private static final String DOG_BREED_TABLE = "dog_breed";
+	private static final String BREED_TABLE = "breed";
 	private static final String LOCATION_TABLE = "location";
 
 	private static final String INSERT_DOG_1_SQL = """
@@ -21,7 +24,7 @@ public class RescueServiceTestSupport {
 			""";
 
 	private static final String INSERT_DOG_2_SQL = """
-			INSERT INTO dog 
+			INSERT INTO dog
 			(age, color, name, location_id)
 			VALUES (6, 'Gray and black', 'Murdock', 1)
 			""";
@@ -135,13 +138,14 @@ public class RescueServiceTestSupport {
 		data.sort((loc1, loc2) -> (int) (loc1.getLocationId() - loc2.getLocationId()));
 		return data;
 	}
-	
+
 	/**
 	 * @param expected
 	 * @return
 	 */
 	protected LocationData updateLocation(LocationData locationData) {
-		return rescueController.updateLocation(locationData.getLocationId(), locationData); // pass in the ID and the response body i.e. locationData
+		// pass in the ID and the response body i.e. locationData
+		return rescueController.updateLocation(locationData.getLocationId(), locationData);
 	}
 
 	/**
@@ -150,29 +154,43 @@ public class RescueServiceTestSupport {
 	protected LocationData buildUpdateLocation() {
 		return updateAddress1;
 	}
-	
+
 	/**
 	 * @param i
 	 */
 	protected void insertDog(int which) {
 		String dogSql = which == 1 ? INSERT_DOG_1_SQL : INSERT_DOG_2_SQL;
-		String breedSql = 
-				which == 1 ? INSERT_BREEDS_1_SQL : INSERT_BREEDS_2_SQL;
-		
+		String breedSql = which == 1 ? INSERT_BREEDS_1_SQL : INSERT_BREEDS_2_SQL;
+
 		jdbcTemplate.update(dogSql);
 		jdbcTemplate.update(breedSql);
 	}
+
+	/**
+	 * @return
+	 */
+	protected int rowsInBreedTable() {
+		return JdbcTestUtils.countRowsInTable(jdbcTemplate, BREED_TABLE);
+	}
+
+	/**
+	 * @return
+	 */
+	protected int rowsInDogBreedTable() {
+		return JdbcTestUtils.countRowsInTable(jdbcTemplate, DOG_BREED_TABLE);
+	}
+
+	/**
+	 * @return
+	 */
+	protected int rowsInDogTable() {
+		return JdbcTestUtils.countRowsInTable(jdbcTemplate, DOG_TABLE);
+	}
+	
+	/**
+	 * @param locationId
+	 */
+	protected void deleteLocation(Long locationId) {
+		rescueController.deleteLocation(locationId);
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
