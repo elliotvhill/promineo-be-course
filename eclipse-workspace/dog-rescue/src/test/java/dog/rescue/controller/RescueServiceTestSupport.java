@@ -1,5 +1,6 @@
 package dog.rescue.controller;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,15 +74,34 @@ public class RescueServiceTestSupport {
 	protected LocationData retrieveLocation(Long locationId) {
 		return rescueController.retrieveLocation(locationId);
 	}
-	
+
 	protected List<LocationData> insertTwoLocations() {
 		LocationData location1 = insertLocation(buildInsertLocation(1));
 		LocationData location2 = insertLocation(buildInsertLocation(2));
-		
+
 		return List.of(location1, location2);
 	}
-	
+
 	protected List<LocationData> retrieveAllLocations() {
 		return rescueController.retrieveAllLocations();
+	}
+
+	/**
+	 * Sort both expected and actual test results from retrieveAllLocations for
+	 * accurate test comparison
+	 * 
+	 * @param actual
+	 * @return
+	 */
+	protected List<LocationData> sorted(List<LocationData> list) {
+		// Turn the immutable list (result of .toList() method) into a mutable list
+		List<LocationData> data = new LinkedList<>(list);
+
+		/**
+		 * Compare location IDs to sort, casting as int (bc that's how the IDs were
+		 * defined)
+		 */
+		data.sort((loc1, loc2) -> (int) (loc1.getLocationId() - loc2.getLocationId()));
+		return data;
 	}
 }
