@@ -160,6 +160,25 @@ Notes from the week 16 video curriculum.
 -   If this seems simpler than JDBC, it's because Spring and Spring Boot are doing most of the work for us
 -   **Someone** wrote all the supporting code, but it wasn't us
 
-<!-- ## Dog Rescue — Update Location -->
+## Dog Rescue — Update Location
+
+-   Write a **method** for the "Update Location" operation in the controller
+-   Write the **test**
+
+### Write the controller method
+
+-   An update operation uses an HTTP `PUT` method (verb)
+-   The **difference** between an insert operation and an update operation is that, for update, you must provide the primary key value, whereas for insert you do not
+
+### Write the service method?
+
+-   We already wrote the service method (`saveLocation`) for the _insert_ operation
+-   The **same** method is called for the _update_ operation
+
+### Write the test
+
+-   **Insert** a location
+-   Call the controller method to **update** the same location
+-   **Verify** the results
 
 <!-- ## Dog Rescue — Delete Location -->
