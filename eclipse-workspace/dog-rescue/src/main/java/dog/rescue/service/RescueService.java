@@ -80,4 +80,13 @@ public class RescueService {
 		// @formatter:on
 	}
 
+	/**
+	 * @param locationId
+	 */
+	@Transactional(readOnly = false)
+	public void deleteLocation(Long locationId) {
+		Location location = findLocationById(locationId);
+		locationDao.delete(location);
+	}
+
 }
