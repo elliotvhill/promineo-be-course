@@ -14,7 +14,19 @@
 
 1. When discussing handling of sensitive data, how do hashing and salting work? Why would we need to hash and salt certain data?
 
+    > **Hashing** converts data into a fixed-size, irreversible string of characters — a **hash**. It is mainly used for storing passwords and ensuring data integrity (i.e. that data has not been altered or tampered with). <sup>[[1]](#source-1)[[2]](#source-2)</sup>
+    >
+    > **Salting** refers to the practice of adding random data — **salt** — to a hash. "Salt" is added to a hash to make data even more secure: it ensures hashes will be unique, even if they have the same input, and makes hashes much stronger against brute force attacks. <sup>[[3]](#source-3)</sup>
+    >
+    > Both salting and hashing are used to protect sensitive data — anything from passwords, to files, to digital signatures, etc. It is a standard security practice to protect user data.
+
 2. What are the three parts of a JSON Web Token (JWT)?
+
+    > A **JSON Web Token** (JWT) is used to authenticate users and securely exchange information via a JSON object.
+    >
+    > The three parts of a JWT are the **header**, **payload**, and **signature**. The header contains metadata about the token, including the algorithm used for signing and the token type. The payload is information about the user — e.g. a user ID, when a token was issued and when it expires, etc. The signature is generated using a secret and is used to ensure that the token hasn't been tampered with.
+    >
+    > The final token is created using the header, payload, and signature values separated by dots (`.`). <sup>[[4]](#source-4)</sup>
 
 3. If a JWT can be decoded by anyone, how are they useful? What problem do they solve and how do they solve it securely?
 
@@ -22,6 +34,9 @@
 
 ## Resources consulted
 
-<!-- <a id="source-1"></a>1.  <sup>[[1]](#source-1)</sup> -->
+<a id="source-1"></a>1. [Encryption vs. Hashing vs. Salting - What's the Difference? | Ping Identity](https://www.pingidentity.com/en/resources/blog/post/encryption-vs-hashing-vs-salting.html)  
+<a id="source-2"></a>2. [What Is Hashing, and How Does It Work? | Codecademy](https://www.codecademy.com/resources/blog/what-is-hashing/)  
+<a id="source-3"></a>3. [Adding Salt to Hashing: A Better Way to Store Passwords | Auth0](https://auth0.com/blog/adding-salt-to-hashing-a-better-way-to-store-passwords/)  
+<a id="source-4"></a>4. [JSON Web Token (JWT) | Geeks for Geeks](https://www.geeksforgeeks.org/json-web-token-jwt/)  
 
-<!-- <a id="source-2"></a>2.  <sup>[[2]](#source-2)</sup> -->
+<!-- <a id="source-5"></a>5.  <sup>[[5]](#source-5)</sup> -->
