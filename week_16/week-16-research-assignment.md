@@ -30,7 +30,11 @@
 
 3. If a JWT can be decoded by anyone, how are they useful? What problem do they solve and how do they solve it securely?
 
+    > JWTs are used for authenticating and authorizing users, not necessarily transmitting sensitive data. Because they are readable by anyone, tokens should not contain any secrets information unless it is encrypted. <sup>[[6]](#source-6)</sup> This is also why tokens are set to expire after a given amount of time. Additionally, because tokens can be decoded and then re-encoded, it is easy to determine that a token has been altered if the token signatures do not match.
+
 4. Research Spring Security. Though not covered in this course, how to provide security is a question that many of our students have. Take a look into some of the available resources to provide security to your application.
+
+    > Spring Security is a project developed by the Spring team to provide code for developers to handle authentication and authorization. This code can be used as-is or customized. <sup>[[5]](#source-5)</sup>
 
 ## Resources consulted
 
@@ -38,5 +42,7 @@
 <a id="source-2"></a>2. [What Is Hashing, and How Does It Work? | Codecademy](https://www.codecademy.com/resources/blog/what-is-hashing/)  
 <a id="source-3"></a>3. [Adding Salt to Hashing: A Better Way to Store Passwords | Auth0](https://auth0.com/blog/adding-salt-to-hashing-a-better-way-to-store-passwords/)  
 <a id="source-4"></a>4. [JSON Web Token (JWT) | Geeks for Geeks](https://www.geeksforgeeks.org/json-web-token-jwt/)  
+<a id="source-5"></a>5. [Introduction to Spring Security and its Features | Geeks for Geeks](https://www.geeksforgeeks.org/introduction-to-spring-security-and-its-features/)  
+<a id="source-6"></a>6. [Introduction to JSON Web Tokens | JWT.io](https://jwt.io/introduction)  
 
-<!-- <a id="source-5"></a>5.  <sup>[[5]](#source-5)</sup> -->
+<!-- <a id="source-7"></a>7.  <sup>[[7]](#source-7)</sup> -->
