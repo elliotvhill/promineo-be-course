@@ -19,6 +19,8 @@ public class RescueService {
 	private LocationDao locationDao;
 
 	/**
+	 * Save a location -- either an insert or an update
+	 * 
 	 * @param locationData
 	 * @return
 	 */
@@ -32,6 +34,8 @@ public class RescueService {
 	}
 
 	/**
+	 * Find a location by location ID
+	 * 
 	 * @param locationId
 	 * @return
 	 */
