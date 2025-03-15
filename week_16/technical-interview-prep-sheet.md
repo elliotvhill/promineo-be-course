@@ -58,3 +58,73 @@ Remember to do your research and come to your own answers. **Don't trust every a
     -   You can use it for free to give feedback, receive feedback, and improve your interviewing skills in a safe and supportive environment.
 
     -   For now, focus on the [data structures and algorithms interview practice option](https://www.pramp.com/dev/uc-data-structures-and-algorithms).
+
+---
+
+### SQL Interview Questions
+
+<details><summary>14. What are the different types of joins in SQL?</summary>
+</details>
+
+<details><summary>15. What is the difference between <code>INNER JOIN</code> and <code>OUTER JOIN</code>?</summary>
+</details>
+
+<details><summary>19. What is the difference between the <code>WHERE</code> and <code>HAVING</code> clauses?</summary>
+</details>
+
+<details><summary>20. What are indexes, and why are they used?</summary>
+</details>
+
+<details><summary>21. What is the difference between <code>DELETE</code> and <code>TRUNCATE</code> commands?</summary>
+</details>
+
+<!-- ### Core Java Interview Questions -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- ### Spring Boot Interview Questions -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- ### REST API Interview Questions -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
+
+<!-- <details><summary></summary>
+</details> -->
